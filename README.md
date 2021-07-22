@@ -4,7 +4,7 @@ A Godot port of the open source game Impressive Title.
 
 ## History
 This game is a port of an animal MMORPG called Impressive Title. Impressive Title was
-created by a talented game designer known as Kovu LKD. The original source code for
+created by a talented game designer known as KovuLKD. The original source code for
 Impressive Title was made open source shortly after Kov released a new game called
 Feral Heart. Feral Heart is known as the sequel to Impressive Title and is still in
 operation as of the last date this file was updated. You can find Feral Heart
