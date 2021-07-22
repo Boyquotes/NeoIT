@@ -1,0 +1,311 @@
+[gd_scene load_steps=17 format=1]
+
+[ext_resource path="res://fonts/Oxanium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://images/GUI/border.png" type="Texture" id=3]
+[ext_resource path="res://images/GUI/borderCenter.png" type="Texture" id=4]
+[ext_resource path="res://images/GUI/buttonOver.png" type="Texture" id=5]
+[ext_resource path="res://images/GUI/buttonDown.png" type="Texture" id=6]
+[ext_resource path="res://images/GUI/buttonUp.png" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=11]
+
+font/size = 24
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 1 )
+
+[sub_resource type="Theme" id=12]
+
+default_font = SubResource( 11 )
+
+[sub_resource type="CanvasItemShader" id=10]
+
+_code = {
+"fragment": "uniform texture border;
+uniform float border_width = 4.0;
+
+//Pixels that lie within the border region need to come from the border
+//texture.
+if(UV.x < TEXTURE_PIXEL_SIZE.x * border_width || 
+    UV.x > 1.0 - TEXTURE_PIXEL_SIZE.x * border_width ||
+    UV.y > 1.0 - TEXTURE_PIXEL_SIZE.y * border_width ||
+    UV.y < TEXTURE_PIXEL_SIZE.y * border_width)
+{
+    COLOR = tex(border, UV);
+}
+else
+{
+    //Make sure that we clip the corners of the inner part
+    if(tex(border, UV).a < .2)
+    {
+        COLOR = color(0.0, 0.0, 0.0, 0.0);
+    }
+    else
+    {
+        COLOR = COLOR;
+    }
+}",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "VERTEX = VERTEX;",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=9]
+
+shader/shader = SubResource( 10 )
+shader/shading_mode = 0
+shader_param/border = ExtResource( 3 )
+shader_param/border_width = 8.0
+
+[sub_resource type="StyleBoxTexture" id=13]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 4 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[sub_resource type="StyleBoxTexture" id=14]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 5 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[sub_resource type="StyleBoxTexture" id=15]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 6 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxTexture" id=17]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 7 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[node name="PauseMenu" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = SubResource( 12 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 2 )
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+
+material/material = SubResource( 9 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 380.0
+margin/top = 130.0
+margin/right = 650.0
+margin/bottom = 460.0
+custom_styles/panel = SubResource( 13 )
+popup/exclusive = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 30.0
+margin/top = 40.0
+margin/right = 240.0
+margin/bottom = 293.0
+custom_constants/separation = 32
+alignment = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ResumeButton" type="Button" parent="PopupPanel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 210.0
+margin/bottom = 25.0
+custom_styles/hover = SubResource( 14 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/focus = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Resume"
+flat = false
+
+[node name="SettingsButton" type="Button" parent="PopupPanel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 57.0
+margin/right = 210.0
+margin/bottom = 82.0
+custom_styles/hover = SubResource( 14 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/focus = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Settings"
+flat = false
+
+[node name="InterfaceButton" type="Button" parent="PopupPanel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 114.0
+margin/right = 210.0
+margin/bottom = 139.0
+custom_styles/hover = SubResource( 14 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/focus = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Interface"
+flat = false
+
+[node name="RestartButton" type="Button" parent="PopupPanel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 171.0
+margin/right = 210.0
+margin/bottom = 196.0
+custom_styles/hover = SubResource( 14 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/focus = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Restart"
+flat = false
+
+[node name="QuitButton" type="Button" parent="PopupPanel/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 228.0
+margin/right = 210.0
+margin/bottom = 253.0
+custom_styles/hover = SubResource( 14 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/focus = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Quit"
+flat = false
+
+[connection signal="pressed" from="PopupPanel/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+
+[connection signal="pressed" from="PopupPanel/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+
+[connection signal="pressed" from="PopupPanel/VBoxContainer/InterfaceButton" to="." method="_on_InterfaceButton_pressed"]
+
+[connection signal="pressed" from="PopupPanel/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
+
+[connection signal="pressed" from="PopupPanel/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+
+

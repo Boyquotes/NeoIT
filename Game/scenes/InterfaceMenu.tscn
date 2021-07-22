@@ -1,0 +1,413 @@
+[gd_scene load_steps=20 format=1]
+
+[ext_resource path="res://fonts/Oxanium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/InterfaceMenu.gd" type="Script" id=2]
+[ext_resource path="res://images/GUI/border.png" type="Texture" id=3]
+[ext_resource path="res://images/GUI/borderCenter.png" type="Texture" id=4]
+[ext_resource path="res://images/GUI/grabberUp.png" type="Texture" id=5]
+[ext_resource path="res://images/GUI/slider.png" type="Texture" id=6]
+[ext_resource path="res://images/GUI/buttonOver.png" type="Texture" id=7]
+[ext_resource path="res://images/GUI/buttonDown.png" type="Texture" id=8]
+[ext_resource path="res://images/GUI/buttonUp.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+
+font/size = 24
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+
+default_font = SubResource( 1 )
+
+[sub_resource type="CanvasItemShader" id=3]
+
+_code = {
+"fragment": "uniform texture border;
+uniform float border_width = 4.0;
+
+//Pixels that lie within the border region need to come from the border
+//texture.
+if(UV.x < TEXTURE_PIXEL_SIZE.x * border_width || 
+    UV.x > 1.0 - TEXTURE_PIXEL_SIZE.x * border_width ||
+    UV.y > 1.0 - TEXTURE_PIXEL_SIZE.y * border_width ||
+    UV.y < TEXTURE_PIXEL_SIZE.y * border_width)
+{
+    COLOR = tex(border, UV);
+}
+else
+{
+    //Make sure that we clip the corners of the inner part
+    if(tex(border, UV).a < .2)
+    {
+        COLOR = color(0.0, 0.0, 0.0, 0.0);
+    }
+    else
+    {
+        COLOR = COLOR;
+    }
+}",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "VERTEX = VERTEX;",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+shader/shader = SubResource( 3 )
+shader/shading_mode = 0
+shader_param/border = ExtResource( 3 )
+shader_param/border_width = 8.0
+
+[sub_resource type="StyleBoxTexture" id=5]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 4 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[sub_resource type="StyleBoxTexture" id=6]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 6 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[sub_resource type="StyleBoxTexture" id=7]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 7 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[sub_resource type="StyleBoxTexture" id=8]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 8 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
+[sub_resource type="StyleBoxTexture" id=10]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+texture = ExtResource( 9 )
+margin/left = 0.0
+margin/right = 0.0
+margin/top = 0.0
+margin/bottom = 0.0
+expand_margin/left = 0.0
+expand_margin/right = 0.0
+expand_margin/top = 0.0
+expand_margin/bottom = 0.0
+draw_center = true
+
+[node name="InterfaceMenu" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = SubResource( 2 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 2 )
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+
+material/material = SubResource( 4 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 130.0
+margin/top = 60.0
+margin/right = 900.0
+margin/bottom = 530.0
+custom_styles/panel = SubResource( 5 )
+popup/exclusive = true
+
+[node name="SensitivityLabel" type="Label" parent="PopupPanel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 80.0
+margin/top = 40.0
+margin/right = 194.0
+margin/bottom = 65.0
+text = "Sensitivity"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="SensitivitySlider" type="HSlider" parent="PopupPanel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 360.0
+margin/top = 40.0
+margin/right = 690.0
+margin/bottom = 64.0
+custom_icons/grabber_hilite = ExtResource( 5 )
+custom_icons/grabber = ExtResource( 5 )
+custom_styles/slider = SubResource( 6 )
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 0.0
+range/exp_edit = false
+range/rounded = false
+tick_count = 0
+ticks_on_borders = true
+focus_mode = 2
+
+[node name="ChannelButtonBlink" type="CheckButton" parent="PopupPanel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 80.0
+margin/top = 240.0
+margin/right = 530.0
+margin/bottom = 273.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Channel Button Blink"
+flat = false
+align = 0
+
+[node name="DoubleJump" type="CheckButton" parent="PopupPanel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 80.0
+margin/top = 280.0
+margin/right = 530.0
+margin/bottom = 313.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Double Jump"
+flat = false
+align = 0
+
+[node name="AutoLipsync" type="CheckButton" parent="PopupPanel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 80.0
+margin/top = 320.0
+margin/right = 530.0
+margin/bottom = 353.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "Auto Lipsync"
+flat = false
+align = 0
+
+[node name="RunModeLabel" type="Label" parent="PopupPanel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 80.0
+margin/top = 190.0
+margin/right = 192.0
+margin/bottom = 215.0
+text = "Run Mode"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="RunMode" type="OptionButton" parent="PopupPanel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 360.0
+margin/top = 190.0
+margin/right = 690.0
+margin/bottom = 221.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+align = 0
+selected = -1
+items = [  ]
+
+[node name="LocalNameDisplayLabel" type="Label" parent="PopupPanel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 80.0
+margin/top = 140.0
+margin/right = 295.0
+margin/bottom = 165.0
+text = "Local Name Display"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="LocalNameDisplay" type="OptionButton" parent="PopupPanel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 360.0
+margin/top = 140.0
+margin/right = 690.0
+margin/bottom = 171.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+align = 0
+selected = -1
+items = [  ]
+
+[node name="GeneralNameDisplayLabel" type="Label" parent="PopupPanel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 80.0
+margin/top = 90.0
+margin/right = 323.0
+margin/bottom = 115.0
+text = "General Name Display"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="GeneralNameDisplay" type="OptionButton" parent="PopupPanel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 360.0
+margin/top = 90.0
+margin/right = 690.0
+margin/bottom = 121.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+align = 0
+selected = -1
+items = [  ]
+
+[node name="BackButton" type="Button" parent="PopupPanel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 300.0
+margin/top = 390.0
+margin/right = 480.0
+margin/bottom = 421.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Back"
+flat = false
+
+[connection signal="value_changed" from="PopupPanel/SensitivitySlider" to="." method="_on_SensitivitySlider_value_changed"]
+
+[connection signal="toggled" from="PopupPanel/ChannelButtonBlink" to="." method="_on_ChannelButtonBlink_toggled"]
+
+[connection signal="toggled" from="PopupPanel/DoubleJump" to="." method="_on_DoubleJump_toggled"]
+
+[connection signal="toggled" from="PopupPanel/AutoLipsync" to="." method="_on_AutoLipsync_toggled"]
+
+[connection signal="item_selected" from="PopupPanel/RunMode" to="." method="_on_RunMode_item_selected"]
+
+[connection signal="item_selected" from="PopupPanel/LocalNameDisplay" to="." method="_on_LocalNameDisplay_item_selected"]
+
+[connection signal="item_selected" from="PopupPanel/GeneralNameDisplay" to="." method="_on_GeneralNameDisplay_item_selected"]
+
+[connection signal="pressed" from="PopupPanel/BackButton" to="." method="_on_BackButton_pressed"]
+
+
