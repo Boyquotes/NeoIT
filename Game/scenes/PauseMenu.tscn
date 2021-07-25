@@ -8,18 +8,18 @@
 [ext_resource path="res://images/GUI/buttonDown.png" type="Texture" id=6]
 [ext_resource path="res://images/GUI/buttonUp.png" type="Texture" id=7]
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=1]
 
 font/size = 24
 font/use_mipmaps = false
 font/use_filter = false
 font/font = ExtResource( 1 )
 
-[sub_resource type="Theme" id=12]
+[sub_resource type="Theme" id=2]
 
-default_font = SubResource( 11 )
+default_font = SubResource( 1 )
 
-[sub_resource type="CanvasItemShader" id=10]
+[sub_resource type="CanvasItemShader" id=3]
 
 _code = {
 "fragment": "uniform texture border;
@@ -53,14 +53,14 @@ else
 "vertex_ofs": 0
 }
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="CanvasItemMaterial" id=4]
 
-shader/shader = SubResource( 10 )
+shader/shader = SubResource( 3 )
 shader/shading_mode = 0
 shader_param/border = ExtResource( 3 )
 shader_param/border_width = 8.0
 
-[sub_resource type="StyleBoxTexture" id=13]
+[sub_resource type="StyleBoxTexture" id=5]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -77,7 +77,7 @@ expand_margin/top = 0.0
 expand_margin/bottom = 0.0
 draw_center = true
 
-[sub_resource type="StyleBoxTexture" id=14]
+[sub_resource type="StyleBoxTexture" id=6]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -94,7 +94,7 @@ expand_margin/top = 0.0
 expand_margin/bottom = 0.0
 draw_center = true
 
-[sub_resource type="StyleBoxTexture" id=15]
+[sub_resource type="StyleBoxTexture" id=7]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -111,14 +111,14 @@ expand_margin/top = 0.0
 expand_margin/bottom = 0.0
 draw_center = true
 
-[sub_resource type="StyleBoxEmpty" id=16]
+[sub_resource type="StyleBoxEmpty" id=8]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 
-[sub_resource type="StyleBoxTexture" id=17]
+[sub_resource type="StyleBoxTexture" id=9]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -141,7 +141,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = SubResource( 12 )
+theme/theme = SubResource( 2 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
@@ -150,7 +150,8 @@ script/script = ExtResource( 2 )
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 
-material/material = SubResource( 9 )
+visibility/visible = false
+material/material = SubResource( 4 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -159,7 +160,7 @@ margin/left = 380.0
 margin/top = 130.0
 margin/right = 650.0
 margin/bottom = 460.0
-custom_styles/panel = SubResource( 13 )
+custom_styles/panel = SubResource( 5 )
 popup/exclusive = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
@@ -188,10 +189,10 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 210.0
 margin/bottom = 25.0
-custom_styles/hover = SubResource( 14 )
-custom_styles/pressed = SubResource( 15 )
-custom_styles/focus = SubResource( 16 )
-custom_styles/normal = SubResource( 17 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -212,10 +213,10 @@ margin/left = 0.0
 margin/top = 57.0
 margin/right = 210.0
 margin/bottom = 82.0
-custom_styles/hover = SubResource( 14 )
-custom_styles/pressed = SubResource( 15 )
-custom_styles/focus = SubResource( 16 )
-custom_styles/normal = SubResource( 17 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -236,10 +237,10 @@ margin/left = 0.0
 margin/top = 114.0
 margin/right = 210.0
 margin/bottom = 139.0
-custom_styles/hover = SubResource( 14 )
-custom_styles/pressed = SubResource( 15 )
-custom_styles/focus = SubResource( 16 )
-custom_styles/normal = SubResource( 17 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -260,10 +261,10 @@ margin/left = 0.0
 margin/top = 171.0
 margin/right = 210.0
 margin/bottom = 196.0
-custom_styles/hover = SubResource( 14 )
-custom_styles/pressed = SubResource( 15 )
-custom_styles/focus = SubResource( 16 )
-custom_styles/normal = SubResource( 17 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -284,10 +285,10 @@ margin/left = 0.0
 margin/top = 228.0
 margin/right = 210.0
 margin/bottom = 253.0
-custom_styles/hover = SubResource( 14 )
-custom_styles/pressed = SubResource( 15 )
-custom_styles/focus = SubResource( 16 )
-custom_styles/normal = SubResource( 17 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
