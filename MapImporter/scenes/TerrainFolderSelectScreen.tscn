@@ -1,0 +1,204 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://fonts/Oxanium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/TerrainFolderSelectScreen.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+
+font/size = 24
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+
+default_font = SubResource( 1 )
+
+[node name="TerrainFolderSelectScreen" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = SubResource( 2 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 2 )
+
+[node name="TitleLabel" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1020.0
+margin/bottom = 19.0
+text = "Select Terrain Folders"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="OldLabel" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 160.0
+margin/top = 230.0
+margin/right = 203.0
+margin/bottom = 270.0
+text = "Old:"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="OldTerrainFolder" type="LineEdit" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 210.0
+margin/top = 230.0
+margin/right = 730.0
+margin/bottom = 265.0
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="OldChooseButton" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 740.0
+margin/top = 230.0
+margin/right = 835.0
+margin/bottom = 261.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Choose"
+flat = false
+
+[node name="NewLabel" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 150.0
+margin/top = 270.0
+margin/right = 206.0
+margin/bottom = 310.0
+text = "New:"
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="NewTerrainFolder" type="LineEdit" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 210.0
+margin/top = 270.0
+margin/right = 730.0
+margin/bottom = 305.0
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="NewChooseButton" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 740.0
+margin/top = 270.0
+margin/right = 835.0
+margin/bottom = 301.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Choose"
+flat = false
+
+[node name="NextButton" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 480.0
+margin/top = 510.0
+margin/right = 544.0
+margin/bottom = 541.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Next"
+flat = false
+
+[node name="OldTerrainDialog" type="FileDialog" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 40.0
+margin/right = 1000.0
+margin/bottom = 580.0
+popup/exclusive = false
+window/title = ""
+dialog/hide_on_ok = false
+mode = 2
+access = 2
+filters = StringArray(  )
+show_hidden_files = false
+
+[node name="NewTerrainDialog" type="FileDialog" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 40.0
+margin/right = 1000.0
+margin/bottom = 580.0
+popup/exclusive = false
+window/title = "Open a Directory"
+dialog/hide_on_ok = false
+mode = 2
+access = 2
+filters = StringArray(  )
+show_hidden_files = false
+
+[connection signal="pressed" from="OldChooseButton" to="." method="_on_ChooseButton_pressed"]
+
+[connection signal="pressed" from="NewChooseButton" to="." method="_on_NewChooseButton_pressed"]
+
+[connection signal="pressed" from="NextButton" to="." method="_on_NextButton_pressed"]
+
+[connection signal="dir_selected" from="OldTerrainDialog" to="." method="_on_FileDialog_dir_selected"]
+
+[connection signal="dir_selected" from="NewTerrainDialog" to="." method="_on_NewTerrainDialog_dir_selected"]
+
+
