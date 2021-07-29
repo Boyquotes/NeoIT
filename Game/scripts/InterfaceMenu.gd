@@ -9,8 +9,8 @@ signal double_jump_toggled(use)
 signal auto_lipsync_toggled(use)
 signal back
 
-const name_modes = ["User", "Character"]
-const run_modes = ["Absolute", "Relative"]
+const name_modes = ["USER", "CHARACTER"]
+const run_modes = ["ABSOLUTE", "RELATIVE"]
 
 
 func _ready():

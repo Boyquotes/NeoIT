@@ -176,7 +176,7 @@ custom_styles/normal = SubResource( 6 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Back"
+text = "BACK"
 flat = false
 
 [node name="EditButton" type="Button" parent="."]
@@ -217,7 +217,7 @@ custom_styles/normal = SubResource( 6 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Select"
+text = "SELECT"
 flat = false
 
 [connection signal="pressed" from="PreviousButton" to="." method="_on_PreviousButton_pressed"]

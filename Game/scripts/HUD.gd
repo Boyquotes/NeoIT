@@ -1,83 +1,83 @@
 extends Control
 
-const chat_modes = ["general", "local", "party", "whisper"]
+const chat_modes = ["GENERAL", "LOCAL", "PARTY", "WHISPER"]
 const primary_actions = [
-    "sit",
-    "sit",
-    "crouch",
-    "point",
-    "stretch",
-    "headswing",
-    "headbang",
-    "buttswing",
-    "wingwave",
-    "moonwalk",
-    "thriller",
-    "rofl",
-    "roar",
-    "curl",
-    "faint"
+    "SIT",
+    "SIT",
+    "CROUCH",
+    "POINT",
+    "STRETCH",
+    "HEADSWING",
+    "HEADBANG",
+    "BUTTSWING",
+    "WINGWAVE",
+    "MOONWALK",
+    "THRILLER",
+    "ROFL",
+    "ROAR",
+    "CURL",
+    "FAINT"
 ]
 const secondary_actions = [
-    "nod head",
-    "shake head",
-    "nod head (slow)",
-    "shake head (slow)",
-    "head tilt",
-    "lick",
-    "nuzzle",
-    "sniff",
-    "tail flick",
-    "laugh",
-    "chuckle"
+    "NOD_HEAD",
+    "SHAKE_HEAD",
+    "NOD_HEAD_SLOW",
+    "SHAKE_HEAD_SLOW",
+    "HEAD_TILT",
+    "LICK",
+    "NUZZLE",
+    "SNIFF",
+    "TAIL_FLICK",
+    "LAUGH",
+    "CHUCKLE"
 ]
 const emotes = [
-    "normal",
-    "smile",
-    "grin",
-    "joy",
-    "anger",
-    "evil grin",
-    "frown",
-    "shock",
-    "frown grin",
-    "smirk",
-    "sad",
-    "subtle frown",
-    "pain",
-    "rage",
-    "rest",
-    "rest grin",
-    "smug grin",
-    "focus",
-    "dead",
-    "brow raise L",
-    "brow raise R",
-    "brow grin L",
-    "brow grin R",
-    "brow smirk L",
-    "brow smirk R",
-    "brow sulk L",
-    "brow sulk R",
-    "brow shock L",
-    "brow shock R",
-    "tongue",
-    "tongue grin",
-    "raspberry",
-    "lick",
-    "grin lick",
-    "smirk lick",
-    "soft lick",
-    "squint",
-    "more pain",
-    "much pain",
-    "more joy",
-    "much joy",
-    "sneaky smirk",
-    "roar",
-    "mild joy",
-    "frown joy",
-    "smirk joy"
+    "NORMAL",
+    "SMILE",
+    "GRIN",
+    "JOY",
+    "ANGER",
+    "EVIL_GRIN",
+    "FROWN",
+    "SHOCK",
+    "FROWN_GRIN",
+    "SMIRK",
+    "SAD",
+    "SUBTLE_FROWN",
+    "PAIN",
+    "RAGE",
+    "REST",
+    "REST_GRIN",
+    "SMUG_GRIN",
+    "FOCUS",
+    "DEAD",
+    "BROW_RAISE_L",
+    "BROW_RAISE_R",
+    "BROW_GRIN_L",
+    "BROW_GRIN_R",
+    "BROW_SMIRK_L",
+    "BROW_SMIRK_R",
+    "BROW_SULK_L",
+    "BROW_SULK_R",
+    "BROW_SHOCK_L",
+    "BROW_SHOCK_R",
+    "TONGUE",
+    "TONGUE_GRIN",
+    "RASPBERRY",
+    "LICK",
+    "GRIN_LICK",
+    "SMIRK_LICK",
+    "SOFT_LICK",
+    "SQUINT",
+    "MORE_PAIN",
+    "MUCH_PAIN",
+    "MORE_JOY",
+    "MUCH_JOY",
+    "SNEAKY_SMIRK",
+    "ROAR",
+    "MILD_JOY",
+    "FROWN_JOY",
+    "SMIRK_JOY"
 ]
 
 
@@ -88,15 +88,15 @@ func _ready():
 		
 	#Populate primary actions
 	for action in primary_actions:
-		get_node("ActionDialog/PrimaryActions").add_item(action)
+		get_node("ActionDialog/PrimaryActions").add_item(tr(action))
 		
 	#Populate secondary actions
 	for action in secondary_actions:
-		get_node("ActionDialog/SecondaryActions").add_item(action)
+		get_node("ActionDialog/SecondaryActions").add_item(tr(action))
 		
 	#Populate emotes
 	for emote in emotes:
-		get_node("ActionDialog/Emotes").add_item(emote)
+		get_node("ActionDialog/Emotes").add_item(tr(emote))
 		
 	#Enable event processing
 	set_process_unhandled_key_input(true)

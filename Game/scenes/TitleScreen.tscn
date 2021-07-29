@@ -175,7 +175,7 @@ custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "New Game"
+text = "NEW_GAME"
 flat = false
 
 [node name="MultiplayerButton" type="Button" parent="ButtonBox"]
@@ -199,7 +199,7 @@ custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Multiplayer"
+text = "MULTIPLAYER"
 flat = false
 
 [node name="QuitButton" type="Button" parent="ButtonBox"]
@@ -223,7 +223,7 @@ custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Quit"
+text = "QUIT"
 flat = false
 
 [node name="UpdateBox" type="TextEdit" parent="."]

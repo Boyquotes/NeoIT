@@ -413,7 +413,7 @@ margin/left = 30.0
 margin/top = 210.0
 margin/right = 83.0
 margin/bottom = 235.0
-text = "Say>"
+text = "SAY"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -433,7 +433,7 @@ focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
 
-[node name="Label" type="Label" parent="ChatPanel"]
+[node name="ChatModeLabel" type="Label" parent="ChatPanel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -443,7 +443,7 @@ margin/left = 30.0
 margin/top = 160.0
 margin/right = 150.0
 margin/bottom = 185.0
-text = "Chat Mode"
+text = "CHAT_MODE"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -663,7 +663,7 @@ margin/top = 30.0
 margin/right = 170.0
 margin/bottom = 220.0
 popup/exclusive = true
-window/title = "Home"
+window/title = "HOME"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HomeDialog"]
 
@@ -689,7 +689,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 137.0
+margin/right = 154.0
 margin/bottom = 32.0
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
@@ -698,7 +698,7 @@ custom_styles/normal = SubResource( 8 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Set Home"
+text = "SET_HOME"
 flat = false
 
 [node name="GoHomeButton" type="Button" parent="HomeDialog/VBoxContainer"]
@@ -710,7 +710,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 36.0
-margin/right = 137.0
+margin/right = 154.0
 margin/bottom = 68.0
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
@@ -719,7 +719,7 @@ custom_styles/normal = SubResource( 8 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Go Home"
+text = "GO_HOME"
 flat = false
 
 [node name="ResetHomeButton" type="Button" parent="HomeDialog/VBoxContainer"]
@@ -731,7 +731,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 72.0
-margin/right = 137.0
+margin/right = 154.0
 margin/bottom = 104.0
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
@@ -740,7 +740,7 @@ custom_styles/normal = SubResource( 8 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Reset Home"
+text = "RESET_HOME"
 flat = false
 
 [node name="DimensionLabel" type="Label" parent="HomeDialog"]
@@ -753,7 +753,7 @@ margin/left = 10.0
 margin/top = 110.0
 margin/right = 146.0
 margin/bottom = 135.0
-text = "-Dimension-"
+text = "DIMENSION"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -791,7 +791,7 @@ margin/top = 40.0
 margin/right = 460.0
 margin/bottom = 320.0
 popup/exclusive = true
-window/title = "Bio"
+window/title = "BIO"
 
 [node name="Bio" type="TextEdit" parent="BioDialog"]
 
@@ -824,7 +824,7 @@ margin/top = 40.0
 margin/right = 830.0
 margin/bottom = 470.0
 popup/exclusive = true
-window/title = "Friends"
+window/title = "FRIENDS"
 
 [node name="OnlineLabel" type="Label" parent="FriendDialog"]
 
@@ -836,7 +836,7 @@ margin/left = 10.0
 margin/top = 10.0
 margin/right = 81.0
 margin/bottom = 35.0
-text = "Online"
+text = "ONLINE"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -864,9 +864,9 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 170.0
 margin/top = 10.0
-margin/right = 241.0
+margin/right = 245.0
 margin/bottom = 35.0
-text = "Offline"
+text = "OFFLINE"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -896,7 +896,7 @@ margin/left = 10.0
 margin/top = 220.0
 margin/right = 85.0
 margin/bottom = 245.0
-text = "Maps"
+text = "MAPS"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -924,9 +924,9 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 170.0
 margin/top = 220.0
-margin/right = 245.0
+margin/right = 257.0
 margin/bottom = 245.0
-text = "Blocked"
+text = "BLOCKED"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -958,7 +958,7 @@ margin/top = 40.0
 margin/right = 450.0
 margin/bottom = 310.0
 popup/exclusive = true
-window/title = "Items"
+window/title = "ITEMS"
 
 [node name="ItemsLabel" type="Label" parent="ItemDialog"]
 
@@ -970,7 +970,7 @@ margin/left = 10.0
 margin/top = 10.0
 margin/right = 73.0
 margin/bottom = 35.0
-text = "Items"
+text = "ITEMS"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -1000,7 +1000,7 @@ margin/left = 220.0
 margin/top = 10.0
 margin/right = 393.0
 margin/bottom = 35.0
-text = "Equipped Items"
+text = "EQUIPPED_ITEMS"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -1032,7 +1032,7 @@ margin/top = 30.0
 margin/right = 590.0
 margin/bottom = 320.0
 popup/exclusive = true
-window/title = "Actions"
+window/title = "ACTIONS"
 
 [node name="PrimaryLabel" type="Label" parent="ActionDialog"]
 
@@ -1044,7 +1044,7 @@ margin/left = 10.0
 margin/top = 10.0
 margin/right = 96.0
 margin/bottom = 35.0
-text = "Primary"
+text = "PRIMARY"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -1074,7 +1074,7 @@ margin/left = 160.0
 margin/top = 10.0
 margin/right = 276.0
 margin/bottom = 35.0
-text = "Secondary"
+text = "SECONDARY"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -1104,7 +1104,7 @@ margin/left = 390.0
 margin/top = 10.0
 margin/right = 463.0
 margin/bottom = 35.0
-text = "Emote"
+text = "EMOTE"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -1136,7 +1136,7 @@ margin/top = 240.0
 margin/right = 1010.0
 margin/bottom = 480.0
 popup/exclusive = false
-window/title = "Party"
+window/title = "PARTY_TITLE"
 
 [node name="Party" type="ItemList" parent="PartyDialog"]
 
