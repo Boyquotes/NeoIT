@@ -371,20 +371,15 @@ func import_world(old_folder, new_folder, name):
 			    "instance_count": instance_count
 			})
 			
-		#Trees section
-		elif (section[0] == "Trees" or 
-		    section[0] == "NewTrees"):
-			pass
-			
-		#Bushes section
-		elif (section[0] == "Bushes" or
-		    section[0] == "NewBushes"):
-			pass
-			
-		#Floating bushes section
-		elif (section[0] == "FloatingBushes" or
+		#Trees or bushes section
+		elif (section[0] == "Trees" or
+		    section[0] == "NewTrees" or
+		    section[0] == "Bushes" or
+		    section[0] == "NewBushes" or
+		    section[0] == "FloatingBushes" or
 		    section[0] == "NewFloatingBushes"):
-			pass
+			var name = section[1]
+			import_foliage(old_folder + "/" + name, new_world)
 			
 		#Collision box section
 		elif section[0] == "CollBox":
@@ -408,7 +403,8 @@ func import_world(old_folder, new_folder, name):
 			
 		#Spawn critters section
 		elif section[0] == "SpawnCritters":
-			pass
+			var name = section[1]
+			import_critters(old_folder + "/" + name, new_world)
 			
 		#Freeze time section
 		elif section[0] == "FreezeTime":
@@ -476,6 +472,138 @@ func import_terrain(name, world):
 			
 	#Close the file
 	cfg_file.close()
+	
+	
+func import_foliage(name, world):
+	#Try to open tree or bush file
+	var foliage_file = File.new()
+	
+	if foliage_file.open(name, File.READ):
+		print("Failed to open '" + name + "'.")
+		return
+		
+	#Process each line of the file
+	var line
+	var batch
+	
+	while not foliage_file.eof_reached():
+		#Get next line
+		line = foliage_file.get_line().strip_edges()
+		
+		#Blank line?
+		if line == "":
+			continue
+			
+		#New section?
+		elif line.substr(0, 1) == "[" and line.ends_with("]"):
+			var section = line.substr(1, line.length() - 2)
+			var data = section.split(";")
+			var mesh = data[0]
+			var material = ""
+			
+			if data.size() > 1:
+				material = data[1]
+				
+			batch = {
+			    "mesh": mesh,
+			    "material": material,
+			    "instances": []
+			}
+			world["objects"].append(batch)
+				
+		#New instance?
+		else:
+			var section = line.split(";")
+			var pos = parse_vec(section[0])
+			var scale = [1, 1, 1]
+			var rot = [0, 0, 0]
+			
+			if section.size() > 1:
+				scale = [
+				    float(section[1]),
+				    float(section[1]),
+				    float(section[1])
+				]
+				
+			if section.size() > 2:
+				rot = [
+				    float(section[2]),
+				    float(section[2]),
+				    float(section[2])
+				]
+				
+			batch["instances"].append({
+			    "pos": pos,
+			    "scale": scale,
+			    "rot": rot
+			})
+		
+	#Close the file
+	foliage_file.close()
+	
+	
+func import_critters(name, world):
+	#Try to open the critter file
+	var critter_file = File.new()
+	
+	if critter_file.open(name, File.READ):
+		print("Failed to open '" + name + "'.")
+		return
+		
+	#Load sections
+	var tmp_sections = critter_file.get_as_text().split("[")
+	critter_file.close()
+	var sections = []
+	
+	for tmp_section in tmp_sections:
+		var section = tmp_section.split("\n")
+		section[0] = section[0].left(section[0].length() - 1)
+		
+		while (section.size() and 
+		    section[section.size() - 1] == ""):
+			section.remove(section.size() - 1)
+			
+		if section.size():
+			sections.append(section)
+		
+	#Process each section
+	var critters = {
+	    "limit": 0,
+	    "roam_areas": [],
+	    "critters": []
+	}
+	
+	for section in sections:
+		#Critter limit
+		if section[0] == "Limit":
+			var limit = int(section[1])
+			critters["limit"] = limit
+			
+		#Roam area
+		elif section[0] == "RoamArea":
+			var start = parse_vec(section[1])
+			var extents = parse_vec(section[2])
+			critters["roam_areas"].append({
+			    "start": start,
+			    "extents": extents
+			})
+			
+		#Critter
+		elif section[0] == "Critter":
+			var type = section[1].split("=")[1]
+			var rate = float(section[2].split("=")[1])
+			var roam_area = -1
+			
+			if section.size() > 3:
+				roam_area = int(section[3].split("=")[1])
+				
+			critters["critters"].append({
+			    "type": type,
+			    "rate": rate,
+			    "roam_area": roam_area
+			})
+			
+	world["critters"] = critters
 	
 	
 func parse_vec(text):
