@@ -44,6 +44,8 @@ dialog/hide_on_ok = true
 
 [connection signal="end_step" from="." to="." method="_on_Main_end_step" flags=3]
 
+[connection signal="import_complete" from="." to="." method="_on_Main_import_complete"]
+
 [connection signal="start_step" from="." to="." method="_on_Main_start_step" flags=3]
 
 [connection signal="next" from="TerrainFolderSelectScreen" to="." method="_on_TerrainFolderSelectScreen_next"]

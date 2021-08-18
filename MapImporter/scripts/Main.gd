@@ -2,6 +2,7 @@ extends Node
 
 signal start_step(message)
 signal end_step
+signal import_complete
 
 var dir = Directory.new()
 
@@ -74,6 +75,12 @@ func _on_Main_end_step():
 	get_node("ImportProgressScreen").end_step()
 	
 	
+func _on_Main_import_complete():
+	#Switch back to terrain folder selection
+	get_node("ImportProgressScreen").hide()
+	get_node("TerrainFolderSelectScreen").show()
+	
+	
 func show_error(message):
 	#Set error message and display error dialog
 	get_node("ErrorDialog").set_text(message)
@@ -101,9 +108,7 @@ func import_maps_thread(data):
 	
 	#Convert materials
 	emit_signal("start_step", "Importing materials...")
-	var material_lib = {
-	    "materials": {}
-	}
+	var material_lib = {}
 	
 	for folder in folders:
 		import_materials(old_folder + "/" + folder, 
@@ -131,6 +136,9 @@ func import_maps_thread(data):
 		    new_folder
 		)
 		emit_signal("end_step")
+		
+	#Send import complete signal
+	emit_signal("import_complete")
 		
 		
 func copy_images(src, dest):
@@ -197,11 +205,15 @@ func import_material(name, material_lib):
 		#New material?
 		if line.begins_with("material "):
 			line.erase(0, 9)
+			
+			if line == "}": #sometimes corrupt data is read?
+				return
+				
 			var material = {
 			    "texture_units": []
 			}
 			parse_material(file, material)
-			material_lib["materials"][line] = material
+			material_lib[line] = material
 	
 	#Close the file
 	file.close()
@@ -812,4 +824,3 @@ func pretty_json(json):
 				pretty_json += char
 		
 	return pretty_json
-	
