@@ -27,27 +27,28 @@ func _on_TerrainFolderSelectScreen_next(old_folder, new_folder):
 	#print("New Folder: " + new_folder)
 	
 	#Enumerate maps
+	var folders = []
 	var maps = []
 	dir.open(old_folder)
 	dir.list_dir_begin()
-	var map = dir.get_next()
+	var file = dir.get_next()
 	
-	while map != "":
+	while file != "":
 		#Skip current and parent dir entries
-		if map == "." or map == "..":
-			map = dir.get_next()
-			continue
+		if file in [".", ".."]:
+			pass
 			
-		#Does the map have a valid terrain config file?
-		#print(map + "/" + map + ".world")
-		
-		if not dir.file_exists(map + "/" + map + ".world"):
-			map = dir.get_next()
-			continue
+		#Is this a folder?
+		elif dir.dir_exists(file):
+			folders.append(file)
 			
-		#Add the map
-		maps.append(map)
-		map = dir.get_next()
+			#Is this a valid map?
+			if dir.file_exists(file + "/" + file + ".world"):
+				#Add the map
+				maps.append(file)
+				
+		#Next file
+		file = dir.get_next()
 		
 	dir.list_dir_end()
 	#print(str(maps.size()) + " maps enumerated")
@@ -55,13 +56,14 @@ func _on_TerrainFolderSelectScreen_next(old_folder, new_folder):
 	#Switch to import progress screen
 	get_node("TerrainFolderSelectScreen").hide()
 	get_node("ImportProgressScreen").show()
-	get_node("ImportProgressScreen").initialize(maps.size())
+	get_node("ImportProgressScreen").initialize(
+	    maps.size() + 2)
 	
 	#Start map import thread
 	var thread = Thread.new()
 	thread.start(self, "import_maps_thread", 
-	    [old_folder, new_folder, maps])
-	#import_maps_thread([old_folder, new_folder, maps])
+	    [old_folder, new_folder, folders, maps])
+	#import_maps_thread([old_folder, new_folder, folders, maps])
 	
 	
 func _on_Main_start_step(message):
@@ -79,52 +81,215 @@ func show_error(message):
 	
 	
 func import_maps_thread(data):
-	#Import each map
+	#Create images folder
 	var old_folder = data[0]
 	var new_folder = data[1]
-	var maps = data[2]
+	var folders = data[2]
+	var maps = data[3]
+	dir.make_dir(new_folder + "/images")
 	
+	#Copy images
+	emit_signal("start_step", "Copying images...")
+	
+	for folder in folders:
+		copy_images(
+		    old_folder + "/" + folder,
+		    new_folder + "/images"
+		)
+		
+	emit_signal("end_step")
+	
+	#Convert materials
+	emit_signal("start_step", "Importing materials...")
+	var material_lib = {
+	    "materials": {}
+	}
+	
+	for folder in folders:
+		import_materials(old_folder + "/" + folder, 
+		    material_lib)
+	
+	var matlib_file = File.new()
+	
+	if matlib_file.open(new_folder + "/materials.json",
+	    File.WRITE):
+		print("Failed to save '" + new_folder + 
+		    "/materials.json'.")
+		return
+		
+	matlib_file.store_string(
+	    pretty_json(material_lib.to_json()))
+	matlib_file.close()
+	emit_signal("end_step")
+	
+	#Import each map
 	for map in maps:
 		emit_signal("start_step", 
 		    "Importing map '" + map + "'...")
 		import_map(
 		    old_folder + "/" + map, 
-		    new_folder + "/" + map
+		    new_folder
 		)
 		emit_signal("end_step")
-	
-	
-func import_map(old_folder, new_folder):
-	#Create map folder
-	dir.make_dir(new_folder)
-	
-	#Copy all image files from the old folder to the new
-	#folder
-	dir.open(old_folder)
+		
+		
+func copy_images(src, dest):
+	#Copy all images in the source folder to the destination
+	#folder.
+	dir.open(src)
 	dir.list_dir_begin()
-	
 	var file = dir.get_next()
-	var world_file = ""
 	
 	while file != "":
-		#Is this file an image?
-		#print(file)
-		
-		if file.extension() in ["bmp", "png", "jpg", "jpeg"]:
+		#Skip current and parent dir
+		if file in [".", ".."]:
+			file = dir.get_next()
+			continue
+			
+		#Is the file an image file?
+		if file.extension() in ["bmp", "png", "jpg", "jpeg",
+		    "tiff", "webp", "dds"]:
 			dir.copy(
-			    old_folder + "/" + file,
-			    new_folder + "/" + file
+			    src + "/" + file,
+			    dest + "/" + file
 			)
 			
-		#Is this file a world file?
-		elif file.extension() == "world":
-			world_file = file
+		#Next file
+		file = dir.get_next()
+			
+	dir.list_dir_end()
+	
+	
+func import_materials(folder, material_lib):
+	#Import every material in the folder
+	dir.open(folder)
+	dir.list_dir_begin()
+	var file = dir.get_next()
+	
+	while file != "":
+		#Skip current and parent dir
+		if file in [".", ".."]:
+			pass
+			
+		#Material script?
+		elif file.extension() == "material":
+			import_material(folder + "/" + file, material_lib)
 			
 		file = dir.get_next()
 	
 	dir.list_dir_end()
 	
+	
+func import_material(name, material_lib):
+	#Try to open material script
+	var file = File.new()
+	
+	if file.open(name, File.READ):
+		print("Failed to open '" + name + "'.")
+		return
+		
+	#Parse material script
+	var line
+	
+	while not file.eof_reached():
+		line = file.get_line().strip_edges()
+		
+		#New material?
+		if line.begins_with("material "):
+			line.erase(0, 9)
+			var material = {
+			    "texture_units": []
+			}
+			parse_material(file, material)
+			material_lib["materials"][line] = material
+	
+	#Close the file
+	file.close()
+	
+	
+func parse_material(file, material):
+	#Find first technique
+	var line
+	
+	while not file.eof_reached():
+		line = file.get_line().strip_edges()
+		
+		#New technique?
+		if line.begins_with("technique"):
+			parse_technique(file, material)
+			return
+			
+			
+func parse_technique(file, material):
+	#Find first pass
+	var line
+	
+	while not file.eof_reached():
+		line = file.get_line().strip_edges()
+		
+		#New pass?
+		if line.begins_with("pass"):
+			parse_pass(file, material)
+			return
+			
+			
+func parse_pass(file, material):
+	#Process pass params and texture units
+	var line
+	
+	while not file.eof_reached():
+		line = file.get_line().strip_edges()
+		
+		#New texture unit?
+		if line.begins_with("texture_unit"):
+			var texture_unit = {}
+			parse_texture_unit(file, texture_unit)
+			material["texture_units"].append(texture_unit)
+			
+		#End of pass?
+		elif line == "}":
+			return
+			
+			
+func parse_texture_unit(file, texture_unit):
+	#Process texture unit params
+	var line
+	
+	while not file.eof_reached():
+		line = file.get_line().strip_edges()
+		
+		#Texture?
+		if line.begins_with("texture "):
+			line.erase(0, 8)
+			texture_unit["texture"] = line
+			texture_unit["scale"] = [1, 1]
+			texture_unit["type"] = "base"
+			
+		#Scale?
+		elif line.begins_with("scale "):
+			line.erase(0, 6)
+			texture_unit["scale"] = parse_vec(line)
+			
+		#Color operation
+		elif line == "colour_op alpha_blend":
+			texture_unit["type"] = "layer_mask"
+			
+		#Color operation
+		elif line == "colour_op modulate":
+			texture_unit["type"] = "contour"
+			
+		#Color operation EX
+		elif line == "colour_op_ex blend_current_alpha src_texture src_current":
+			texture_unit["type"] = "layer"
+			
+		#End of texture unit
+		elif line == "}":
+			return
+	
+	
+func import_map(old_folder, new_folder):
 	#Import world file
+	var world_file = old_folder.get_file() + ".world"
 	print("Importing world '" + world_file + "'...")
 	import_world(old_folder, new_folder, world_file)
 	
@@ -164,8 +329,7 @@ func import_world(old_folder, new_folder, name):
 	    "particles": [],
 	    "lights": [],
 	    "billboards": [],
-	    "sphere_walls": [],
-	    "box_walls": [],
+	    "walls": [],
 	    "random_objects": [],
 	    "collision_shapes": [],
 	    "music": []
@@ -320,7 +484,8 @@ func import_world(old_folder, new_folder, name):
 			var pos = parse_vec(section[1])
 			var radius = float(section[2])
 			var is_inside = (true if section[3] == "true" else false)
-			new_world["sphere_walls"].append({
+			new_world["walls"].append({
+			    "shape": "sphere",
 			    "pos": pos,
 			    "radius": radius,
 			    "is_inside": is_inside
@@ -331,7 +496,8 @@ func import_world(old_folder, new_folder, name):
 			var pos = parse_vec(section[1])
 			var extents = parse_vec(section[2])
 			var is_inside = (true if section[3] == "true" else false)
-			new_world["box_walls"].append({
+			new_world["walls"].append({
+			    "shape": "box",
 			    "pos": pos,
 			    "extents": extents,
 			    "is_inside": is_inside
