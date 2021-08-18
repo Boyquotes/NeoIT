@@ -17,11 +17,13 @@ func _on_TerrainFolderSelectScreen_next(old_folder, new_folder):
 		return
 		
 	if not dir.dir_exists(old_folder):
-		show_error("The directory '" + old_folder + "' does not exist.")
+		show_error(tr("THE_DIRECTORY") + " '" + old_folder + 
+		    "' " + tr("DOES_NOT_EXIST") + ".")
 		return
 		
 	if not dir.dir_exists(new_folder):
-		show_error("The directory '" + new_folder + "' does not exist.")
+		show_error(tr("THE_DIRECTORY") + " '" + new_folder + 
+		    "' " + tr("DOES_NOT_EXIST") + ".")
 		return
 		
 	#print("Old Folder: " + old_folder)
@@ -96,7 +98,7 @@ func import_maps_thread(data):
 	dir.make_dir(new_folder + "/images")
 	
 	#Copy images
-	emit_signal("start_step", "Copying images...")
+	emit_signal("start_step", tr("COPYING_IMAGES"))
 	
 	for folder in folders:
 		copy_images(
@@ -107,7 +109,7 @@ func import_maps_thread(data):
 	emit_signal("end_step")
 	
 	#Convert materials
-	emit_signal("start_step", "Importing materials...")
+	emit_signal("start_step", tr("IMPORTING_MATERIALS"))
 	var material_lib = {}
 	
 	for folder in folders:
@@ -118,7 +120,7 @@ func import_maps_thread(data):
 	
 	if matlib_file.open(new_folder + "/materials.json",
 	    File.WRITE):
-		print("Failed to save '" + new_folder + 
+		print(tr("FAILED_TO_SAVE") + " '" + new_folder + 
 		    "/materials.json'.")
 		return
 		
@@ -130,7 +132,7 @@ func import_maps_thread(data):
 	#Import each map
 	for map in maps:
 		emit_signal("start_step", 
-		    "Importing map '" + map + "'...")
+		    tr("IMPORTING_MAP") + " '" + map + "'...")
 		import_map(
 		    old_folder + "/" + map, 
 		    new_folder
@@ -193,7 +195,7 @@ func import_material(name, material_lib):
 	var file = File.new()
 	
 	if file.open(name, File.READ):
-		print("Failed to open '" + name + "'.")
+		print(tr("FAILED_TO_OPEN") + " '" + name + "'.")
 		return
 		
 	#Parse material script
@@ -302,7 +304,7 @@ func parse_texture_unit(file, texture_unit):
 func import_map(old_folder, new_folder):
 	#Import world file
 	var world_file = old_folder.get_file() + ".world"
-	print("Importing world '" + world_file + "'...")
+	print(tr("IMPORTING_WORLD") + " '" + world_file + "'...")
 	import_world(old_folder, new_folder, world_file)
 	
 	
@@ -312,7 +314,7 @@ func import_world(old_folder, new_folder, name):
 	var filename = old_folder + "/" + name
 	
 	if world_file.open(filename, File.READ):
-		print("Failed to open '" + filename + "'.")
+		print(tr("FAILED_TO_OPEN") + " '" + filename + "'.")
 		return
 		
 	#Parse old world data
@@ -600,8 +602,8 @@ func import_world(old_folder, new_folder, name):
 			
 		#Unknown
 		else:
-			print("Unknown section '" + section[0] + 
-			    "' will be skipped.")
+			print(tr("UNKNOWN_SECTION") + " '" + section[0] + 
+			    "' " + tr("WILL_BE_SKIPPED."))
 		
 	#Save new map file
 	var map_file = File.new()
@@ -609,7 +611,7 @@ func import_world(old_folder, new_folder, name):
 	    name.replace(".world", ".json"))
 	
 	if map_file.open(filename, File.WRITE):
-		print("Failed to save '" + filename + "'.")
+		print(tr("FAILED_TO_SAVE") + " '" + filename + "'.")
 		return
 		
 	var json = pretty_json(new_world.to_json())
@@ -622,7 +624,7 @@ func import_terrain(name, world):
 	var cfg_file = File.new()
 	
 	if cfg_file.open(name, File.READ):
-		print("Failed to open '" + name + "'.")
+		print(tr("FAILED_TO_OPEN") + " '" + name + "'.")
 		return
 		
 	#Find the heightmap, size, and custom material lines only
@@ -657,7 +659,7 @@ func import_foliage(name, world):
 	var foliage_file = File.new()
 	
 	if foliage_file.open(name, File.READ):
-		print("Failed to open '" + name + "'.")
+		print(tr("FAILED_TO_OPEN") + " '" + name + "'.")
 		return
 		
 	#Process each line of the file
@@ -725,7 +727,7 @@ func import_critters(name, world):
 	var critter_file = File.new()
 	
 	if critter_file.open(name, File.READ):
-		print("Failed to open '" + name + "'.")
+		print(tr("FAILED_TO_OPEN") + " '" + name + "'.")
 		return
 		
 	#Load sections

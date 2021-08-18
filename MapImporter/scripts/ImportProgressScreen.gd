@@ -11,7 +11,7 @@ func initialize(steps):
 	get_node("ProgressBar").set_value(0)
 	
 	#Set initial progress message
-	get_node("Progress").set_text("Initializing...")
+	get_node("Progress").set_text(tr("INITIALIZING"))
 	
 	
 func start_step(message):
