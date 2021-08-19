@@ -176,7 +176,6 @@ script/script = ExtResource( 2 )
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 
-visibility/visible = false
 material/material = SubResource( 4 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
