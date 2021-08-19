@@ -1,0 +1,95 @@
+{
+    "size":[
+        50000,
+        300,
+        50000
+    ],
+    "walls":[
+        
+    ],
+    "lights":[
+        
+    ],
+    "gates":[
+        
+    ],
+    "water_planes":[
+        
+    ],
+    "portals":[
+        {
+            "dest_map":"Default",
+            "radius":25,
+            "pos":[
+                25600,
+                270,
+                25600
+            ]
+        },
+        {
+            "dest_map":"Waterfall",
+            "radius":25,
+            "pos":[
+                37000,
+                180,
+                44750
+            ]
+        },
+        {
+            "dest_map":"Forest",
+            "radius":15,
+            "pos":[
+                49000,
+                40,
+                755
+            ]
+        },
+        {
+            "dest_map":"Ocean",
+            "radius":30,
+            "pos":[
+                24800,
+                280,
+                24950
+            ]
+        }
+    ],
+    "billboards":[
+        
+    ],
+    "material":"Terrain/ReallyBigTerrain",
+    "heightmap":"reallybigterrain.png",
+    "collision_shapes":[
+        
+    ],
+    "particles":[
+        
+    ],
+    "weather":"ThunderstormRain",
+    "grass":{
+        "grass_color_map":"grass_tex.jpg",
+        "grass_map":"grassdensitymap.png",
+        "material":"yellowGrass"
+    },
+    "music":[
+        
+    ],
+    "spawn_pos":[
+        25000,
+        25000,
+        100
+    ],
+    "random_objects":[
+        {
+            "instance_count":500,
+            "meshes":[
+                "fir14_25",
+                "fir06_30",
+                "fir05_30"
+            ]
+        }
+    ],
+    "objects":[
+        
+    ]
+}

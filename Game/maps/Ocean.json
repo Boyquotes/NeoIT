@@ -1,0 +1,95 @@
+{
+    "size":[
+        8000,
+        700,
+        8000
+    ],
+    "walls":[
+        
+    ],
+    "lights":[
+        
+    ],
+    "gates":[
+        {
+            "dest_vec":[
+                217,
+                4859,
+                676
+            ],
+            "dest_map":"Underwater Cave",
+            "material":"GateMatBlack",
+            "pos":[
+                4292,
+                140,
+                4161
+            ]
+        }
+    ],
+    "water_planes":[
+        {
+            "is_solid":false,
+            "material":"Terrain/LargeWater",
+            "scale":[
+                30,
+                30
+            ],
+            "sound":"water1.wav",
+            "pos":[
+                4000,
+                600,
+                4000
+            ]
+        }
+    ],
+    "portals":[
+        {
+            "dest_map":"Default",
+            "radius":25,
+            "pos":[
+                1250,
+                300,
+                1000
+            ]
+        },
+        {
+            "dest_map":"Waterfall",
+            "radius":50,
+            "pos":[
+                900,
+                120,
+                7100
+            ]
+        }
+    ],
+    "billboards":[
+        
+    ],
+    "material":"Terrain/MarshTerrain",
+    "heightmap":"oceanterrain.png",
+    "collision_shapes":[
+        
+    ],
+    "particles":[
+        
+    ],
+    "grass":{
+        "grass_color_map":"grass_tex.jpg",
+        "grass_map":"grassdensitymap.png",
+        "material":"yellowGrass"
+    },
+    "music":[
+        
+    ],
+    "spawn_pos":[
+        4000,
+        3900,
+        25
+    ],
+    "random_objects":[
+        
+    ],
+    "objects":[
+        
+    ]
+}

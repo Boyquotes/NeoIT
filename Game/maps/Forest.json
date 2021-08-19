@@ -1,0 +1,88 @@
+{
+    "size":[
+        5000,
+        600,
+        5000
+    ],
+    "walls":[
+        
+    ],
+    "lights":[
+        
+    ],
+    "gates":[
+        
+    ],
+    "water_planes":[
+        {
+            "is_solid":false,
+            "material":"Terrain/CalmWater",
+            "scale":[
+                2.2,
+                2.2
+            ],
+            "sound":"water1.wav",
+            "pos":[
+                1100,
+                280,
+                900
+            ]
+        }
+    ],
+    "portals":[
+        {
+            "dest_map":"Default",
+            "radius":25,
+            "pos":[
+                940,
+                120,
+                780
+            ]
+        }
+    ],
+    "billboards":[
+        
+    ],
+    "material":"Terrain/ForestTerrain",
+    "heightmap":"forestterrain.png",
+    "collision_shapes":[
+        
+    ],
+    "particles":[
+        
+    ],
+    "grass":{
+        "grass_color_map":"grass_tex.jpg",
+        "grass_map":"grassdensitymap2.png",
+        "material":"grass"
+    },
+    "music":[
+        
+    ],
+    "spawn_pos":[
+        900,
+        2000,
+        1
+    ],
+    "random_objects":[
+        {
+            "instance_count":350,
+            "meshes":[
+                "fir14_25",
+                "fir06_30",
+                "fir05_30"
+            ]
+        },
+        {
+            "instance_count":-1,
+            "meshes":[
+                "farn1",
+                "plant2",
+                "shroom1_1"
+            ]
+        }
+    ],
+    "objects":[
+        
+    ]
+}
