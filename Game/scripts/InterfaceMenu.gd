@@ -15,7 +15,7 @@ const run_modes = ["ABSOLUTE", "RELATIVE"]
 
 func _ready():
 	#Show the popup
-	get_node("PopupPanel").popup()
+	#get_node("PopupPanel").popup()
 	
 	#Populate option buttons
 	for name_mode in name_modes:

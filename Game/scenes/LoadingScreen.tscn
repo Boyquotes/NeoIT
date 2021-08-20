@@ -1,25 +1,15 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://fonts/Oxanium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://themes/DefaultTheme.tres" type="Theme" id=1]
 [ext_resource path="res://images/GUI/backdrop1.png" type="Texture" id=2]
+[ext_resource path="res://fonts/ConsolaMono.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 
-font/size = 24
+font/size = 32
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 1 )
-
-[sub_resource type="Theme" id=2]
-
-default_font = SubResource( 1 )
-
-[sub_resource type="DynamicFont" id=3]
-
-font/size = 48
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 1 )
+font/font = ExtResource( 3 )
 
 [node name="LoadingScreen" type="Control"]
 
@@ -27,7 +17,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = SubResource( 2 )
+theme/theme = ExtResource( 1 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
@@ -57,7 +47,7 @@ margin/left = 0.0
 margin/top = 550.0
 margin/right = 212.0
 margin/bottom = 599.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Loading..."
 percent_visible = 1.0
