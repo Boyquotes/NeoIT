@@ -3,8 +3,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.1,
-                    0.1
+                    0.01,
+                    0.01
                 ],
                 "texture":"grass_tex2.png",
                 "type":"base"
@@ -19,8 +19,8 @@
             },
             {
                 "scale":[
-                    0.1,
-                    0.1
+                    0.01,
+                    0.01
                 ],
                 "texture":"rock_tex1.png",
                 "type":"layer"
@@ -31,8 +31,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.001,
+                    0.001
                 ],
                 "texture":"dust_texdark.jpg",
                 "type":"base"
@@ -47,8 +47,8 @@
             },
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.001,
+                    0.001
                 ],
                 "texture":"rock_tex2.png",
                 "type":"layer"
@@ -59,16 +59,16 @@
         "texture_units":[
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"Water01.png",
                 "type":"base"
             },
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"Water02.png",
                 "type":"base"
@@ -91,8 +91,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.1,
-                    0.1
+                    0.01,
+                    0.01
                 ],
                 "texture":"rock_tex1.png",
                 "type":"base"
@@ -103,8 +103,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.001,
+                    0.001
                 ],
                 "texture":"soil_tex.png",
                 "type":"base"
@@ -119,8 +119,8 @@
             },
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"grass_tex2.png",
                 "type":"layer"
@@ -199,6 +199,18 @@
             }
         ]
     },
+    "Portal/Template":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"portalTemplate.png",
+                "type":"base"
+            }
+        ]
+    },
     "Portal/Shrieking_Hill":{
         "texture_units":[
             {
@@ -215,16 +227,16 @@
         "texture_units":[
             {
                 "scale":[
-                    0.02,
-                    0.02
+                    0.002,
+                    0.002
                 ],
                 "texture":"canyon_tex.jpg",
                 "type":"base"
             },
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"terrain_detail.jpg",
                 "type":"contour"
@@ -235,8 +247,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.02,
-                    0.02
+                    0.002,
+                    0.002
                 ],
                 "texture":"lava_tex.jpg",
                 "type":"base"
@@ -247,8 +259,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.025,
-                    0.025
+                    0.0025,
+                    0.0025
                 ],
                 "texture":"grass_tex2.png",
                 "type":"base"
@@ -259,8 +271,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.02,
-                    0.02
+                    0.002,
+                    0.002
                 ],
                 "texture":"jungle.jpg",
                 "type":"base"
@@ -283,8 +295,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.1,
-                    0.1
+                    0.01,
+                    0.01
                 ],
                 "texture":"rock_tex1.png",
                 "type":"base"
@@ -307,8 +319,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.001,
+                    0.001
                 ],
                 "texture":"grass_tex2.png",
                 "type":"base"
@@ -331,8 +343,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.02,
-                    0.02
+                    0.002,
+                    0.002
                 ],
                 "texture":"desertsand.jpg",
                 "type":"base"
@@ -391,16 +403,16 @@
         "texture_units":[
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"Water01.png",
                 "type":"base"
             },
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"Water02.png",
                 "type":"base"
@@ -431,16 +443,16 @@
         "texture_units":[
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"magma_tex.jpg",
                 "type":"contour"
             },
             {
                 "scale":[
-                    0.07,
-                    0.07
+                    0.007,
+                    0.007
                 ],
                 "texture":"magma_tex.jpg",
                 "type":"base"
@@ -463,8 +475,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.025,
-                    0.025
+                    0.0025,
+                    0.0025
                 ],
                 "texture":"grass_tex2.png",
                 "type":"base"
@@ -535,8 +547,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.001,
+                    0.001
                 ],
                 "texture":"soil_tex.png",
                 "type":"base"
@@ -551,8 +563,8 @@
             },
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"stone_tex.png",
                 "type":"layer"
@@ -563,16 +575,16 @@
         "texture_units":[
             {
                 "scale":[
-                    0.005,
-                    0.005
+                    0.0005,
+                    0.0005
                 ],
                 "texture":"grass_tex3.jpg",
                 "type":"base"
             },
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.001,
+                    0.001
                 ],
                 "texture":"terrain_detail2.jpg",
                 "type":"contour"
@@ -583,16 +595,16 @@
         "texture_units":[
             {
                 "scale":[
-                    0.02,
-                    0.02
+                    0.002,
+                    0.002
                 ],
                 "texture":"sand_tex.png",
                 "type":"base"
             },
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"terrain_detail2.jpg",
                 "type":"contour"
@@ -603,8 +615,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.001,
+                    0.001
                 ],
                 "texture":"sand_tex.png",
                 "type":"base"
@@ -619,8 +631,8 @@
             },
             {
                 "scale":[
-                    0.02,
-                    0.02
+                    0.002,
+                    0.002
                 ],
                 "texture":"grass_tex2.png",
                 "type":"layer"
@@ -643,16 +655,16 @@
         "texture_units":[
             {
                 "scale":[
-                    2.5,
-                    2.5
+                    0.25,
+                    0.25
                 ],
                 "texture":"Water01.png",
                 "type":"base"
             },
             {
                 "scale":[
-                    2.5,
-                    2.5
+                    0.25,
+                    0.25
                 ],
                 "texture":"Water02.png",
                 "type":"base"
@@ -675,16 +687,16 @@
         "texture_units":[
             {
                 "scale":[
-                    1,
-                    1
+                    0.1,
+                    0.1
                 ],
                 "texture":"Water01.png",
                 "type":"base"
             },
             {
                 "scale":[
-                    1,
-                    1
+                    0.1,
+                    0.1
                 ],
                 "texture":"Water04.png",
                 "type":"base"
@@ -739,8 +751,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.1,
-                    0.1
+                    0.01,
+                    0.01
                 ],
                 "texture":"grass_tex2.png",
                 "type":"base"
@@ -755,11 +767,23 @@
             },
             {
                 "scale":[
-                    0.1,
-                    0.1
+                    0.01,
+                    0.01
                 ],
                 "texture":"rock_tex1.png",
                 "type":"layer"
+            }
+        ]
+    },
+    "Terrain/TemplateTerrain":{
+        "texture_units":[
+            {
+                "scale":[
+                    0.001,
+                    0.001
+                ],
+                "texture":"green_grass.png",
+                "type":"base"
             }
         ]
     },
@@ -791,16 +815,16 @@
         "texture_units":[
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.001,
+                    0.001
                 ],
                 "texture":"grass_tex2.png",
                 "type":"base"
             },
             {
                 "scale":[
-                    0.05,
-                    0.05
+                    0.005,
+                    0.005
                 ],
                 "texture":"stone_tex.png",
                 "type":"base"
@@ -876,16 +900,16 @@
         "texture_units":[
             {
                 "scale":[
-                    2.5,
-                    2.5
+                    0.25,
+                    0.25
                 ],
                 "texture":"Water01.png",
                 "type":"base"
             },
             {
                 "scale":[
-                    2.5,
-                    2.5
+                    0.25,
+                    0.25
                 ],
                 "texture":"Water02.png",
                 "type":"base"
@@ -896,8 +920,8 @@
         "texture_units":[
             {
                 "scale":[
-                    2.5,
-                    2.5
+                    0.25,
+                    0.25
                 ],
                 "texture":"magma_tex.jpg",
                 "type":"base"
@@ -913,16 +937,16 @@
         "texture_units":[
             {
                 "scale":[
-                    1,
-                    1
+                    0.1,
+                    0.1
                 ],
                 "texture":"Water01.png",
                 "type":"base"
             },
             {
                 "scale":[
-                    1,
-                    1
+                    0.1,
+                    0.1
                 ],
                 "texture":"Water04.png",
                 "type":"base"
@@ -933,8 +957,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.02,
-                    0.02
+                    0.002,
+                    0.002
                 ],
                 "texture":"grassy_tex.jpg",
                 "type":"base"
@@ -949,8 +973,8 @@
             },
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.001,
+                    0.001
                 ],
                 "texture":"sand_tex2.png",
                 "type":"layer"
@@ -973,8 +997,8 @@
         "texture_units":[
             {
                 "scale":[
-                    2,
-                    2
+                    0.2,
+                    0.2
                 ],
                 "texture":"rock_tex2.png",
                 "type":"base"
@@ -1009,8 +1033,8 @@
         "texture_units":[
             {
                 "scale":[
-                    0.02,
-                    0.02
+                    0.002,
+                    0.002
                 ],
                 "texture":"ice_tex.jpg",
                 "type":"base"

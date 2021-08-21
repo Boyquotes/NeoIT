@@ -163,7 +163,11 @@ func load_map(path):
 		
 	get_node("TerrainSystem").set_material(material)
 	var scale = map["size"]
-	get_node("TerrainSystem").set_scale(Vector3((scale[0] * .1) / 512, scale[1] * .1, (scale[2] * .1) / 512))
+	print("Map Size: " + str(scale))
+	get_node("TerrainSystem").set_scale(Vector3(scale[0] / 512, scale[1], scale[2] / 512))
+	
+	#Load map objects
+	#<==================
 	return true
 	
 	
@@ -175,6 +179,7 @@ func unload_map():
 func compile_material(name):
 	#Is the material cached?
 	if name in mtl_cache:
+		print("[WorldManager] Using cached material '" + name + "'.")
 		return mtl_cache[name]
 		
 	#Fetch material source
@@ -196,8 +201,35 @@ func compile_material(name):
 			#Apply scale?
 			if "scale" in tex_unit:
 				var scale = tex_unit["scale"]
-				scale[0] = 1 / scale[0]
-				scale[1] = 1 / scale[1]
+				scale[0] = .1 / scale[0]
+				scale[1] = .1 / scale[1]
+				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n"
+				
+			else:
+				frag_shader += "col = tex(texture" + str(i) + ", UV);\n"
+				
+		#Layer mask?
+		elif tex_unit["type"] == "layer_mask":
+			frag_shader += "\nif(tex(texture" + str(i) + ", UV).a > 0)\n{\n    "
+			
+		#Layer
+		elif tex_unit["type"] == "layer":
+			if "scale" in tex_unit:
+				var scale = tex_unit["scale"]
+				scale[0] = .1 / scale[0]
+				scale[1] = .1 / scale[1]
+				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n}\n\n"
+				
+			else:
+				frag_shader += "col = tex(texture" + str(i) + ", UV);\n}\n\n"
+				
+		#Contour
+		elif tex_unit["type"] == "contour":
+			#Apply scale?
+			if "scale" in tex_unit:
+				var scale = tex_unit["scale"]
+				scale[0] = .1 / scale[0]
+				scale[1] = .1 / scale[1]
 				frag_shader += "col *= tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n"
 				
 			else:
@@ -232,4 +264,7 @@ func compile_material(name):
 		mtl.set_shader_param("texture" + str(i), tex)
 		i += 1
 		
+	#Cache the material
+	mtl_cache[name] = mtl
+	print("[WorldManager] Compiled and cached material '" + name + "'.")
 	return mtl
