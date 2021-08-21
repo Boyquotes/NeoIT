@@ -361,7 +361,7 @@ func import_world(old_folder, new_folder, name):
 		#Portal section
 		elif section[0] == "Portal":
 			var pos = parse_vec(section[1])
-			var radius = float(section[2])
+			var radius = float(section[2]) * .1
 			var dest_map = section[3]
 			new_world["portals"].append({
 			    "pos": pos,
@@ -385,7 +385,10 @@ func import_world(old_folder, new_folder, name):
 		#Water plane section
 		elif section[0] == "WaterPlane":
 			var pos = parse_vec(section[1])
-			var scale = [float(section[2]), float(section[3])]
+			var scale = [
+			    float(section[2]) * .1, 
+			    float(section[3]) * .1
+			]
 			var material = ""
 			var sound = ""
 			var is_solid = false
@@ -460,11 +463,11 @@ func import_world(old_folder, new_folder, name):
 			
 			if section.size() > 3:
 				color = parse_vec(section[1])
-				height = float(section[2])
+				height = float(section[2]) * .1
 				material = section[3]
 				
 			else:
-				height = float(section[1])
+				height = float(section[1]) * .1
 				material = section[2]
 				
 			new_world["interior"] = {
@@ -476,7 +479,7 @@ func import_world(old_folder, new_folder, name):
 		#Light section
 		elif section[0] == "Light":
 			var pos = parse_vec(section[1])
-			var color = parse_vec(section[2])
+			var color = parse_vec(section[2], true)
 			new_world["lights"].append({
 			    "pos": pos,
 			    "color": color
@@ -496,7 +499,7 @@ func import_world(old_folder, new_folder, name):
 		#Sphere wall section
 		elif section[0] == "SphereWall":
 			var pos = parse_vec(section[1])
-			var radius = float(section[2])
+			var radius = float(section[2]) * .1
 			var is_inside = (true if section[3] == "true" else false)
 			new_world["walls"].append({
 			    "shape": "sphere",
@@ -574,7 +577,7 @@ func import_world(old_folder, new_folder, name):
 		#Collision sphere section
 		elif section[0] == "CollSphere":
 			var pos = parse_vec(section[1])
-			var radius = float(section[2])
+			var radius = float(section[2]) * .1
 			new_world["collision_shapes"].append({
 			    "shape": "sphere",
 			    "pos": pos,
@@ -628,7 +631,7 @@ func import_terrain(name, world):
 		return
 		
 	#Find the heightmap, size, and custom material lines only
-	var size = [1, 1, 1]
+	var size = [512, 30, 512]
 	
 	while not cfg_file.eof_reached():
 		var line = cfg_file.get_line().split("=")
@@ -637,13 +640,13 @@ func import_terrain(name, world):
 			world["heightmap"] = line[1]
 			
 		elif line[0] == "PageWorldX":
-			size[0] = float(line[1])
+			size[0] = float(line[1]) * .1
 			
 		elif line[0] == "PageWorldZ":
-			size[2] = float(line[1])
+			size[2] = float(line[1]) * .1
 			
 		elif line[0] == "MaxHeight":
-			size[1] = float(line[1])
+			size[1] = float(line[1]) * .1
 			
 		elif line[0] == "CustomMaterialName":
 			world["material"] = line[1]
@@ -675,7 +678,7 @@ func import_foliage(name, world):
 			continue
 			
 		#New section?
-		elif line.substr(0, 1) == "[" and line.ends_with("]"):
+		elif line.begins_with("[") and line.ends_with("]"):
 			var section = line.substr(1, line.length() - 2)
 			var data = section.split(";")
 			var mesh = data[0]
@@ -700,17 +703,13 @@ func import_foliage(name, world):
 			
 			if section.size() > 1:
 				scale = [
-				    float(section[1]),
-				    float(section[1]),
-				    float(section[1])
+				    float(section[1]) * .1,
+				    float(section[1]) * .1,
+				    float(section[1]) * .1
 				]
 				
 			if section.size() > 2:
-				rot = [
-				    float(section[2]),
-				    float(section[2]),
-				    float(section[2])
-				]
+				rot[1] = float(section[2])
 				
 			batch["instances"].append({
 			    "pos": pos,
@@ -786,12 +785,12 @@ func import_critters(name, world):
 	world["critters"] = critters
 	
 	
-func parse_vec(text):
+func parse_vec(text, is_color=false):
 	var parts = text.split(" ")
 	var vec = []
 	
 	for part in parts:
-		vec.append(float(part))
+		vec.append(float(part) * (1 if is_color else .1))
 		
 	return vec
 	
