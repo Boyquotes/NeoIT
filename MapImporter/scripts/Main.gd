@@ -282,7 +282,7 @@ func parse_texture_unit(file, texture_unit):
 		#Scale?
 		elif line.begins_with("scale "):
 			line.erase(0, 6)
-			texture_unit["scale"] = parse_vec(line)
+			texture_unit["scale"] = parse_vec(line, true)
 			
 		#Color operation
 		elif line == "colour_op alpha_blend":
@@ -785,12 +785,12 @@ func import_critters(name, world):
 	world["critters"] = critters
 	
 	
-func parse_vec(text, is_color=false):
+func parse_vec(text, apply_factor=false):
 	var parts = text.split(" ")
 	var vec = []
 	
 	for part in parts:
-		vec.append(float(part) * (1 if is_color else .1))
+		vec.append(float(part) * (1 if apply_factor else .1))
 		
 	return vec
 	
