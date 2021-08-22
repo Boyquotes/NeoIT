@@ -1,9 +1,15 @@
 extends Spatial
 
+#export (PackedScene) var WorldPortal
+#export (PackedScene) var WorldGate
+var WorldPortal = preload("res://scenes/objects/portal.tscn")
+var WorldGate = preload("res://scenes/objects/gate.tscn")
+
 var dir = Directory.new()
 var meshes = {}
 var materials = {}
 var mtl_cache = {}
+var spawn_pos = Vector3()
 
 
 func _ready():
@@ -163,17 +169,61 @@ func load_map(path):
 		
 	get_node("TerrainSystem").set_material(material)
 	var scale = map["size"]
-	print("Map Size: " + str(scale))
 	get_node("TerrainSystem").set_scale(Vector3(scale[0] / 512, scale[1], scale[2] / 512))
+	spawn_pos = map["spawn_pos"]
 	
-	#Load map objects
-	#<==================
+	#Load portals
+	for portal_data in map["portals"]:
+		#Fetch portal properties
+		var pos = portal_data["pos"]
+		var radius = portal_data["radius"]
+		var dest_map = portal_data["dest_map"]
+		
+		#Create portal and set transform
+		var portal = WorldPortal.instance()
+		portal.set_scale(Vector3(radius, radius, radius))
+		var transform = portal.get_transform()
+		transform.origin = Vector3(pos[0], pos[1], pos[2])
+		portal.set_transform(transform)
+		
+		#Set portal desination and material
+		portal.set_destination(dest_map)
+		portal.set_material(compile_material("Portal/" + dest_map.replace(" ", "_")))
+		
+		#Add portal to scene
+		add_child(portal)
+		
+	#Load gates
+	for gate_data in map["gates"]:
+		#Fetch gate properties
+		var material = gate_data["material"]
+		var pos = gate_data["pos"]
+		var dest_map = gate_data["dest_map"]
+		var dest_vec = gate_data["dest_vec"]
+		
+		#Create gate and set transform
+		var gate = WorldGate.instance()
+		gate.set_scale(Vector3(5, 5, 5))
+		var transform = gate.get_transform()
+		transform.origin = Vector3(pos[0], pos[1], pos[2])
+		gate.set_transform(transform)
+		
+		#Set gate destination, destination vector, and material
+		gate.set_destination(dest_map)
+		gate.set_destination_vec(dest_vec)
+		gate.set_material(compile_material(material))
+		
+		#Add gate to scene
+		add_child(gate)
+		
 	return true
 	
 	
 func unload_map():
-	#Unload terrain
+	#Unload terrain and all world objects
 	get_node("TerrainSystem").unload_terrain()
+	get_tree().call_group(get_tree().GROUP_CALL_DEFAULT, 
+	    "WorldObjects", "queue_free")
 	
 	
 func compile_material(name):
@@ -182,7 +232,37 @@ func compile_material(name):
 		print("[WorldManager] Using cached material '" + name + "'.")
 		return mtl_cache[name]
 		
+	#Handle special materials
+	if name == "GateMatBlack":
+		#Generate solid black material
+		var frag_shader = "DIFFUSE = vec3(0, 0, 0);"
+		var shader = Shader.new()
+		shader.set_code("", frag_shader, "")
+		var mtl = ShaderMaterial.new()
+		mtl.set_shader(shader)
+		
+		#Cache and return material
+		mtl_cache[name] = mtl
+		print("[WorldManager] Compiled and cached material '" + name + "'.")
+		return mtl
+		
+	elif name == "GateMatWhite":
+		#Generate solid white material
+		var frag_shader = "DIFFUSE = vec3(1, 1, 1);"
+		var shader = Shader.new()
+		shader.set_code("", frag_shader, "")
+		var mtl = ShaderMaterial.new()
+		mtl.set_shader(shader)
+		
+		#Cache and return material
+		mtl_cache[name] = mtl
+		print("[WorldManager] Compiled and cached material '" + name + "'.")
+		return mtl
+		
 	#Fetch material source
+	if not name in materials:
+		return null
+		
 	var material = materials[name]
 	
 	#Generate frag shader source
@@ -201,8 +281,8 @@ func compile_material(name):
 			#Apply scale?
 			if "scale" in tex_unit:
 				var scale = tex_unit["scale"]
-				scale[0] = .1 / scale[0]
-				scale[1] = .1 / scale[1]
+				scale[0] = 1 / scale[0]
+				scale[1] = 1 / scale[1]
 				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n"
 				
 			else:
