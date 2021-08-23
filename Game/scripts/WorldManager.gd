@@ -2,8 +2,10 @@ extends Spatial
 
 #export (PackedScene) var WorldPortal
 #export (PackedScene) var WorldGate
-var WorldPortal = preload("res://scenes/objects/portal.tscn")
-var WorldGate = preload("res://scenes/objects/gate.tscn")
+var WorldPortal = preload("res://scenes/objects/Portal.tscn")
+var WorldGate = preload("res://scenes/objects/Gate.tscn")
+var WaterPlane = preload("res://scenes/objects/WaterPlane.tscn")
+var IcePlane = preload("res://scenes/objects/IcePlane.tscn")
 
 var dir = Directory.new()
 var meshes = {}
@@ -216,6 +218,29 @@ func load_map(path):
 		#Add gate to scene
 		add_child(gate)
 		
+	#Load water planes
+	for water_plane_data in map["water_planes"]:
+		#Fetch water plane properties
+		var pos = water_plane_data["pos"]
+		var scale = water_plane_data["scale"]
+		var material = water_plane_data["material"]
+		var sound = (water_plane_data["sound"] if "sound" in water_plane_data else "")
+		var is_solid = (true if "is_solid" in water_plane_data and water_plane_data["is_solid"] else false)
+		#print("Water Plane: " + str(water_plane_data))
+		
+		#Create water plane and set transform
+		var water_plane = (IcePlane.instance() if is_solid else WaterPlane.instance())
+		water_plane.set_scale(Vector3(scale[0], 1, scale[1]))
+		var transform = water_plane.get_transform()
+		transform.origin = Vector3(pos[0], pos[1], pos[2])
+		water_plane.set_transform(transform)
+		
+		#Set material
+		water_plane.set_material(compile_material(material))
+		
+		#Add water plane to scene
+		add_child(water_plane)
+		
 	return true
 	
 	
@@ -296,8 +321,8 @@ func compile_material(name):
 		elif tex_unit["type"] == "layer":
 			if "scale" in tex_unit:
 				var scale = tex_unit["scale"]
-				scale[0] = .1 / scale[0]
-				scale[1] = .1 / scale[1]
+				scale[0] = 1 / scale[0]
+				scale[1] = 1 / scale[1]
 				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n}\n\n"
 				
 			else:
@@ -308,16 +333,21 @@ func compile_material(name):
 			#Apply scale?
 			if "scale" in tex_unit:
 				var scale = tex_unit["scale"]
-				scale[0] = .1 / scale[0]
-				scale[1] = .1 / scale[1]
+				scale[0] = 1 / scale[0]
+				scale[1] = 1 / scale[1]
 				frag_shader += "col *= tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n"
 				
 			else:
 				frag_shader += "col *= tex(texture" + str(i) + ", UV);\n"
 				
 		i += 1
-				
-	frag_shader += "DIFFUSE = col.rgb;\n"
+		
+	if "Water" in name:
+		frag_shader += "DIFFUSE_ALPHA = col;\n"
+		
+	else:
+		frag_shader += "DIFFUSE = col.rgb;\n"
+		
 	print("Frag source for material '" + name + "':")
 	print(frag_shader)
 	

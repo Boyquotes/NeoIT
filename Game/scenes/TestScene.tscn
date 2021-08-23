@@ -36,7 +36,7 @@ shadow/zoffset_scale = 2.0
 [node name="Camera" type="Camera" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 165, 50, 153 )
 projection = 0
 fov = 45.0
 near = 0.1
