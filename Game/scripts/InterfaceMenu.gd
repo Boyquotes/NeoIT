@@ -9,18 +9,9 @@ signal double_jump_toggled(use)
 signal auto_lipsync_toggled(use)
 signal back
 
-const name_modes = ["USER", "CHARACTER"]
-const run_modes = ["ABSOLUTE", "RELATIVE"]
-
 
 func _ready():
-	#Populate option buttons
-	for name_mode in name_modes:
-		get_node("Panel/GeneralNameDisplay").add_item(name_mode)
-		get_node("Panel/LocalNameDisplay").add_item(name_mode)
-		
-	for run_mode in run_modes:
-		get_node("Panel/RunMode").add_item(run_mode)
+	pass
 
 
 func _on_SensitivitySlider_value_changed(value):
@@ -31,23 +22,29 @@ func _on_SensitivitySlider_value_changed(value):
 	
 func _on_GeneralNameDisplay_item_selected(ID):
 	#Emit general name mode changed signal
-	var value = name_modes[get_node("PopupPanel/GeneralNameDisplay").get_selected()]
+	var value = get_node("Panel/GeneralNameDisplay").get_selected()
 	emit_signal("general_name_mode_changed", value)
-	print("General chat name mode set to '" + value + "'")
+	print("General chat name mode set to '" + 
+	    get_node("Panel/GeneralNameDisplay").get_item_text(value) + 
+	    "'")
 
 
 func _on_LocalNameDisplay_item_selected(ID):
 	#Emit local name mode changed signal
-	var value = name_modes[get_node("PopupPanel/LocalNameDisplay").get_selected()]
+	var value = get_node("Panel/LocalNameDisplay").get_selected()
 	emit_signal("local_name_mode_changed", value)
-	print("Local chat name mode set to '" + value + "'")
+	print("Local chat name mode set to '" + 
+	    get_node("Panel/LocalNameDisplay").get_item_text(value) + 
+	    "'")
 
 
 func _on_RunMode_item_selected(ID):
 	#Emit run mode changed signal
-	var value = run_modes[get_node("PopupPanel/RunMode").get_selected()]
+	var value = get_node("Panel/RunMode").get_selected()
 	emit_signal("run_mode_changed", value)
-	print("Run mode set to '" + value + "'")
+	print("Run mode set to '" + 
+	    get_node("Panel/RunMode").get_item_text(value) + 
+	    "'")
 
 
 func _on_ChannelButtonBlink_toggled(pressed):

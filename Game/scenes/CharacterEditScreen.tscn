@@ -210,6 +210,7 @@ tabs_visible = true
 
 [node name="Body" type="Control" parent="Panel/TabContainer"]
 
+visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -609,7 +610,6 @@ items = [  ]
 
 [node name="Colors" type="Control" parent="Panel/TabContainer"]
 
-visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -770,14 +770,15 @@ size_flags/vertical = 2
 margin/left = 50.0
 margin/top = 15.0
 margin/right = 450.0
-margin/bottom = 46.0
+margin/bottom = 49.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
+text = "Item 0"
 flat = false
 align = 0
-selected = -1
-items = [  ]
+selected = 0
+items = [ "PELT", null, false, -1, null, "UNDERFUR", null, false, -1, null, "NOSE", null, false, -1, null, "ABOVE_EYES", null, false, -1, null, "BELOW_EYES", null, false, -1, null, "EARS", null, false, -1, null, "TAIL_TIP", null, false, -1, null, "EYES", null, false, -1, null ]
 
 [node name="RGBDisplay" type="LineEdit" parent="Panel/TabContainer/Colors"]
 

@@ -290,14 +290,15 @@ size_flags/vertical = 2
 margin/left = 380.0
 margin/top = 190.0
 margin/right = 690.0
-margin/bottom = 221.0
+margin/bottom = 224.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
+text = "ABSOLUTE"
 flat = false
 align = 0
-selected = -1
-items = [  ]
+selected = 0
+items = [ "ABSOLUTE", null, false, -1, null, "RELATIVE", null, false, -1, null ]
 
 [node name="LocalNameDisplayLabel" type="Label" parent="Panel"]
 
@@ -323,14 +324,15 @@ size_flags/vertical = 2
 margin/left = 380.0
 margin/top = 140.0
 margin/right = 690.0
-margin/bottom = 171.0
+margin/bottom = 174.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
+text = "USER"
 flat = false
 align = 0
-selected = -1
-items = [  ]
+selected = 0
+items = [ "USER", null, false, -1, null, "CHARACTER", null, false, -1, null ]
 
 [node name="GeneralNameDisplayLabel" type="Label" parent="Panel"]
 
@@ -356,14 +358,15 @@ size_flags/vertical = 2
 margin/left = 380.0
 margin/top = 90.0
 margin/right = 690.0
-margin/bottom = 121.0
+margin/bottom = 124.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
+text = "USER"
 flat = false
 align = 0
-selected = -1
-items = [  ]
+selected = 0
+items = [ "USER", null, false, -1, null, "CHARACTER", null, false, -1, null ]
 
 [node name="BackButton" type="Button" parent="Panel"]
 

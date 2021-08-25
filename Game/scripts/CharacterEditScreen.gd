@@ -10,27 +10,14 @@ signal size_changed(size)
 signal body_mark_changed(type)
 signal head_mark_changed(type)
 signal tail_mark_changed(type)
-signal color_changed(part, color)
+signal color_changed(idx, value)
 signal back
 signal save(name)
 signal delete(name)
 
-const color_types = [
-    "pelt", 
-    "underfur", 
-    "nose", 
-    "above eyes",
-    "below eyes",
-    "ears",
-    "tail tip",
-    "eyes"
-]
-
 
 func _ready():
-	#Populate color type
-	for color_type in color_types:
-		get_node("Panel/TabContainer/Colors/ColorType").add_item(color_type)
+	pass
 
 
 func _on_Body_item_selected(ID):
@@ -87,16 +74,18 @@ func _on_TailMarkings_item_selected(ID):
 	
 func _on_color_changed(value):
 	#Emit color changed signal and update RGB display
-	var part = color_types[get_node("Panel/TabContainer/Colors/ColorType").get_selected()]
+	var idx = get_node("Panel/TabContainer/Colors/ColorType").get_selected()
 	var color = Color(
 	    get_node("Panel/TabContainer/Colors/Red").get_value(),
 	    get_node("Panel/TabContainer/Colors/Green").get_value(),
 	    get_node("Panel/TabContainer/Colors/Blue").get_value()
 	)
 	
-	emit_signal("color_changed", part, color)
+	emit_signal("color_changed", idx, color)
 	get_node("Panel/TabContainer/Colors/RGBDisplay").set_text(str(color))
-	print("Color of part '" + part + "' set to (" + str(color) + ")")
+	print("Color of part '" + 
+	    get_node("Panel/TabContainer/Colors/ColorType").get_item_text(idx) + 
+	    "' set to (" + str(color) + ")")
 	
 	
 func _on_BackButton_pressed():
