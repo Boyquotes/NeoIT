@@ -14,16 +14,13 @@ const run_modes = ["ABSOLUTE", "RELATIVE"]
 
 
 func _ready():
-	#Show the popup
-	#get_node("PopupPanel").popup()
-	
 	#Populate option buttons
 	for name_mode in name_modes:
-		get_node("PopupPanel/GeneralNameDisplay").add_item(name_mode)
-		get_node("PopupPanel/LocalNameDisplay").add_item(name_mode)
+		get_node("Panel/GeneralNameDisplay").add_item(name_mode)
+		get_node("Panel/LocalNameDisplay").add_item(name_mode)
 		
 	for run_mode in run_modes:
-		get_node("PopupPanel/RunMode").add_item(run_mode)
+		get_node("Panel/RunMode").add_item(run_mode)
 
 
 func _on_SensitivitySlider_value_changed(value):

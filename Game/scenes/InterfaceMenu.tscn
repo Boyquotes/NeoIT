@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=1]
 
-[ext_resource path="res://themes/DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/InterfaceMenu.gd" type="Script" id=2]
 [ext_resource path="res://images/GUI/border.png" type="Texture" id=3]
 [ext_resource path="res://images/GUI/borderCenter.png" type="Texture" id=4]
@@ -145,6 +145,8 @@ draw_center = true
 
 [node name="InterfaceMenu" type="Control"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -152,26 +154,29 @@ size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = 984.0
+margin/bottom = 560.0
 script/script = ExtResource( 2 )
 
-[node name="PopupPanel" type="PopupPanel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 
 visibility/visible = false
 material/material = SubResource( 2 )
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 130.0
-margin/top = 60.0
-margin/right = 900.0
-margin/bottom = 530.0
+margin/left = -110.0
+margin/top = -40.0
+margin/right = -880.0
+margin/bottom = -510.0
 custom_styles/panel = SubResource( 3 )
-popup/exclusive = true
 
-[node name="SensitivityLabel" type="Label" parent="PopupPanel"]
+[node name="SensitivityLabel" type="Label" parent="Panel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -186,7 +191,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="SensitivitySlider" type="HSlider" parent="PopupPanel"]
+[node name="SensitivitySlider" type="HSlider" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -210,7 +215,7 @@ tick_count = 0
 ticks_on_borders = true
 focus_mode = 2
 
-[node name="ChannelButtonBlink" type="CheckButton" parent="PopupPanel"]
+[node name="ChannelButtonBlink" type="CheckButton" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -227,7 +232,7 @@ text = "CHANNEL_BUTTON_BLINK"
 flat = false
 align = 0
 
-[node name="DoubleJump" type="CheckButton" parent="PopupPanel"]
+[node name="DoubleJump" type="CheckButton" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -244,7 +249,7 @@ text = "DOUBLE_JUMP"
 flat = false
 align = 0
 
-[node name="AutoLipsync" type="CheckButton" parent="PopupPanel"]
+[node name="AutoLipsync" type="CheckButton" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -261,7 +266,7 @@ text = "AUTO_LIPSYNC"
 flat = false
 align = 0
 
-[node name="RunModeLabel" type="Label" parent="PopupPanel"]
+[node name="RunModeLabel" type="Label" parent="Panel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -276,7 +281,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="RunMode" type="OptionButton" parent="PopupPanel"]
+[node name="RunMode" type="OptionButton" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -294,7 +299,7 @@ align = 0
 selected = -1
 items = [  ]
 
-[node name="LocalNameDisplayLabel" type="Label" parent="PopupPanel"]
+[node name="LocalNameDisplayLabel" type="Label" parent="Panel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -309,7 +314,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="LocalNameDisplay" type="OptionButton" parent="PopupPanel"]
+[node name="LocalNameDisplay" type="OptionButton" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -327,7 +332,7 @@ align = 0
 selected = -1
 items = [  ]
 
-[node name="GeneralNameDisplayLabel" type="Label" parent="PopupPanel"]
+[node name="GeneralNameDisplayLabel" type="Label" parent="Panel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -342,7 +347,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="GeneralNameDisplay" type="OptionButton" parent="PopupPanel"]
+[node name="GeneralNameDisplay" type="OptionButton" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -360,7 +365,7 @@ align = 0
 selected = -1
 items = [  ]
 
-[node name="BackButton" type="Button" parent="PopupPanel"]
+[node name="BackButton" type="Button" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -384,20 +389,20 @@ shortcut = null
 text = "BACK"
 flat = false
 
-[connection signal="value_changed" from="PopupPanel/SensitivitySlider" to="." method="_on_SensitivitySlider_value_changed"]
+[connection signal="value_changed" from="Panel/SensitivitySlider" to="." method="_on_SensitivitySlider_value_changed"]
 
-[connection signal="toggled" from="PopupPanel/ChannelButtonBlink" to="." method="_on_ChannelButtonBlink_toggled"]
+[connection signal="toggled" from="Panel/ChannelButtonBlink" to="." method="_on_ChannelButtonBlink_toggled"]
 
-[connection signal="toggled" from="PopupPanel/DoubleJump" to="." method="_on_DoubleJump_toggled"]
+[connection signal="toggled" from="Panel/DoubleJump" to="." method="_on_DoubleJump_toggled"]
 
-[connection signal="toggled" from="PopupPanel/AutoLipsync" to="." method="_on_AutoLipsync_toggled"]
+[connection signal="toggled" from="Panel/AutoLipsync" to="." method="_on_AutoLipsync_toggled"]
 
-[connection signal="item_selected" from="PopupPanel/RunMode" to="." method="_on_RunMode_item_selected"]
+[connection signal="item_selected" from="Panel/RunMode" to="." method="_on_RunMode_item_selected"]
 
-[connection signal="item_selected" from="PopupPanel/LocalNameDisplay" to="." method="_on_LocalNameDisplay_item_selected"]
+[connection signal="item_selected" from="Panel/LocalNameDisplay" to="." method="_on_LocalNameDisplay_item_selected"]
 
-[connection signal="item_selected" from="PopupPanel/GeneralNameDisplay" to="." method="_on_GeneralNameDisplay_item_selected"]
+[connection signal="item_selected" from="Panel/GeneralNameDisplay" to="." method="_on_GeneralNameDisplay_item_selected"]
 
-[connection signal="pressed" from="PopupPanel/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Panel/BackButton" to="." method="_on_BackButton_pressed"]
 
 

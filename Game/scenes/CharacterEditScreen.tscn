@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=1]
 
-[ext_resource path="res://themes/DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/CharacterEditScreen.gd" type="Script" id=2]
 [ext_resource path="res://images/GUI/startscreen.png" type="Texture" id=3]
 [ext_resource path="res://images/GUI/buttonUp.png" type="Texture" id=4]
@@ -162,6 +162,8 @@ draw_center = true
 
 [node name="CharacterEditScreen" type="Control"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -169,12 +171,13 @@ size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = 984.0
+margin/bottom = 560.0
 script/script = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="."]
 
+anchor/bottom = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -182,19 +185,21 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 540.0
-margin/bottom = 600.0
+margin/bottom = -560.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="TabContainer" type="TabContainer" parent="Panel"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 20.0
 margin/top = 30.0
-margin/right = 460.0
-margin/bottom = 490.0
+margin/right = 20.0
+margin/bottom = 110.0
 custom_styles/tab_fg = SubResource( 2 )
 custom_styles/tab_bg = SubResource( 3 )
 custom_styles/panel = SubResource( 4 )
@@ -212,7 +217,7 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 25.0
+margin/top = 28.0
 margin/right = 0.0
 margin/bottom = 0.0
 
@@ -890,14 +895,17 @@ flat = false
 
 [node name="BackButton" type="Button" parent="Panel"]
 
+anchor/top = 1
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 160.0
-margin/top = 520.0
-margin/right = 380.0
-margin/bottom = 560.0
+margin/top = 80.0
+margin/right = 160.0
+margin/bottom = 40.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/focus = SubResource( 9 )

@@ -8,8 +8,6 @@ signal quit
 
 
 func _ready():
-	#Show the pause menu
-	#get_node("PopupPanel").popup()
 	pass
 
 

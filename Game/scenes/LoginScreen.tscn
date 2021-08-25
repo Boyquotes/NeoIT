@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=1]
 
-[ext_resource path="res://themes/DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/LoginScreen.gd" type="Script" id=2]
 [ext_resource path="res://images/GUI/backdrop1.png" type="Texture" id=3]
 [ext_resource path="res://images/GUI/startscreen.png" type="Texture" id=4]
@@ -103,6 +103,8 @@ draw_center = true
 
 [node name="LoginScreen" type="Control"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -110,26 +112,29 @@ size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = 984.0
+margin/bottom = 560.0
 script/script = ExtResource( 2 )
 
 [node name="TextureFrame" type="TextureFrame" parent="."]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 1024.0
-margin/bottom = 600.0
+margin/right = -984.0
+margin/bottom = -560.0
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 0
 
 [node name="Panel" type="Panel" parent="."]
 
+anchor/bottom = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -137,19 +142,20 @@ size_flags/vertical = 2
 margin/left = 60.0
 margin/top = 60.0
 margin/right = 490.0
-margin/bottom = 520.0
+margin/bottom = -480.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="MultiplayerLabel" type="Label" parent="Panel"]
 
+anchor/right = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 10.0
 margin/top = 50.0
-margin/right = 410.0
-margin/bottom = 75.0
+margin/right = 20.0
+margin/bottom = 78.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "MULTIPLAYER"
 align = 1
@@ -224,14 +230,18 @@ caret/caret_blink_speed = 0.65
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 
+anchor/left = 3
+anchor/top = 1
+anchor/right = 3
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 100.0
+margin/left = 125.0
 margin/top = 230.0
-margin/right = 350.0
-margin/bottom = 414.0
+margin/right = -125.0
+margin/bottom = 46.0
 custom_constants/separation = 24
 alignment = 0
 __meta__ = {

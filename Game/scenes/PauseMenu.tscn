@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=1]
 
-[ext_resource path="res://themes/DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=2]
 [ext_resource path="res://images/GUI/border.png" type="Texture" id=3]
 [ext_resource path="res://images/GUI/borderCenter.png" type="Texture" id=4]
@@ -126,6 +126,8 @@ draw_center = true
 
 [node name="PauseMenu" type="Control"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -133,26 +135,29 @@ size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = 984.0
+margin/bottom = 560.0
 script/script = ExtResource( 2 )
 
-[node name="PopupPanel" type="PopupPanel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 
 visibility/visible = false
 material/material = SubResource( 2 )
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 380.0
-margin/top = 130.0
-margin/right = 650.0
-margin/bottom = 460.0
+margin/left = -360.0
+margin/top = -110.0
+margin/right = -630.0
+margin/bottom = -440.0
 custom_styles/panel = SubResource( 3 )
-popup/exclusive = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -161,14 +166,14 @@ size_flags/vertical = 2
 margin/left = 30.0
 margin/top = 40.0
 margin/right = 240.0
-margin/bottom = 293.0
+margin/bottom = 308.0
 custom_constants/separation = 32
 alignment = 0
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="ResumeButton" type="Button" parent="PopupPanel/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="Panel/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -192,7 +197,7 @@ shortcut = null
 text = "RESUME"
 flat = false
 
-[node name="SettingsButton" type="Button" parent="PopupPanel/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Panel/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -216,7 +221,7 @@ shortcut = null
 text = "SETTINGS"
 flat = false
 
-[node name="InterfaceButton" type="Button" parent="PopupPanel/VBoxContainer"]
+[node name="InterfaceButton" type="Button" parent="Panel/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -240,7 +245,7 @@ shortcut = null
 text = "INTERFACE"
 flat = false
 
-[node name="RestartButton" type="Button" parent="PopupPanel/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="Panel/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -264,7 +269,7 @@ shortcut = null
 text = "RESTART"
 flat = false
 
-[node name="QuitButton" type="Button" parent="PopupPanel/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Panel/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -288,14 +293,14 @@ shortcut = null
 text = "QUIT"
 flat = false
 
-[connection signal="pressed" from="PopupPanel/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 
-[connection signal="pressed" from="PopupPanel/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 
-[connection signal="pressed" from="PopupPanel/VBoxContainer/InterfaceButton" to="." method="_on_InterfaceButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/InterfaceButton" to="." method="_on_InterfaceButton_pressed"]
 
-[connection signal="pressed" from="PopupPanel/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
 
-[connection signal="pressed" from="PopupPanel/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 
 

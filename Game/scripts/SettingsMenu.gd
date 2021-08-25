@@ -9,8 +9,6 @@ signal back
 
 
 func _ready():
-	#Show the popup
-	#get_node("PopupPanel").popup()
 	pass
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=1]
 
-[ext_resource path="res://themes/DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/SettingsMenu.gd" type="Script" id=2]
 [ext_resource path="res://images/GUI/border.png" type="Texture" id=3]
 [ext_resource path="res://images/GUI/borderCenter.png" type="Texture" id=4]
@@ -152,6 +152,8 @@ draw_center = true
 
 [node name="SettingsMenu" type="Control"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -159,26 +161,29 @@ size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = 984.0
+margin/bottom = 560.0
 script/script = ExtResource( 2 )
 
-[node name="PopupPanel" type="PopupPanel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 
 visibility/visible = false
 material/material = SubResource( 2 )
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 220.0
-margin/top = 80.0
-margin/right = 820.0
-margin/bottom = 520.0
+margin/left = -200.0
+margin/top = -60.0
+margin/right = -800.0
+margin/bottom = -500.0
 custom_styles/panel = SubResource( 3 )
-popup/exclusive = true
 
-[node name="MusicLabel" type="Label" parent="PopupPanel"]
+[node name="MusicLabel" type="Label" parent="Panel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -193,7 +198,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="MusicSlider" type="HSlider" parent="PopupPanel"]
+[node name="MusicSlider" type="HSlider" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -217,7 +222,7 @@ tick_count = 0
 ticks_on_borders = true
 focus_mode = 2
 
-[node name="GUISoundsLabel" type="Label" parent="PopupPanel"]
+[node name="GUISoundsLabel" type="Label" parent="Panel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -232,7 +237,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="GUISoundsSlider" type="HSlider" parent="PopupPanel"]
+[node name="GUISoundsSlider" type="HSlider" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -256,7 +261,7 @@ tick_count = 0
 ticks_on_borders = true
 focus_mode = 2
 
-[node name="SoundsLabel" type="Label" parent="PopupPanel"]
+[node name="SoundsLabel" type="Label" parent="Panel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -271,7 +276,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="SoundsSlider" type="HSlider" parent="PopupPanel"]
+[node name="SoundsSlider" type="HSlider" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -295,7 +300,7 @@ tick_count = 0
 ticks_on_borders = true
 focus_mode = 2
 
-[node name="ViewDistanceLabel" type="Label" parent="PopupPanel"]
+[node name="ViewDistanceLabel" type="Label" parent="Panel"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -310,7 +315,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="ViewDistanceSlider" type="HSlider" parent="PopupPanel"]
+[node name="ViewDistanceSlider" type="HSlider" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -334,7 +339,7 @@ tick_count = 0
 ticks_on_borders = true
 focus_mode = 2
 
-[node name="ShadowsButton" type="CheckButton" parent="PopupPanel"]
+[node name="ShadowsButton" type="CheckButton" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -352,7 +357,7 @@ text = "SHADOWS"
 flat = false
 align = 0
 
-[node name="BackButton" type="Button" parent="PopupPanel"]
+[node name="BackButton" type="Button" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -376,16 +381,16 @@ shortcut = null
 text = "BACK"
 flat = false
 
-[connection signal="value_changed" from="PopupPanel/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="Panel/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 
-[connection signal="value_changed" from="PopupPanel/GUISoundsSlider" to="." method="_on_GUISoundsSlider_value_changed"]
+[connection signal="value_changed" from="Panel/GUISoundsSlider" to="." method="_on_GUISoundsSlider_value_changed"]
 
-[connection signal="value_changed" from="PopupPanel/SoundsSlider" to="." method="_on_SoundsSlider_value_changed"]
+[connection signal="value_changed" from="Panel/SoundsSlider" to="." method="_on_SoundsSlider_value_changed"]
 
-[connection signal="value_changed" from="PopupPanel/ViewDistanceSlider" to="." method="_on_ViewDistanceSlider_value_changed"]
+[connection signal="value_changed" from="Panel/ViewDistanceSlider" to="." method="_on_ViewDistanceSlider_value_changed"]
 
-[connection signal="toggled" from="PopupPanel/ShadowsButton" to="." method="_on_ShadowsButton_toggled"]
+[connection signal="toggled" from="Panel/ShadowsButton" to="." method="_on_ShadowsButton_toggled"]
 
-[connection signal="pressed" from="PopupPanel/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Panel/BackButton" to="." method="_on_BackButton_pressed"]
 
 

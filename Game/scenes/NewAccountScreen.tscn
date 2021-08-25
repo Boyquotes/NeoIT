@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=1]
 
-[ext_resource path="res://themes/DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/NewAccountScreen.gd" type="Script" id=2]
 [ext_resource path="res://images/GUI/backdrop1.png" type="Texture" id=3]
 [ext_resource path="res://images/GUI/startscreen.png" type="Texture" id=4]
@@ -9,7 +9,7 @@
 [ext_resource path="res://images/GUI/buttonDown.png" type="Texture" id=7]
 [ext_resource path="res://images/GUI/buttonUp.png" type="Texture" id=8]
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=1]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -26,7 +26,7 @@ expand_margin/top = 0.0
 expand_margin/bottom = 0.0
 draw_center = true
 
-[sub_resource type="StyleBoxTexture" id=4]
+[sub_resource type="StyleBoxTexture" id=2]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -43,7 +43,7 @@ expand_margin/top = 0.0
 expand_margin/bottom = 0.0
 draw_center = true
 
-[sub_resource type="StyleBoxTexture" id=5]
+[sub_resource type="StyleBoxTexture" id=3]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -60,7 +60,7 @@ expand_margin/top = 0.0
 expand_margin/bottom = 0.0
 draw_center = true
 
-[sub_resource type="StyleBoxTexture" id=6]
+[sub_resource type="StyleBoxTexture" id=4]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -77,14 +77,14 @@ expand_margin/top = 0.0
 expand_margin/bottom = 0.0
 draw_center = true
 
-[sub_resource type="StyleBoxEmpty" id=7]
+[sub_resource type="StyleBoxEmpty" id=5]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 
-[sub_resource type="StyleBoxTexture" id=8]
+[sub_resource type="StyleBoxTexture" id=6]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -103,6 +103,8 @@ draw_center = true
 
 [node name="NewAccountScreen" type="Control"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -110,26 +112,29 @@ size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = 984.0
+margin/bottom = 560.0
 script/script = ExtResource( 2 )
 
 [node name="TextureFrame" type="TextureFrame" parent="."]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 1024.0
-margin/bottom = 600.0
+margin/right = -984.0
+margin/bottom = -560.0
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 0
 
 [node name="Panel" type="Panel" parent="."]
 
+anchor/bottom = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -137,19 +142,20 @@ size_flags/vertical = 2
 margin/left = 60.0
 margin/top = 60.0
 margin/right = 620.0
-margin/bottom = 520.0
-custom_styles/panel = SubResource( 3 )
+margin/bottom = -480.0
+custom_styles/panel = SubResource( 1 )
 
 [node name="NewAcccountLabel" type="Label" parent="Panel"]
 
+anchor/right = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 10.0
 margin/top = 50.0
-margin/right = 540.0
-margin/bottom = 75.0
+margin/right = 20.0
+margin/bottom = 78.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "CREATE_NEW_ACCOUNT"
 align = 1
@@ -183,7 +189,7 @@ margin/left = 320.0
 margin/top = 100.0
 margin/right = 500.0
 margin/bottom = 125.0
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -215,7 +221,7 @@ margin/left = 320.0
 margin/top = 140.0
 margin/right = 500.0
 margin/bottom = 165.0
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 secret = true
 focus_mode = 2
@@ -248,7 +254,7 @@ margin/left = 320.0
 margin/top = 180.0
 margin/right = 500.0
 margin/bottom = 205.0
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 secret = true
 focus_mode = 2
@@ -281,7 +287,7 @@ margin/left = 320.0
 margin/top = 220.0
 margin/right = 500.0
 margin/bottom = 245.0
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -313,7 +319,7 @@ margin/left = 320.0
 margin/top = 260.0
 margin/right = 500.0
 margin/bottom = 285.0
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -345,7 +351,7 @@ margin/left = 320.0
 margin/top = 300.0
 margin/right = 500.0
 margin/bottom = 325.0
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -353,18 +359,20 @@ caret/caret_blink_speed = 0.65
 
 [node name="BackButton" type="Button" parent="Panel"]
 
+anchor/top = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 50.0
-margin/top = 380.0
+margin/top = 80.0
 margin/right = 230.0
-margin/bottom = 411.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
+margin/bottom = 49.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -377,18 +385,22 @@ flat = false
 
 [node name="CreateButton" type="Button" parent="Panel"]
 
+anchor/left = 1
+anchor/top = 1
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 270.0
-margin/top = 380.0
-margin/right = 450.0
-margin/bottom = 411.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
+margin/left = 290.0
+margin/top = 80.0
+margin/right = 110.0
+margin/bottom = 49.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )

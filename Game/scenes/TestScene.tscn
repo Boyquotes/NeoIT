@@ -3,7 +3,8 @@
 [ext_resource path="res://scripts/TestScene.gd" type="Script" id=1]
 [ext_resource path="res://scripts/SimpleCamera.gd" type="Script" id=2]
 [ext_resource path="res://scenes/WorldManager.tscn" type="PackedScene" id=3]
-[ext_resource path="res://themes/DefaultTheme.tres" type="Theme" id=4]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=4]
+
 
 [node name="TestScene" type="Node"]
 
