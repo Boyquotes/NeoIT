@@ -284,6 +284,11 @@ func parse_texture_unit(file, texture_unit):
 			line.erase(0, 6)
 			texture_unit["scale"] = parse_vec(line, false)
 			
+		#Scroll?
+		elif line.begins_with("scroll_anim "):
+			line.erase(0, 12)
+			texture_unit["scroll"] = parse_vec(line, false)
+			
 		#Color operation
 		elif line == "colour_op alpha_blend":
 			texture_unit["type"] = "layer_mask"
@@ -688,7 +693,7 @@ func import_foliage(name, world):
 				material = data[1]
 				
 			batch = {
-			    "mesh": mesh,
+			    "mesh": mesh.replace(".mesh", ""),
 			    "material": material,
 			    "instances": []
 			}

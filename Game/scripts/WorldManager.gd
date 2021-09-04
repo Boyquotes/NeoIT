@@ -7,6 +7,8 @@ var WorldGate = preload("res://scenes/objects/Gate.tscn")
 var WaterPlane = preload("res://scenes/objects/WaterPlane.tscn")
 var IcePlane = preload("res://scenes/objects/IcePlane.tscn")
 
+onready var space_state = get_world().get_direct_space_state()
+
 var dir = Directory.new()
 var meshes = {}
 var materials = {}
@@ -241,6 +243,83 @@ func load_map(path):
 		#Add water plane to scene
 		add_child(water_plane)
 		
+	#Load scenery
+	for object in map["objects"]:
+		#Fetch object properties
+		var mesh = object["mesh"]
+		var pos = (object["pos"] if "pos" in object else [0, 0, 0])
+		var scale = (object["scale"] if "scale" in object else [1, 1, 1])
+		var rot = (object["rot"] if "rot" in object else [0, 0, 0])
+		var sound = (object["sound"] if "sound" in object else "")
+		var material = (object["material"] if "material" in object else "")
+		var instances = (object["instances"] if "instances" in object else null)
+		
+		#Ensure that the mesh exists
+		if not mesh in meshes:
+			print("[WorldManager] Mesh '" + mesh + "' not found!")
+			continue
+		
+		#Single instance or group of instances?
+		if instances == null:
+			#Create object instance and set transform
+			var object = meshes[mesh].instance()
+			object.set_scale(Vector3(scale[0], scale[1], scale[2]))
+			var transform = object.get_transform()
+			
+			if pos.size() == 3:
+				transform.origin = Vector3(pos[0], pos[1], pos[2])
+				
+			elif pos.size() == 2:
+				transform.origin = Vector3(pos[0], cast_ray(pos[0], pos[1]), pos[1])
+				
+			object.set_transform(transform)
+			object.rotate(Vector3(1, 0, 0), deg2rad(rot[0]))
+			object.rotate(Vector3(0, 1, 0), deg2rad(rot[1]))
+			object.rotate(Vector3(0, 0, 1), deg2rad(rot[2]))
+			
+			#Set material?
+			if material != "":
+				for child in object.get_children():
+					if child.is_type("MeshInstance"):
+						child.set_material_override(compile_material(material))
+			
+			#Add object to scene
+			object.add_to_group("WorldObjects")
+			add_child(object)
+			print("[WorldManager] Added object '" + mesh + "' to scene.")
+			
+		else:
+			#Create one new object per instance
+			for instance in instances:
+				#Get instance properties
+				pos = instance["pos"]
+				scale = (instance["scale"] if "scale" in instance else [1, 1, 1])
+				rot = (instance["rot"] if "rot" in instance else [0, 0, 0])
+				
+				#Create new object instance and set its transform
+				var object = meshes[mesh].instance()
+				object.set_scale(Vector3(scale[0], scale[1], scale[2]))
+				var transform = object.get_transform()
+				
+				if pos.size() == 3:
+					transform.origin = Vector3(pos[0], pos[1], pos[2])
+					
+				elif pos.size() == 2:
+					transform.origin = Vector3(pos[0], cast_ray(pos[0], pos[1]), pos[1])
+					
+				object.set_transform(transform)
+				
+				#Set material?
+				if material != "":
+					for child in object.get_children():
+						if child.is_type("MeshInstance"):
+							child.set_material_override(compile_material(material))
+					
+				#Add object to scene
+				object.add_to_group("WorldObjects")
+				add_child(object)
+				print("[WorldManager] Added object instance '" + mesh + "' to scene.")
+		
 	return true
 	
 	
@@ -301,6 +380,14 @@ func compile_material(name):
 	var i = 0
 		
 	for tex_unit in material["texture_units"]:
+		#Texture scrolling?
+		#print(tex_unit)
+		var scroll_code = ""
+		
+		if "scroll" in tex_unit:
+			var scroll = tex_unit["scroll"]
+			scroll_code = " + (vec2(" + str(scroll[0]) + ", " + str(scroll[1]) + ") * TIME)"
+		
 		#Base texture?
 		if tex_unit["type"] == "base":
 			#Apply scale?
@@ -308,10 +395,10 @@ func compile_material(name):
 				var scale = tex_unit["scale"]
 				scale[0] = 1 / scale[0]
 				scale[1] = 1 / scale[1]
-				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n"
+				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + ")" + scroll_code + ");\n"
 				
 			else:
-				frag_shader += "col = tex(texture" + str(i) + ", UV);\n"
+				frag_shader += "col = tex(texture" + str(i) + ", UV" + scroll_code + ");\n"
 				
 		#Layer mask?
 		elif tex_unit["type"] == "layer_mask":
@@ -323,10 +410,10 @@ func compile_material(name):
 				var scale = tex_unit["scale"]
 				scale[0] = 1 / scale[0]
 				scale[1] = 1 / scale[1]
-				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n}\n\n"
+				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + ")" + scroll_code + ");\n}\n\n"
 				
 			else:
-				frag_shader += "col = tex(texture" + str(i) + ", UV);\n}\n\n"
+				frag_shader += "col = tex(texture" + str(i) + ", UV" + scroll_code + ");\n}\n\n"
 				
 		#Contour
 		elif tex_unit["type"] == "contour":
@@ -348,8 +435,8 @@ func compile_material(name):
 	else:
 		frag_shader += "DIFFUSE = col.rgb;\n"
 		
-	print("Frag source for material '" + name + "':")
-	print(frag_shader)
+	#print("Frag source for material '" + name + "':")
+	#print(frag_shader)
 	
 	#Create shader material
 	var shader = Shader.new()
@@ -378,3 +465,19 @@ func compile_material(name):
 	mtl_cache[name] = mtl
 	print("[WorldManager] Compiled and cached material '" + name + "'.")
 	return mtl
+	
+	
+func cast_ray(x, z):
+	#Cast a ray downward until it hits the terrain
+	var result = space_state.intersect_ray(
+	    Vector3(x, -1, z),
+	    Vector3(x, 1000, z),
+	    [],
+	    1,
+	    PhysicsDirectSpaceState.TYPE_MASK_STATIC_BODY
+	)
+	
+	if not "position" in result:
+		return 0
+		
+	return result["position"].y

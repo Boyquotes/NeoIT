@@ -402,6 +402,10 @@
     "Terrain/LargeWater":{
         "texture_units":[
             {
+                "scroll":[
+                    -0.03,
+                    -0.05
+                ],
                 "scale":[
                     0.05,
                     0.05
@@ -410,6 +414,10 @@
                 "type":"base"
             },
             {
+                "scroll":[
+                    -0.05,
+                    0.01
+                ],
                 "scale":[
                     0.05,
                     0.05
@@ -422,6 +430,10 @@
     "Waterfall":{
         "texture_units":[
             {
+                "scroll":[
+                    0,
+                    0.75
+                ],
                 "scale":[
                     1,
                     1
@@ -442,6 +454,10 @@
     "Terrain/LargeMagma":{
         "texture_units":[
             {
+                "scroll":[
+                    -0.03,
+                    -0.05
+                ],
                 "scale":[
                     0.05,
                     0.05
@@ -450,6 +466,10 @@
                 "type":"contour"
             },
             {
+                "scroll":[
+                    -0.05,
+                    0.01
+                ],
                 "scale":[
                     0.07,
                     0.07
@@ -654,6 +674,10 @@
     "Terrain/CalmWater":{
         "texture_units":[
             {
+                "scroll":[
+                    -0.03,
+                    -0.05
+                ],
                 "scale":[
                     2.5,
                     2.5
@@ -662,6 +686,10 @@
                 "type":"base"
             },
             {
+                "scroll":[
+                    -0.05,
+                    0.01
+                ],
                 "scale":[
                     2.5,
                     2.5
@@ -686,6 +714,10 @@
     "Terrain/LakeWater":{
         "texture_units":[
             {
+                "scroll":[
+                    -0.03,
+                    0.05
+                ],
                 "scale":[
                     1,
                     1
@@ -694,6 +726,10 @@
                 "type":"base"
             },
             {
+                "scroll":[
+                    -0.05,
+                    0.01
+                ],
                 "scale":[
                     1,
                     1
@@ -730,6 +766,10 @@
     "Waterfall2":{
         "texture_units":[
             {
+                "scroll":[
+                    0,
+                    0.75
+                ],
                 "scale":[
                     1,
                     1
@@ -899,6 +939,10 @@
     "Terrain/Water":{
         "texture_units":[
             {
+                "scroll":[
+                    -0.15,
+                    -0.15
+                ],
                 "scale":[
                     2.5,
                     2.5
@@ -907,6 +951,10 @@
                 "type":"base"
             },
             {
+                "scroll":[
+                    -0.25,
+                    0.1
+                ],
                 "scale":[
                     2.5,
                     2.5
@@ -919,6 +967,10 @@
     "Terrain/Magma":{
         "texture_units":[
             {
+                "scroll":[
+                    -0.03,
+                    -0.05
+                ],
                 "scale":[
                     2.5,
                     2.5
@@ -936,6 +988,10 @@
     "Terrain/RapidWater":{
         "texture_units":[
             {
+                "scroll":[
+                    -1,
+                    0.05
+                ],
                 "scale":[
                     1,
                     1
@@ -944,6 +1000,10 @@
                 "type":"base"
             },
             {
+                "scroll":[
+                    -1.01,
+                    0.01
+                ],
                 "scale":[
                     1,
                     1

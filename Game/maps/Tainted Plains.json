@@ -70,7 +70,7 @@
     ],
     "objects":[
         {
-            "mesh":"acaciaTree.mesh",
+            "mesh":"acaciaTree",
             "material":"GUIMat/None(1)",
             "instances":[
                 {
@@ -994,7 +994,7 @@
             ]
         },
         {
-            "mesh":"pumpkin.mesh",
+            "mesh":"pumpkin",
             "material":"",
             "instances":[
                 {
@@ -1561,7 +1561,7 @@
             ]
         },
         {
-            "mesh":"candles.mesh",
+            "mesh":"candles",
             "material":"",
             "instances":[
                 {
@@ -2111,7 +2111,7 @@
             ]
         },
         {
-            "mesh":"grave.mesh",
+            "mesh":"grave",
             "material":"",
             "instances":[
                 {

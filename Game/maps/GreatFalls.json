@@ -579,7 +579,7 @@
     ],
     "objects":[
         {
-            "mesh":"savannahTree.mesh",
+            "mesh":"savannahTree",
             "material":"",
             "instances":[
                 {
@@ -10937,7 +10937,7 @@
             ]
         },
         {
-            "mesh":"fir06_30.mesh",
+            "mesh":"fir06_30",
             "material":"",
             "instances":[
                 {
@@ -10975,7 +10975,7 @@
             ]
         },
         {
-            "mesh":"farn1.mesh",
+            "mesh":"farn1",
             "material":"",
             "instances":[
                 {
@@ -13317,7 +13317,7 @@
             ]
         },
         {
-            "mesh":"rock.mesh",
+            "mesh":"rock",
             "material":"",
             "instances":[
                 {
@@ -13371,7 +13371,7 @@
             ]
         },
         {
-            "mesh":"den.mesh",
+            "mesh":"den",
             "material":"",
             "instances":[
                 {
@@ -13633,7 +13633,7 @@
             ]
         },
         {
-            "mesh":"BeeHive.mesh",
+            "mesh":"BeeHive",
             "material":"",
             "instances":[
                 {
@@ -13707,7 +13707,7 @@
             ]
         },
         {
-            "mesh":"farn1.mesh",
+            "mesh":"farn1",
             "material":"",
             "instances":[
                 {
@@ -13985,7 +13985,7 @@
             ]
         },
         {
-            "mesh":"GrassPatch.mesh",
+            "mesh":"GrassPatch",
             "material":"",
             "instances":[
                 {
@@ -14008,7 +14008,7 @@
             ]
         },
         {
-            "mesh":"shroom1_1.mesh",
+            "mesh":"shroom1_1",
             "material":"",
             "instances":[
                 {
@@ -14031,7 +14031,7 @@
             ]
         },
         {
-            "mesh":"shroom1_2.mesh",
+            "mesh":"shroom1_2",
             "material":"",
             "instances":[
                 {
@@ -14071,7 +14071,7 @@
             ]
         },
         {
-            "mesh":"shroom2_2.mesh",
+            "mesh":"shroom2_2",
             "material":"",
             "instances":[
                 {
@@ -14094,7 +14094,7 @@
             ]
         },
         {
-            "mesh":"rockSlab.mesh",
+            "mesh":"rockSlab",
             "material":"",
             "instances":[
                 {
@@ -14117,7 +14117,7 @@
             ]
         },
         {
-            "mesh":"Wand.mesh",
+            "mesh":"Wand",
             "material":"",
             "instances":[
                 {
@@ -14140,7 +14140,7 @@
             ]
         },
         {
-            "mesh":"Sign.mesh",
+            "mesh":"Sign",
             "material":"",
             "instances":[
                 {

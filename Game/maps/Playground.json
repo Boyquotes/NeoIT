@@ -1533,7 +1533,7 @@
     ],
     "objects":[
         {
-            "mesh":"fir14_25.mesh",
+            "mesh":"fir14_25",
             "material":"",
             "instances":[
                 {
@@ -1743,7 +1743,7 @@
             ]
         },
         {
-            "mesh":"fir06_30.mesh",
+            "mesh":"fir06_30",
             "material":"",
             "instances":[
                 {
@@ -2089,7 +2089,7 @@
             ]
         },
         {
-            "mesh":"Tree1.mesh",
+            "mesh":"Tree1",
             "material":"",
             "instances":[
                 {
@@ -2316,7 +2316,7 @@
             ]
         },
         {
-            "mesh":"acaciaTree.mesh",
+            "mesh":"acaciaTree",
             "material":"",
             "instances":[
                 {
@@ -2594,7 +2594,7 @@
             ]
         },
         {
-            "mesh":"savannahTree.mesh",
+            "mesh":"savannahTree",
             "material":"",
             "instances":[
                 {
@@ -2974,7 +2974,7 @@
             ]
         },
         {
-            "mesh":"Jungletree.mesh",
+            "mesh":"Jungletree",
             "material":"",
             "instances":[
                 {
@@ -3048,7 +3048,7 @@
             ]
         },
         {
-            "mesh":"fern.mesh",
+            "mesh":"fern",
             "material":"",
             "instances":[
                 {
@@ -3309,7 +3309,7 @@
             ]
         },
         {
-            "mesh":"farn2.mesh",
+            "mesh":"farn2",
             "material":"",
             "instances":[
                 {
@@ -3400,7 +3400,7 @@
             ]
         },
         {
-            "mesh":"rockSlab.mesh",
+            "mesh":"rockSlab",
             "material":"",
             "instances":[
                 {
@@ -3984,7 +3984,7 @@
             ]
         },
         {
-            "mesh":"rockSlab2.mesh",
+            "mesh":"rockSlab2",
             "material":"",
             "instances":[
                 {
@@ -4704,7 +4704,7 @@
             ]
         },
         {
-            "mesh":"grassPatch.mesh",
+            "mesh":"grassPatch",
             "material":"",
             "instances":[
                 {
@@ -5118,7 +5118,7 @@
             ]
         },
         {
-            "mesh":"shroom2_2.mesh",
+            "mesh":"shroom2_2",
             "material":"",
             "instances":[
                 {
@@ -5226,7 +5226,7 @@
             ]
         },
         {
-            "mesh":"shrub.mesh",
+            "mesh":"shrub",
             "material":"",
             "instances":[
                 {
@@ -5419,7 +5419,7 @@
             ]
         },
         {
-            "mesh":"shroom2_1.mesh",
+            "mesh":"shroom2_1",
             "material":"",
             "instances":[
                 {
@@ -5544,7 +5544,7 @@
             ]
         },
         {
-            "mesh":"farn1.mesh",
+            "mesh":"farn1",
             "material":"",
             "instances":[
                 {
@@ -5584,7 +5584,7 @@
             ]
         },
         {
-            "mesh":"waterfall.mesh",
+            "mesh":"waterfall",
             "material":"Waterfall2",
             "instances":[
                 {
@@ -5624,7 +5624,7 @@
             ]
         },
         {
-            "mesh":"rock.mesh",
+            "mesh":"rock",
             "material":"",
             "instances":[
                 {
@@ -6208,7 +6208,7 @@
             ]
         },
         {
-            "mesh":"salmon.mesh",
+            "mesh":"salmon",
             "material":"",
             "instances":[
                 {
@@ -6299,7 +6299,7 @@
             ]
         },
         {
-            "mesh":"crystal.mesh",
+            "mesh":"crystal",
             "material":"",
             "instances":[
                 {
@@ -6543,7 +6543,7 @@
             ]
         },
         {
-            "mesh":"shroom1_2.mesh",
+            "mesh":"shroom1_2",
             "material":"",
             "instances":[
                 {
@@ -6685,7 +6685,7 @@
             ]
         },
         {
-            "mesh":"head2.mesh",
+            "mesh":"head2",
             "material":"",
             "instances":[
                 {
@@ -6708,7 +6708,7 @@
             ]
         },
         {
-            "mesh":"body1.mesh",
+            "mesh":"body1",
             "material":"",
             "instances":[
                 {
@@ -6731,7 +6731,7 @@
             ]
         },
         {
-            "mesh":"tail2.mesh",
+            "mesh":"tail2",
             "material":"",
             "instances":[
                 {
@@ -6754,7 +6754,7 @@
             ]
         },
         {
-            "mesh":"wings.mesh",
+            "mesh":"wings",
             "material":"",
             "instances":[
                 {

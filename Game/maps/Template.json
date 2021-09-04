@@ -75,7 +75,7 @@
     ],
     "objects":[
         {
-            "mesh":"acaciaTree.mesh",
+            "mesh":"acaciaTree",
             "material":"",
             "instances":[
                 {
@@ -112,7 +112,7 @@
             ]
         },
         {
-            "mesh":"rock.mesh",
+            "mesh":"rock",
             "material":"",
             "instances":[
                 {

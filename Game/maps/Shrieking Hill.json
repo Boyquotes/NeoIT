@@ -345,7 +345,7 @@
     ],
     "objects":[
         {
-            "mesh":"fir05_30.mesh",
+            "mesh":"fir05_30",
             "material":"",
             "instances":[
                 {
@@ -691,7 +691,7 @@
             ]
         },
         {
-            "mesh":"fir06_30.mesh",
+            "mesh":"fir06_30",
             "material":"",
             "instances":[
                 {
@@ -1309,7 +1309,7 @@
             ]
         },
         {
-            "mesh":"fir14_25.mesh",
+            "mesh":"fir14_25",
             "material":"",
             "instances":[
                 {
@@ -1366,7 +1366,7 @@
             ]
         },
         {
-            "mesh":"fir05_30.mesh",
+            "mesh":"fir05_30",
             "material":"Terrain/CalmWater",
             "instances":[
                 {
@@ -1389,7 +1389,7 @@
             ]
         },
         {
-            "mesh":"farn2.mesh",
+            "mesh":"farn2",
             "material":"",
             "instances":[
                 {
@@ -1939,7 +1939,7 @@
             ]
         },
         {
-            "mesh":"rockSlab2.mesh",
+            "mesh":"rockSlab2",
             "material":"",
             "instances":[
                 {
@@ -2013,14 +2013,14 @@
             ]
         },
         {
-            "mesh":"grassPatch.mesh",
+            "mesh":"grassPatch",
             "material":"",
             "instances":[
                 
             ]
         },
         {
-            "mesh":"shroom2_2.mesh",
+            "mesh":"shroom2_2",
             "material":"",
             "instances":[
                 {
@@ -2349,28 +2349,28 @@
             ]
         },
         {
-            "mesh":"shrub.mesh",
+            "mesh":"shrub",
             "material":"",
             "instances":[
                 
             ]
         },
         {
-            "mesh":"shroom2_1.mesh",
+            "mesh":"shroom2_1",
             "material":"",
             "instances":[
                 
             ]
         },
         {
-            "mesh":"farn1.mesh",
+            "mesh":"farn1",
             "material":"",
             "instances":[
                 
             ]
         },
         {
-            "mesh":"pumpkin.mesh",
+            "mesh":"pumpkin",
             "material":"",
             "instances":[
                 {
@@ -2835,7 +2835,7 @@
             ]
         },
         {
-            "mesh":"candles.mesh",
+            "mesh":"candles",
             "material":"",
             "instances":[
                 {
@@ -3096,7 +3096,7 @@
             ]
         },
         {
-            "mesh":"grave.mesh",
+            "mesh":"grave",
             "material":"",
             "instances":[
                 {
@@ -3561,7 +3561,7 @@
             ]
         },
         {
-            "mesh":"shroom2_2.mesh",
+            "mesh":"shroom2_2",
             "material":"Terrain/CalmWater",
             "instances":[
                 {
@@ -3601,7 +3601,7 @@
             ]
         },
         {
-            "mesh":"crystal.mesh",
+            "mesh":"crystal",
             "material":"Terrain/bloodWater",
             "instances":[
                 {

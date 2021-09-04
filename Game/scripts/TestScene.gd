@@ -4,6 +4,16 @@ extends Node
 func _ready():
 	#Initialize world manager
 	get_node("WorldManager").initialize()
+	
+	#Turn on event processing
+	set_process_unhandled_input(true)
+	
+	
+func _unhandled_input(event):
+	#Click event?
+	if (event.type == InputEvent.SCREEN_TOUCH and
+	    event.pressed):
+		get_node("UI/UI/Panel/World").release_focus()
 
 
 func _on_LoadButton_pressed():

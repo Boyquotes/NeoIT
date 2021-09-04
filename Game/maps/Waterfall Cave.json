@@ -131,7 +131,7 @@
     ],
     "objects":[
         {
-            "mesh":"Crystal.mesh",
+            "mesh":"Crystal",
             "material":"",
             "instances":[
                 {

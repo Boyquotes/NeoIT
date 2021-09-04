@@ -201,7 +201,7 @@
     ],
     "objects":[
         {
-            "mesh":"waterfall.mesh",
+            "mesh":"waterfall",
             "material":"",
             "instances":[
                 {
@@ -224,7 +224,7 @@
             ]
         },
         {
-            "mesh":"crystal.mesh",
+            "mesh":"crystal",
             "material":"",
             "instances":[
                 {
