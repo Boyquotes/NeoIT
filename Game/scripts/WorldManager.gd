@@ -7,8 +7,6 @@ var WorldGate = preload("res://scenes/objects/Gate.tscn")
 var WaterPlane = preload("res://scenes/objects/WaterPlane.tscn")
 var IcePlane = preload("res://scenes/objects/IcePlane.tscn")
 
-onready var space_state = get_world().get_direct_space_state()
-
 var dir = Directory.new()
 var meshes = {}
 var materials = {}
@@ -270,7 +268,7 @@ func load_map(path):
 				transform.origin = Vector3(pos[0], pos[1], pos[2])
 				
 			elif pos.size() == 2:
-				transform.origin = Vector3(pos[0], cast_ray(pos[0], pos[1]), pos[1])
+				transform.origin = Vector3(pos[0], cast_ray(pos[0], pos[1]) * scale[1], pos[1])
 				
 			object.set_transform(transform)
 			object.rotate(Vector3(1, 0, 0), deg2rad(rot[0]))
@@ -305,7 +303,7 @@ func load_map(path):
 					transform.origin = Vector3(pos[0], pos[1], pos[2])
 					
 				elif pos.size() == 2:
-					transform.origin = Vector3(pos[0], cast_ray(pos[0], pos[1]), pos[1])
+					transform.origin = Vector3(pos[0], get_node("TerrainSystem").get_height(pos[0], pos[1]), pos[1])
 					
 				object.set_transform(transform)
 				
@@ -465,19 +463,3 @@ func compile_material(name):
 	mtl_cache[name] = mtl
 	print("[WorldManager] Compiled and cached material '" + name + "'.")
 	return mtl
-	
-	
-func cast_ray(x, z):
-	#Cast a ray downward until it hits the terrain
-	var result = space_state.intersect_ray(
-	    Vector3(x, -1, z),
-	    Vector3(x, 1000, z),
-	    [],
-	    1,
-	    PhysicsDirectSpaceState.TYPE_MASK_STATIC_BODY
-	)
-	
-	if not "position" in result:
-		return 0
-		
-	return result["position"].y
