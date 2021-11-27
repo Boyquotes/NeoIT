@@ -1,13 +1,35 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://scripts/TestScene.gd" type="Script" id=1]
-[ext_resource path="res://scripts/SimpleCamera.gd" type="Script" id=2]
-[ext_resource path="res://scenes/WorldManager.tscn" type="PackedScene" id=3]
-[ext_resource path="res://themes/Default.tres" type="Theme" id=4]
+[ext_resource path="res://addons/FlyCam/FlyCam.gd" type="Script" id=2]
+[ext_resource path="res://addons/FlyCam/icon.png" type="Texture" id=3]
+[ext_resource path="res://scenes/WorldManager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=5]
 
 [node name="TestScene" type="Node"]
 
 script/script = ExtResource( 1 )
+
+[node name="FlyCam" type="Camera" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 250, 20, 250 )
+projection = 0
+fov = 45.0
+near = 0.1
+far = 100.0
+keep_aspect = 1
+current = false
+visible_layers = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+script/script = ExtResource( 2 )
+__meta__ = {
+"_editor_icon": ExtResource( 3 )
+}
+speed = 8
+rot = Vector3( 0, 0, 0 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
 
@@ -33,25 +55,7 @@ shadow/max_distance = 0.0
 shadow/split_weight = 0.5
 shadow/zoffset_scale = 2.0
 
-[node name="Camera" type="Camera" parent="."]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 165, 50, 153 )
-projection = 0
-fov = 45.0
-near = 0.1
-far = 200.0
-keep_aspect = 1
-current = true
-visible_layers = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-script/script = ExtResource( 2 )
-speed = 8
-rot = Vector3( -45, 180, 0 )
-
-[node name="WorldManager" parent="." instance=ExtResource( 3 )]
+[node name="WorldManager" parent="." instance=ExtResource( 4 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -66,7 +70,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = ExtResource( 4 )
+theme/theme = ExtResource( 5 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
