@@ -1,12 +1,15 @@
 [gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://themes/Default.tres" type="Theme" id=1]
-[ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=2]
-[ext_resource path="res://images/GUI/border.png" type="Texture" id=3]
-[ext_resource path="res://images/GUI/borderCenter.png" type="Texture" id=4]
-[ext_resource path="res://images/GUI/buttonOver.png" type="Texture" id=5]
-[ext_resource path="res://images/GUI/buttonDown.png" type="Texture" id=6]
-[ext_resource path="res://images/GUI/buttonUp.png" type="Texture" id=7]
+[ext_resource path="res://scripts/ui/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/images/border.png" type="Texture" id=3]
+[ext_resource path="res://scenes/ui/images/borderCenter.png" type="Texture" id=4]
+[ext_resource path="res://scenes/ui/images/buttonOver.png" type="Texture" id=5]
+[ext_resource path="res://scenes/ui/images/buttonDown.png" type="Texture" id=6]
+[ext_resource path="res://scenes/ui/images/buttonUp.png" type="Texture" id=7]
+
+
+
 
 [sub_resource type="CanvasItemShader" id=1]
 

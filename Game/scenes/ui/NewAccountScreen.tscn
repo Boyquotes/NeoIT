@@ -1,13 +1,16 @@
 [gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://themes/Default.tres" type="Theme" id=1]
-[ext_resource path="res://scripts/LoginScreen.gd" type="Script" id=2]
-[ext_resource path="res://images/GUI/backdrop1.png" type="Texture" id=3]
-[ext_resource path="res://images/GUI/startscreen.png" type="Texture" id=4]
-[ext_resource path="res://images/GUI/borderCenter.png" type="Texture" id=5]
-[ext_resource path="res://images/GUI/buttonOver.png" type="Texture" id=6]
-[ext_resource path="res://images/GUI/buttonDown.png" type="Texture" id=7]
-[ext_resource path="res://images/GUI/buttonUp.png" type="Texture" id=8]
+[ext_resource path="res://scripts/ui/NewAccountScreen.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/images/backdrop1.png" type="Texture" id=3]
+[ext_resource path="res://scenes/ui/images/startscreen.png" type="Texture" id=4]
+[ext_resource path="res://scenes/ui/images/borderCenter.png" type="Texture" id=5]
+[ext_resource path="res://scenes/ui/images/buttonOver.png" type="Texture" id=6]
+[ext_resource path="res://scenes/ui/images/buttonDown.png" type="Texture" id=7]
+[ext_resource path="res://scenes/ui/images/buttonUp.png" type="Texture" id=8]
+
+
+
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -101,7 +104,7 @@ expand_margin/top = 0.0
 expand_margin/bottom = 0.0
 draw_center = true
 
-[node name="LoginScreen" type="Control"]
+[node name="NewAccountScreen" type="Control"]
 
 anchor/right = 1
 anchor/bottom = 1
@@ -141,11 +144,11 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 60.0
 margin/top = 60.0
-margin/right = 490.0
+margin/right = 620.0
 margin/bottom = -480.0
 custom_styles/panel = SubResource( 1 )
 
-[node name="MultiplayerLabel" type="Label" parent="Panel"]
+[node name="NewAcccountLabel" type="Label" parent="Panel"]
 
 anchor/right = 1
 focus/ignore_mouse = true
@@ -157,7 +160,7 @@ margin/top = 50.0
 margin/right = 20.0
 margin/bottom = 78.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "MULTIPLAYER"
+text = "CREATE_NEW_ACCOUNT"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -170,9 +173,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 50.0
-margin/top = 110.0
-margin/right = 177.0
-margin/bottom = 135.0
+margin/top = 100.0
+margin/right = 165.0
+margin/bottom = 125.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "USERNAME"
 percent_visible = 1.0
@@ -185,10 +188,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 190.0
-margin/top = 110.0
-margin/right = 370.0
-margin/bottom = 135.0
+margin/left = 320.0
+margin/top = 100.0
+margin/right = 500.0
+margin/bottom = 125.0
 custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 focus_mode = 2
@@ -202,9 +205,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 50.0
-margin/top = 150.0
-margin/right = 178.0
-margin/bottom = 175.0
+margin/top = 140.0
+margin/right = 165.0
+margin/bottom = 165.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "PASSWORD"
 percent_visible = 1.0
@@ -217,10 +220,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 190.0
-margin/top = 150.0
-margin/right = 370.0
-margin/bottom = 175.0
+margin/left = 320.0
+margin/top = 140.0
+margin/right = 500.0
+margin/bottom = 165.0
 custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 secret = true
@@ -228,108 +231,147 @@ focus_mode = 2
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="ConfirmPasswordLabel" type="Label" parent="Panel"]
 
-anchor/left = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 50.0
+margin/top = 180.0
+margin/right = 253.0
+margin/bottom = 205.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "CONFIRM_PASSWORD"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="ConfirmPassword" type="LineEdit" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 320.0
+margin/top = 180.0
+margin/right = 500.0
+margin/bottom = 205.0
+custom_styles/normal = SubResource( 2 )
+placeholder/alpha = 0.6
+secret = true
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="EmailLabel" type="Label" parent="Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 50.0
+margin/top = 220.0
+margin/right = 111.0
+margin/bottom = 245.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "EMAIL"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Email" type="LineEdit" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 320.0
+margin/top = 220.0
+margin/right = 500.0
+margin/bottom = 245.0
+custom_styles/normal = SubResource( 2 )
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="QuestionLabel" type="Label" parent="Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 50.0
+margin/top = 260.0
+margin/right = 150.0
+margin/bottom = 285.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "QUESTION"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Question" type="LineEdit" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 320.0
+margin/top = 260.0
+margin/right = 500.0
+margin/bottom = 285.0
+custom_styles/normal = SubResource( 2 )
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="AnswerLabel" type="Label" parent="Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 50.0
+margin/top = 300.0
+margin/right = 150.0
+margin/bottom = 325.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "ANSWER"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Answer" type="LineEdit" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 320.0
+margin/top = 300.0
+margin/right = 500.0
+margin/bottom = 325.0
+custom_styles/normal = SubResource( 2 )
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="BackButton" type="Button" parent="Panel"]
+
 anchor/top = 1
-anchor/right = 3
 anchor/bottom = 1
 focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 125.0
-margin/top = 230.0
-margin/right = -125.0
-margin/bottom = 46.0
-custom_constants/separation = 24
-alignment = 0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="LoginButton" type="Button" parent="Panel/VBoxContainer"]
-
-focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 250.0
-margin/bottom = 28.0
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "LOGIN"
-flat = false
-
-[node name="NewAccountButton" type="Button" parent="Panel/VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 52.0
-margin/right = 250.0
-margin/bottom = 80.0
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "NEW_ACCOUNT"
-flat = false
-
-[node name="ChangePasswordButton" type="Button" parent="Panel/VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 104.0
-margin/right = 250.0
-margin/bottom = 132.0
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "CHANGE_PASSWORD"
-flat = false
-
-[node name="BackButton" type="Button" parent="Panel/VBoxContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 156.0
-margin/right = 250.0
-margin/bottom = 184.0
+margin/left = 50.0
+margin/top = 80.0
+margin/right = 230.0
+margin/bottom = 49.0
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 5 )
@@ -344,12 +386,36 @@ shortcut = null
 text = "BACK"
 flat = false
 
-[connection signal="pressed" from="Panel/VBoxContainer/LoginButton" to="." method="_on_LoginButton_pressed"]
+[node name="CreateButton" type="Button" parent="Panel"]
 
-[connection signal="pressed" from="Panel/VBoxContainer/NewAccountButton" to="." method="_on_NewAccountButton_pressed"]
+anchor/left = 1
+anchor/top = 1
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 290.0
+margin/top = 80.0
+margin/right = 110.0
+margin/bottom = 49.0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "CREATE_ACCOUNT"
+flat = false
 
-[connection signal="pressed" from="Panel/VBoxContainer/ChangePasswordButton" to="." method="_on_ChangePasswordButton_pressed"]
+[connection signal="pressed" from="Panel/BackButton" to="." method="_on_BackButton_pressed"]
 
-[connection signal="pressed" from="Panel/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Panel/CreateButton" to="." method="_on_CreateButton_pressed"]
 
 

@@ -1,8 +1,11 @@
 [gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://themes/Default.tres" type="Theme" id=1]
-[ext_resource path="res://images/GUI/backdrop1.png" type="Texture" id=2]
-[ext_resource path="res://fonts/ConsolaMono.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/ui/images/backdrop1.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ui/ConsolaMono.ttf" type="DynamicFontData" id=3]
+
+
+
 
 [sub_resource type="DynamicFont" id=1]
 

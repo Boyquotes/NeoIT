@@ -1,7 +1,9 @@
 [gd_scene load_steps=5 format=1]
 
-[ext_resource path="res://images/GUI/logo.png" type="Texture" id=1]
-[ext_resource path="res://images/GUI/logowaves.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ui/images/logo.png" type="Texture" id=1]
+[ext_resource path="res://scenes/ui/images/logowaves.png" type="Texture" id=2]
+
+
 
 [sub_resource type="CanvasItemShader" id=1]
 
