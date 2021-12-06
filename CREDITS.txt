@@ -4,6 +4,5 @@ DylanCheetah
 
 Localization
 ============
-Lamina
-Drake
 Orthodogs
+Drake
