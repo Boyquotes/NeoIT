@@ -372,7 +372,7 @@ func compile_material(name):
 	var tex_unit_cnt = material["texture_units"].size()
 	
 	for i in range(tex_unit_cnt):
-		frag_shader += "uniform texture texture" + str(i) + ";\n"
+		frag_shader += "uniform texture TEXTURE" + str(i) + ";\n"
 		
 	frag_shader += "\nvec4 col = vec4(1, 1, 1, 1);\n\n"
 	var i = 0
@@ -393,14 +393,14 @@ func compile_material(name):
 				var scale = tex_unit["scale"]
 				scale[0] = 1 / scale[0]
 				scale[1] = 1 / scale[1]
-				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + ")" + scroll_code + ");\n"
+				frag_shader += "col = tex(TEXTURE" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + ")" + scroll_code + ");\n"
 				
 			else:
-				frag_shader += "col = tex(texture" + str(i) + ", UV" + scroll_code + ");\n"
+				frag_shader += "col = tex(TEXTURE" + str(i) + ", UV" + scroll_code + ");\n"
 				
 		#Layer mask?
 		elif tex_unit["type"] == "layer_mask":
-			frag_shader += "\nif(tex(texture" + str(i) + ", UV).a > 0)\n{\n    "
+			frag_shader += "\nif(tex(TEXTURE" + str(i) + ", UV).a > 0)\n{\n    "
 			
 		#Layer
 		elif tex_unit["type"] == "layer":
@@ -408,10 +408,10 @@ func compile_material(name):
 				var scale = tex_unit["scale"]
 				scale[0] = 1 / scale[0]
 				scale[1] = 1 / scale[1]
-				frag_shader += "col = tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + ")" + scroll_code + ");\n}\n\n"
+				frag_shader += "col = tex(TEXTURE" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + ")" + scroll_code + ");\n}\n\n"
 				
 			else:
-				frag_shader += "col = tex(texture" + str(i) + ", UV" + scroll_code + ");\n}\n\n"
+				frag_shader += "col = tex(TEXTURE" + str(i) + ", UV" + scroll_code + ");\n}\n\n"
 				
 		#Contour
 		elif tex_unit["type"] == "contour":
@@ -420,10 +420,10 @@ func compile_material(name):
 				var scale = tex_unit["scale"]
 				scale[0] = 1 / scale[0]
 				scale[1] = 1 / scale[1]
-				frag_shader += "col *= tex(texture" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n"
+				frag_shader += "col *= tex(TEXTURE" + str(i) + ", UV * vec2(" + str(scale[0]) + ", " + str(scale[1]) + "));\n"
 				
 			else:
-				frag_shader += "col *= tex(texture" + str(i) + ", UV);\n"
+				frag_shader += "col *= tex(TEXTURE" + str(i) + ", UV);\n"
 				
 		i += 1
 		
@@ -456,7 +456,7 @@ func compile_material(name):
 			var tex = ImageTexture.new()
 			tex.load(tex_path)
 		
-		mtl.set_shader_param("texture" + str(i), tex)
+		mtl.set_shader_param("TEXTURE" + str(i), tex)
 		i += 1
 		
 	#Cache the material

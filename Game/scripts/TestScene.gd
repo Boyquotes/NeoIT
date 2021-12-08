@@ -13,7 +13,8 @@ func _unhandled_input(event):
 	#Click event?
 	if (event.type == InputEvent.SCREEN_TOUCH and
 	    event.pressed):
-		get_node("UI/UI/Panel/World").release_focus()
+		for child in get_node("UI/UI/Panel").get_children():
+			child.release_focus()
 
 
 func _on_LoadButton_pressed():
