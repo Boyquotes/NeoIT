@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset>
+	<contributor>
+		<author>Anonymous</author>
+		<authoring_tool>Collada Exporter for Blender 2.6+, by Juan Linietsky (juan@codenix.com)</authoring_tool>
+	</contributor>
+	<created>2021-12-08T15:49:01Z</created>
+	<modified>2021-12-08T15:49:01Z</modified>
+	<unit meter="1.0" name="meter"/>
+	<up_axis>Z_UP</up_axis>
+</asset>
+<library_images>
+	<image id="id-image-3" name="aureola.png">
+		<init_from>images/aureola.png</init_from>
+	</image>
+</library_images>
+<library_effects>
+	<effect id="id-fx-2" name="aureola-fx">
+		<profile_COMMON>
+			<newparam sid="id-fx_surf-4">
+				<surface type="2D">
+					<init_from>id-image-3</init_from>
+					<format>A8R8G8B8</format>
+				</surface>
+			</newparam>
+			<newparam sid="id-fx_sampler-5">
+				<sampler2D>
+					<source>id-fx_surf-4</source>
+				</sampler2D>
+			</newparam>
+			<technique sid="common">
+				<blinn>
+					<emission>
+						<color>  0.0 0.0 0.0 1.0 </color>
+					</emission>
+					<ambient>
+						<color>  0.0 0.0 0.0 1.0 </color>
+					</ambient>
+					<diffuse>
+						<texture texture="id-fx_sampler-5" texcoord="CHANNEL1"/>
+					</diffuse>
+					<specular>
+						<color>  0.5 0.5 0.5 1.0 </color>
+					</specular>
+					<shininess>
+						<float>50</float>
+					</shininess>
+					<reflective>
+						<color>  1.0 1.0 1.0 1.0 </color>
+					</reflective>
+					<transparency>
+						<float>1.0</float>
+					</transparency>
+					<index_of_refraction>
+						<float>4.0</float>
+					</index_of_refraction>
+				</blinn>
+				<extra>
+					<technique profile="FCOLLADA">
+					</technique>
+					<technique profile="GOOGLEEARTH">
+						<double_sided>0</double_sided>
+					</technique>
+				</extra>
+			</technique>
+		</profile_COMMON>
+	</effect>
+</library_effects>
+<library_materials>
+	<material id="id-material-6" name="aureola">
+		<instance_effect url="#id-fx-2"/>
+	</material>
+</library_materials>
+<library_geometries>
+	<geometry id="id-mesh-7" name="aureola">
+		<mesh>
+			<source id="id-mesh-7-positions">
+				<float_array id="id-mesh-7-positions-array" count="12"> 25.0 -25.0 0.0 -25.0 25.0 0.0 -25.0 -25.0 0.0 25.0 25.0 0.0</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-7-positions-array" count="4" stride="3">
+					<param name="X" type="float"/>
+					<param name="Y" type="float"/>
+					<param name="Z" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<source id="id-mesh-7-normals">
+				<float_array id="id-mesh-7-normals-array" count="12"> 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-7-normals-array" count="4" stride="3">
+					<param name="X" type="float"/>
+					<param name="Y" type="float"/>
+					<param name="Z" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<source id="id-mesh-7-texcoord-0">
+				<float_array id="id-mesh-7-texcoord-0-array" count="8"> 0.9998999238014221 9.998000314226374e-05 9.998000314226374e-05 0.9999001026153564 9.998000314226374e-05 0.00010013255814556032 0.9998999238014221 0.9999001026153564</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-7-texcoord-0-array" count="4" stride="2">
+					<param name="S" type="float"/>
+					<param name="T" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<vertices id="id-mesh-7-vertices">
+				<input semantic="POSITION" source="#id-mesh-7-positions"/>
+			</vertices>
+			<triangles count="2" material="id-trimat-8">
+				<input semantic="VERTEX" source="#id-mesh-7-vertices" offset="0"/>
+				<input semantic="NORMAL" source="#id-mesh-7-normals" offset="0"/>
+				<input semantic="TEXCOORD" source="#id-mesh-7-texcoord-0" offset="0" set="0"/>
+				<p> 0 1 2 0 3 1 </p>
+			</triangles>
+		</mesh>
+	</geometry>
+</library_geometries>
+<library_visual_scenes>
+	<visual_scene id="id-scene-1" name="scene">
+		<node id="aureola" name="aureola" type="NODE">
+			<matrix sid="transform"> 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0  </matrix>
+			<instance_geometry url="#id-mesh-7">
+				<bind_material>
+					<technique_common>
+						<instance_material symbol="id-trimat-8" target="#id-material-6"/>
+					</technique_common>
+				</bind_material>
+			</instance_geometry>
+		</node>
+	</visual_scene>
+</library_visual_scenes>
+<library_animations>
+	<animation id="id-anim-9">
+		<source id="id-anim-9-input">
+			<float_array id="id-anim-9-input-array" count="20"> 0.0 0.041666666666666664 0.08333333333333334 0.125 0.16666666666666666 0.20833333333333334 0.24999999999999997 0.29166666666666663 0.3333333333333333 0.37499999999999994 0.41666666666666663 0.4583333333333333 0.49999999999999994 0.5416666666666666 0.5833333333333334 0.625 0.6666666666666666 0.7083333333333334 0.75 0.7916666666666666</float_array>
+			<technique_common>
+				<accessor source="#id-anim-9-input-array" count="20" stride="1">
+					<param name="TIME" type="float"/>
+				</accessor>
+			</technique_common>
+		</source>
+		<source id="id-anim-9-transform-output">
+			<float_array id="id-anim-9-transform-output-array" count="320">  1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.12217250466346741 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.491498738527298 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 1.1087267398834229 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 1.9687062501907349 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 3.0587449073791504 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 4.357139587402344 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 5.832247257232666 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 7.4425177574157715 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 9.137825012207031 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 10.862174987792969 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 12.55748176574707 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 14.167752265930176 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 15.64285945892334 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 16.941253662109375 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 18.031295776367188 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 18.891273498535156 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 19.508502960205078 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 19.877826690673828 0.0 0.0 0.0 1.0    1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 20.0 0.0 0.0 0.0 1.0  </float_array>
+			<technique_common>
+				<accessor source="#id-anim-9-transform-output-array" count="20" stride="16">
+					<param name="TRANSFORM" type="float4x4"/>
+				</accessor>
+			</technique_common>
+		</source>
+		<source id="id-anim-9-interpolation-output">
+			<Name_array id="id-anim-9-interpolation-output-array" count="20"> LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR LINEAR</Name_array>
+			<technique_common>
+				<accessor source="#id-anim-9-interpolation-output-array" count="20" stride="1">
+					<param name="INTERPOLATION" type="Name"/>
+				</accessor>
+			</technique_common>
+		</source>
+		<sampler id="id-anim-9-sampler">
+			<input semantic="INPUT" source="#id-anim-9-input"/>
+			<input semantic="OUTPUT" source="#id-anim-9-transform-output"/>
+			<input semantic="INTERPOLATION" source="#id-anim-9-interpolation-output"/>
+		</sampler>
+		<channel source="#id-anim-9-sampler" target="aureola/transform"/>
+	</animation>
+</library_animations>
+<scene>
+	<instance_visual_scene url="#id-scene-1" />
+</scene>
+</COLLADA>
