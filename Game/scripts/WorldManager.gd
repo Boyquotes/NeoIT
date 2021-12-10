@@ -11,6 +11,7 @@ var dir = Directory.new()
 var meshes = {}
 var materials = {}
 var mtl_cache = {}
+var particles = {}
 var spawn_pos = Vector3()
 
 
@@ -70,7 +71,7 @@ func initialize():
 						for j in range(mesh.get_property_count(i)):
 							if mesh.get_property_name(i, j):
 								print("[WorldManager] Mesh '" + file + "' has a prohibited script and will not be loaded.")
-								continue
+								mesh = TestCube.new()
 								
 					#Add the mesh
 					print("[WorldManager] Loaded mesh '" + file + "'.")
@@ -78,6 +79,9 @@ func initialize():
 					
 				else:
 					print("[WorldManager] Failed to load user mesh '" + file + "'.")
+					
+			#Next file
+			file = dir.get_next()
 		
 		dir.list_dir_end()
 		
@@ -105,17 +109,43 @@ func initialize():
 	
 	if file.open(user_mtl_path, File.READ):
 		print("[WorldManager] Failed to load user material library.")
-		return true
 		
-	#Load user material data
-	mtl_data = file.get_as_text()
-	file.close()
+	else:
+		#Load user material data
+		mtl_data = file.get_as_text()
+		file.close()
+		
+		#Parse user material data
+		if materials.parse_json(mtl_data):
+			print("[WorldManager] Failed to parse user material library.")
+			return false
+		
+	#Enumerate all particle systems
+	dir.open("res://particles")
+	dir.list_dir_begin()
+	var file = dir.get_next()
 	
-	#Parse user material data
-	if materials.parse_json(mtl_data):
-		print("[WorldManager] Failed to parse user material library.")
-		return false
+	while file != "":
+		#Skip current dir and parent dir
+		if file in [".", ".."]:
+			pass
 		
+		#Process particle system
+		else:
+			#Try to load the particle system
+			var particle = load("res://particles/" + file)
+			
+			if particle:
+				print("[WorldManager] Loaded particle system '" + file + "'.")
+				particles[file.replace(".scn", "").replace(".tscn", "")] = particle
+				
+			else:
+				print("[WorldManager] Failed to load particle system '" + file + "'.")
+				
+		#Next file
+		file = dir.get_next()
+		
+	dir.list_dir_end()
 	return true
 	
 	
@@ -317,6 +347,30 @@ func load_map(path):
 				object.add_to_group("WorldObjects")
 				add_child(object)
 				print("[WorldManager] Added object instance '" + mesh + "' to scene.")
+				
+	#Load particles
+	for particle in map["particles"]:
+		#Fetch particle properties
+		var name = particle["name"]
+		var pos = (particle["pos"] if "pos" in particle else [0, 0, 0])
+		var sound = (particle["sound"] if "sound" in particle else "")
+		
+		#Ensure that the particle system exists
+		if not name in particles:
+			print("[WorldManager] Particle system '" + name + "' not found!")
+			continue
+			
+		#Create particle instance
+		var particle = particles[name].instance()
+		particle.add_to_group("WorldObjects")
+		particle.add_to_group("ParticleSystems")
+		
+		#Set position and add to scene
+		var transform = particle.get_transform()
+		transform.origin = Vector3(pos[0], pos[1], pos[2])
+		particle.set_transform(transform)
+		add_child(particle)
+		print("[WorldManager] Added particle instance '" + name + "' to scene.")
 		
 	return true
 	

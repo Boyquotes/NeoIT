@@ -56,7 +56,7 @@ mesh/mesh = ExtResource( 1 )
 mesh/skeleton = NodePath("..")
 material/0 = null
 
-[node name="Particles" type="Particles" parent="Emitter"]
+[node name="Particles" type="Particles" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 layers = 1
