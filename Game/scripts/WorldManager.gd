@@ -1,11 +1,10 @@
 extends Spatial
 
-#export (PackedScene) var WorldPortal
-#export (PackedScene) var WorldGate
-var WorldPortal = preload("res://scenes/objects/Portal.tscn")
-var WorldGate = preload("res://scenes/objects/Gate.tscn")
-var WaterPlane = preload("res://scenes/objects/WaterPlane.tscn")
-var IcePlane = preload("res://scenes/objects/IcePlane.tscn")
+export (PackedScene) var WorldPortal
+export (PackedScene) var WorldGate
+export (PackedScene) var WaterPlane
+export (PackedScene) var IcePlane
+export (Material) var missing_mat
 
 var dir = Directory.new()
 var meshes = {}
@@ -69,8 +68,8 @@ func initialize():
 					#Make sure the mesh has no scripts attached
 					for i in range(mesh.get_node_count()):
 						for j in range(mesh.get_property_count(i)):
-							if mesh.get_property_name(i, j):
-								print("[WorldManager] Mesh '" + file + "' has a prohibited script and will not be loaded.")
+							if mesh.get_property_name(i, j) == "Script":
+								print("[WorldManager] Mesh '" + file + "' has a prohibited script and will be represented by a dummy mesh.")
 								mesh = TestCube.new()
 								
 					#Add the mesh
@@ -120,14 +119,17 @@ func initialize():
 			print("[WorldManager] Failed to parse user material library.")
 			return false
 		
-	#Enumerate all particle systems
+	#Enumerate all official particle systems
 	dir.open("res://particles")
 	dir.list_dir_begin()
 	var file = dir.get_next()
 	
 	while file != "":
 		#Skip current dir and parent dir
-		if file in [".", ".."]:
+		if (file in [".", ".."] or 
+		    file == "emitters" or 
+		    file == "images" or 
+		    file.extension() == "dae"):
 			pass
 		
 		#Process particle system
@@ -146,6 +148,46 @@ func initialize():
 		file = dir.get_next()
 		
 	dir.list_dir_end()
+	
+	#Enumerate all user particle systems
+	var user_particle_dir = OS.get_executable_path().get_base_dir() + "/user/particles"
+	
+	if dir.dir_exists(user_particle_dir):
+		dir.open(user_particle_dir)
+		dir.list_dir_begin()
+		var file = dir.get_next()
+		
+		while file != "":
+			#Skip current and parent dir
+			if (file in [".", ".."] or 
+		        file == "emitters" or 
+		        file == "images" or 
+		        file.extension() == "dae"):
+				pass
+				
+			else:
+				#Try to load the particle system
+				var particle = load(user_particle_dir + "/" + file)
+				
+				if particle:
+					#Make sure there are no scripts attached
+					for i in range(particle.get_node_count()):
+						for j in range(particle.get_node_property_count()):
+							if particle.get_node_property_name(i, j) == "Script":
+								print("[WorldManager] Particle system '" + file + "' has a prohibited script and will be represented by a dummy mesh.")
+								particle = TestCube.new()
+								
+					print("[WorldManager] Loaded particle system '" + file + "'.")
+					
+				else:
+					print("[WorldManager] Failed to load user particle system '" + file + "'.")
+					
+			#Next file
+			file = dir.get_next()
+			
+	else:
+		print("[WorldManager] No user particle system folder detected.")
+		
 	return true
 	
 	
@@ -372,6 +414,49 @@ func load_map(path):
 		add_child(particle)
 		print("[WorldManager] Added particle instance '" + name + "' to scene.")
 		
+	#Load lights
+	for light in map["lights"]:
+		#Fetch light properties
+		var pos = light["pos"]
+		var color = light["color"]
+		
+		#Create light
+		var light = OmniLight.new()
+		light.add_to_group("WorldObjects")
+		light.set_color(OmniLight.COLOR_DIFFUSE, Color(color[0], color[1], color[2]))
+		light.set_color(OmniLight.COLOR_SPECULAR, Color(color[0], color[1], color[2]))
+		
+		#Set position and add to scene
+		var transform = light.get_transform()
+		transform.origin = Vector3(pos[0], pos[1], pos[2])
+		light.set_transform(transform)
+		add_child(light)
+		print("[WorldManager] Added a light to the scene.")
+		
+	#Load billboards
+	for billboard in map["billboards"]:
+		#Fetch billboard properties
+		var pos = billboard["pos"]
+		var scale = billboard["scale"]
+		var material = billboard["material"]
+		
+		#Create billboard
+		var billboard = Quad.new()
+		billboard.add_to_group("WorldObjects")
+		billboard.set_centered(true)
+		billboard.set_size(Vector2(scale[0], scale[1]))
+		var mat = compile_material(material)
+		mat.set_flag(Material.FLAG_DOUBLE_SIDED, true)
+		billboard.set_material_override(mat)
+		billboard.set_flag(Quad.FLAG_BILLBOARD, true)
+		
+		#Set position and add to scene
+		var transform = billboard.get_transform()
+		transform.origin = Vector3(pos[0], pos[1], pos[2])
+		billboard.set_transform(transform)
+		add_child(billboard)
+		print("[WorldManager] Added a billboard to the scene.")
+		
 	return true
 	
 	
@@ -417,7 +502,7 @@ func compile_material(name):
 		
 	#Fetch material source
 	if not name in materials:
-		return null
+		return missing_mat
 		
 	var material = materials[name]
 	
