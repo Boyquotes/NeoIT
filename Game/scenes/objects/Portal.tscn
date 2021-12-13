@@ -8,8 +8,8 @@
 radius = 1.0
 
 [node name="Portal" type="Area" groups=[
+"WorldObjects",
 "Portals",
-"WorldObject",
 ]]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )

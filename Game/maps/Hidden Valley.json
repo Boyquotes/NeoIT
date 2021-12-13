@@ -2016,7 +2016,7 @@
             ]
         },
         {
-            "mesh":"waterfall",
+            "mesh":"Waterfall",
             "material":"Waterfall2",
             "instances":[
                 {

@@ -4,13 +4,18 @@ export (PackedScene) var WorldPortal
 export (PackedScene) var WorldGate
 export (PackedScene) var WaterPlane
 export (PackedScene) var IcePlane
+export (PackedScene) var SphereWall
+export (PackedScene) var BoxWall
 export (Material) var missing_mat
+
+onready var logger = get_node("Logger")
 
 var dir = Directory.new()
 var meshes = {}
 var materials = {}
 var mtl_cache = {}
 var particles = {}
+var map_size = Vector3()
 var spawn_pos = Vector3()
 
 
@@ -35,11 +40,11 @@ func initialize():
 			var mesh = load("res://meshes/scenery/" + file)
 			
 			if mesh:
-				print("[WorldManager] Loaded mesh '" + file + "'.")
+				logger.log_info("Loaded mesh '" + file + "'.")
 				meshes[file.replace(".scn", "")] = mesh
 				
 			else:
-				print("[WorldManager] Failed to load mesh '" + file + "'.")
+				logger.log_error("Failed to load mesh '" + file + "'.")
 			
 		#Next file
 		file = dir.get_next()
@@ -69,15 +74,15 @@ func initialize():
 					for i in range(mesh.get_node_count()):
 						for j in range(mesh.get_property_count(i)):
 							if mesh.get_property_name(i, j) == "Script":
-								print("[WorldManager] Mesh '" + file + "' has a prohibited script and will be represented by a dummy mesh.")
+								logger.log_warning("Mesh '" + file + "' has a prohibited script and will be represented by a dummy mesh.")
 								mesh = TestCube.new()
 								
 					#Add the mesh
-					print("[WorldManager] Loaded mesh '" + file + "'.")
+					logger.log_info("Loaded mesh '" + file + "'.")
 					meshes[file.replace(".scn", "")] = mesh
 					
 				else:
-					print("[WorldManager] Failed to load user mesh '" + file + "'.")
+					logger.log_error("Failed to load user mesh '" + file + "'.")
 					
 			#Next file
 			file = dir.get_next()
@@ -85,13 +90,13 @@ func initialize():
 		dir.list_dir_end()
 		
 	else:
-		print("[WorldManager] No user mesh folder detected.")
+		logger.log_warning("No user mesh folder detected.")
 	
 	#Try to open material library
 	file = File.new()
 	
 	if file.open("res://maps/materials.json", File.READ):
-		print("[WorldManager] Failed to load material library.")
+		logger.log_error("Failed to load material library.")
 		return false
 		
 	#Load material data
@@ -100,14 +105,14 @@ func initialize():
 	
 	#Parse material data
 	if materials.parse_json(mtl_data):
-		print("[WorldManager] Failed to parse material library.")
+		logger.log_error("Failed to parse material library.")
 		return false
 		
 	#Try to open user material library
 	var user_mtl_path = OS.get_executable_path().get_base_dir() + "/user/maps/materials.json"
 	
 	if file.open(user_mtl_path, File.READ):
-		print("[WorldManager] Failed to load user material library.")
+		logger.log_warning("Failed to load user material library.")
 		
 	else:
 		#Load user material data
@@ -116,7 +121,7 @@ func initialize():
 		
 		#Parse user material data
 		if materials.parse_json(mtl_data):
-			print("[WorldManager] Failed to parse user material library.")
+			logger.log_error("Failed to parse user material library.")
 			return false
 		
 	#Enumerate all official particle systems
@@ -138,11 +143,11 @@ func initialize():
 			var particle = load("res://particles/" + file)
 			
 			if particle:
-				print("[WorldManager] Loaded particle system '" + file + "'.")
+				logger.log_info("Loaded particle system '" + file + "'.")
 				particles[file.replace(".scn", "").replace(".tscn", "")] = particle
 				
 			else:
-				print("[WorldManager] Failed to load particle system '" + file + "'.")
+				logger.log_error("Failed to load particle system '" + file + "'.")
 				
 		#Next file
 		file = dir.get_next()
@@ -174,19 +179,19 @@ func initialize():
 					for i in range(particle.get_node_count()):
 						for j in range(particle.get_node_property_count()):
 							if particle.get_node_property_name(i, j) == "Script":
-								print("[WorldManager] Particle system '" + file + "' has a prohibited script and will be represented by a dummy mesh.")
+								logger.log_warning("Particle system '" + file + "' has a prohibited script and will be represented by a dummy mesh.")
 								particle = TestCube.new()
 								
-					print("[WorldManager] Loaded particle system '" + file + "'.")
+					logger.log_info("Loaded particle system '" + file + "'.")
 					
 				else:
-					print("[WorldManager] Failed to load user particle system '" + file + "'.")
+					logger.log_error("Failed to load user particle system '" + file + "'.")
 					
 			#Next file
 			file = dir.get_next()
 			
 	else:
-		print("[WorldManager] No user particle system folder detected.")
+		logger.log_warning("No user particle system folder detected.")
 		
 	return true
 	
@@ -213,7 +218,7 @@ func load_map(path):
 	var file = File.new()
 	
 	if file.open(path, File.READ):
-		print("[WorldManager] Failed to open map file '" + path + "'.")
+		logger.log_error("Failed to open map file '" + path + "'.")
 		return false
 		
 	#Load map data
@@ -224,7 +229,7 @@ func load_map(path):
 	var map = {}
 	
 	if map.parse_json(map_data):
-		print("[WorldManager] Failed to parse map data.")
+		logger.log_error("Failed to parse map data.")
 		return false
 		
 	map_data = ""
@@ -233,7 +238,7 @@ func load_map(path):
 	var path = "res://maps/images/" + map["heightmap"]
 	
 	if not get_node("TerrainSystem").load_terrain(path):
-		print("[WorldManager] Failed to load terrain.")
+		logger.log_error("Failed to load terrain.")
 		return false
 		
 	var material = compile_material(map["material"])
@@ -244,7 +249,9 @@ func load_map(path):
 	get_node("TerrainSystem").set_material(material)
 	var scale = map["size"]
 	get_node("TerrainSystem").set_scale(Vector3(scale[0] / 512, scale[1], scale[2] / 512))
-	spawn_pos = map["spawn_pos"]
+	map_size = Vector3(scale[0], scale[1], scale[2])
+	var spawn = map["spawn_pos"]
+	spawn_pos = Vector3(spawn[0], spawn[1], spawn[2])
 	
 	#Load portals
 	for portal_data in map["portals"]:
@@ -326,7 +333,7 @@ func load_map(path):
 		
 		#Ensure that the mesh exists
 		if not mesh in meshes:
-			print("[WorldManager] Mesh '" + mesh + "' not found!")
+			logger.log_error("Mesh '" + mesh + "' not found!")
 			continue
 		
 		#Single instance or group of instances?
@@ -356,7 +363,7 @@ func load_map(path):
 			#Add object to scene
 			object.add_to_group("WorldObjects")
 			add_child(object)
-			print("[WorldManager] Added object '" + mesh + "' to scene.")
+			logger.log_info("Added object '" + mesh + "' to scene.")
 			
 		else:
 			#Create one new object per instance
@@ -388,7 +395,7 @@ func load_map(path):
 				#Add object to scene
 				object.add_to_group("WorldObjects")
 				add_child(object)
-				print("[WorldManager] Added object instance '" + mesh + "' to scene.")
+				logger.log_info("Added object instance '" + mesh + "' to scene.")
 				
 	#Load particles
 	for particle in map["particles"]:
@@ -399,7 +406,7 @@ func load_map(path):
 		
 		#Ensure that the particle system exists
 		if not name in particles:
-			print("[WorldManager] Particle system '" + name + "' not found!")
+			logger.log_error("Particle system '" + name + "' not found!")
 			continue
 			
 		#Create particle instance
@@ -412,7 +419,7 @@ func load_map(path):
 		transform.origin = Vector3(pos[0], pos[1], pos[2])
 		particle.set_transform(transform)
 		add_child(particle)
-		print("[WorldManager] Added particle instance '" + name + "' to scene.")
+		logger.log_info("Added particle instance '" + name + "' to scene.")
 		
 	#Load lights
 	for light in map["lights"]:
@@ -431,7 +438,7 @@ func load_map(path):
 		transform.origin = Vector3(pos[0], pos[1], pos[2])
 		light.set_transform(transform)
 		add_child(light)
-		print("[WorldManager] Added a light to the scene.")
+		logger.log_info("Added a light to the scene.")
 		
 	#Load billboards
 	for billboard in map["billboards"]:
@@ -455,8 +462,70 @@ func load_map(path):
 		transform.origin = Vector3(pos[0], pos[1], pos[2])
 		billboard.set_transform(transform)
 		add_child(billboard)
-		print("[WorldManager] Added a billboard to the scene.")
+		logger.log_info("Added a billboard to the scene.")
 		
+	#Load walls
+	for wall in map["walls"]:
+		#Fetch wall properties
+		var shape = wall["shape"]
+		var pos = wall["pos"]
+		var radius = (wall["radius"] if "radius" in wall else null)
+		var extents = (wall["extents"] if "extents" in wall else null)
+		var is_inside = wall["is_inside"]
+		var wall = null
+		
+		#Create sphere wall
+		if shape == "sphere":
+			wall = SphereWall.instance()
+			var shape = wall.get_node("CollisionShape").get_shape()
+			shape.set_radius(radius)
+			wall.get_node("CollisionShape").set_shape(shape)
+			
+		#Create box wall
+		elif shape == "box":
+			wall = BoxWall.instance()
+			var shape = wall.get_node("CollisionShape").get_shape()
+			shape.set_extents(Vector3(extents[0], map["size"][1] / 2, extents[1]))
+			wall.get_node("CollisionShape").set_shape(shape)
+		
+		#Set wall position and add to scene
+		if wall:
+			wall.set_inside(is_inside)
+			var transform = wall.get_transform()
+			transform.origin = Vector3(pos[0], pos[1], pos[2])
+			wall.set_transform(transform)
+			add_child(wall)
+			logger.log_info("Wall added to scene.")
+			
+		else:
+			logger.log_error("Unknown wall type '" + shape + "'.")
+			
+	#Load random objects
+	for object_group in map["random_objects"]:
+		#Fetch object group properties
+		var mesh_names = object_group["meshes"]
+		var instances = (object_group["instance_count"] if object_group["instance_count"] > 0 else rand_range(1, 100))
+		
+		#Place random objects
+		for i in range(instances):
+			#Create random object
+			var mesh = mesh_names[rand_range(0, mesh_names.size())]
+			var object = meshes[mesh].instance()
+			object.add_to_group("WorldObjects")
+			
+			#Set random position
+			var pos = Vector3(rand_range(0, map_size.x), 0, rand_range(0, map_size.z))
+			pos.y = get_node("TerrainSystem").get_height(pos.x, pos.z)
+			var transform = object.get_transform()
+			transform.origin = pos
+			object.set_transform(transform)
+			
+			#Set random scale and add object to scene
+			var scale = rand_range(.06, .1)
+			object.set_scale(Vector3(scale, scale, scale))
+			add_child(object)
+			logger.log_info("Added random object instance '" + mesh + "'.")
+	
 	return true
 	
 	
@@ -470,7 +539,7 @@ func unload_map():
 func compile_material(name):
 	#Is the material cached?
 	if name in mtl_cache:
-		print("[WorldManager] Using cached material '" + name + "'.")
+		logger.log_info("Using cached material '" + name + "'.")
 		return mtl_cache[name]
 		
 	#Handle special materials
@@ -484,7 +553,7 @@ func compile_material(name):
 		
 		#Cache and return material
 		mtl_cache[name] = mtl
-		print("[WorldManager] Compiled and cached material '" + name + "'.")
+		logger.log_info("Compiled and cached material '" + name + "'.")
 		return mtl
 		
 	elif name == "GateMatWhite":
@@ -497,11 +566,12 @@ func compile_material(name):
 		
 		#Cache and return material
 		mtl_cache[name] = mtl
-		print("[WorldManager] Compiled and cached material '" + name + "'.")
+		logger.log_info("Compiled and cached material '" + name + "'.")
 		return mtl
 		
 	#Fetch material source
 	if not name in materials:
+		logger.log_error("Failed to load material '" + name + "'.")
 		return missing_mat
 		
 	var material = materials[name]
@@ -600,5 +670,5 @@ func compile_material(name):
 		
 	#Cache the material
 	mtl_cache[name] = mtl
-	print("[WorldManager] Compiled and cached material '" + name + "'.")
+	logger.log_info("Compiled and cached material '" + name + "'.")
 	return mtl

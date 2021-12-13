@@ -1,13 +1,16 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://scripts/WorldManager.gd" type="Script" id=1]
 [ext_resource path="res://scenes/objects/Portal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/objects/Gate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/objects/WaterPlane.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/objects/IcePlane.tscn" type="PackedScene" id=5]
-[ext_resource path="res://maps/images/caution.png" type="Texture" id=6]
-[ext_resource path="res://addons/TerrainSystem/TerrainSystem.gd" type="Script" id=7]
-[ext_resource path="res://addons/TerrainSystem/icon.png" type="Texture" id=8]
+[ext_resource path="res://scenes/objects/SphereWall.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/objects/BoxWall.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/Logger/Logger.gd" type="Script" id=8]
+[ext_resource path="res://addons/Logger/icon.png" type="Texture" id=9]
+[ext_resource path="res://addons/TerrainSystem/TerrainSystem.gd" type="Script" id=10]
+[ext_resource path="res://addons/TerrainSystem/icon.png" type="Texture" id=11]
 
 [sub_resource type="MaterialShader" id=1]
 
@@ -35,7 +38,6 @@ params/blend_mode = 0
 params/depth_draw = 1
 params/line_width = 0.0
 shader/shader = SubResource( 1 )
-shader_param/TEXTURE = ExtResource( 6 )
 
 [node name="WorldManager" type="Spatial"]
 
@@ -45,14 +47,23 @@ WorldPortal = ExtResource( 2 )
 WorldGate = ExtResource( 3 )
 WaterPlane = ExtResource( 4 )
 IcePlane = ExtResource( 5 )
+SphereWall = ExtResource( 6 )
+BoxWall = ExtResource( 7 )
 missing_mat = SubResource( 2 )
+
+[node name="Logger" type="Node" parent="."]
+
+script/script = ExtResource( 8 )
+__meta__ = {
+"_editor_icon": ExtResource( 9 )
+}
 
 [node name="TerrainSystem" type="Spatial" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-script/script = ExtResource( 7 )
+script/script = ExtResource( 10 )
 __meta__ = {
-"_editor_icon": ExtResource( 8 )
+"_editor_icon": ExtResource( 11 )
 }
 chunk_size = 64
 

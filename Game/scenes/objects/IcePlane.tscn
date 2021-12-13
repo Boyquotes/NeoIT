@@ -7,7 +7,10 @@
 
 extents = Vector3( 256, 500, 256 )
 
-[node name="IcePlane" type="StaticBody"]
+[node name="IcePlane" type="StaticBody" groups=[
+"WorldObjects",
+"IcePlanes",
+]]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 input/ray_pickable = true

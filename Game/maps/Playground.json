@@ -1479,34 +1479,6 @@
             ]
         }
     ],
-    "critters":{
-        "limit":80,
-        "critters":[
-            {
-                "rate":0.1,
-                "roam_area":-1,
-                "type":"Red Panda"
-            },
-            {
-                "rate":0.1,
-                "roam_area":-1,
-                "type":"Peacock"
-            },
-            {
-                "rate":0.1,
-                "roam_area":-1,
-                "type":"Frog"
-            },
-            {
-                "rate":0.1,
-                "roam_area":-1,
-                "type":"Mouse"
-            }
-        ],
-        "roam_areas":[
-            
-        ]
-    },
     "weather":"ThunderstormRain",
     "grass":{
         "grass_color_map":"Flower2.png",
