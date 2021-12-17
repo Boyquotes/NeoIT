@@ -7,6 +7,7 @@ func _ready():
 	
 	#Turn on event processing
 	set_process_unhandled_input(true)
+	get_node("StreamPlayer").play()
 	
 	
 func _unhandled_input(event):

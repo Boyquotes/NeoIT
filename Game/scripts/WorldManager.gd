@@ -6,6 +6,8 @@ export (PackedScene) var WaterPlane
 export (PackedScene) var IcePlane
 export (PackedScene) var SphereWall
 export (PackedScene) var BoxWall
+export (PackedScene) var CollisionBox
+export (PackedScene) var CollisionSphere
 export (Material) var missing_mat
 
 onready var logger = get_node("Logger")
@@ -525,6 +527,40 @@ func load_map(path):
 			object.set_scale(Vector3(scale, scale, scale))
 			add_child(object)
 			logger.log_info("Added random object instance '" + mesh + "'.")
+			
+	#Load collision shapes
+	for collider in map["collision_shapes"]:
+		#Fetch collision shape properties
+		var shape = collider["shape"]
+		var pos = collider["pos"]
+		var size = (collider["size"] if "size" in collider else null)
+		var radius = (collider["radius"] if "radius" in collider else null)
+		var collider = null
+		
+		#Create collision box
+		if shape == "box":
+			collider = CollisionBox.instance()
+			shape = collider.get_node("CollisionShape").get_shape()
+			shape.set_extents(Vector3(size[0], size[1], size[2]))
+			collider.get_node("CollisionShape").set_shape(shape)
+			
+		#Create collision sphere
+		elif shape == "sphere":
+			collider = CollisionSphere.instance()
+			shape = collider.get_node("CollisionShape").get_shape()
+			shape.set_radius(radius)
+			collider.get_node("CollisionShape").set_shape(shape)
+			
+		#Add collision shape to the scene
+		if collider:
+			var transform = collider.get_transform()
+			transform.origin = Vector3(pos[0], pos[1], pos[2])
+			collider.set_transform(transform)
+			add_child(collider)
+			logger.log_info("Added collision shape to scene.")
+			
+		else:
+			logger.log_error("Unknown collision shape type.")
 	
 	return true
 	

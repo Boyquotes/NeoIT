@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scripts/TestScene.gd" type="Script" id=1]
 [ext_resource path="res://addons/FlyCam/FlyCam.gd" type="Script" id=2]
 [ext_resource path="res://addons/FlyCam/icon.png" type="Texture" id=3]
 [ext_resource path="res://scenes/WorldManager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://themes/Default.tres" type="Theme" id=5]
+[ext_resource path="res://audio/sfx/SampleLibrary.tres" type="SampleLibrary" id=6]
 
 [node name="TestScene" type="Node"]
 
@@ -149,6 +150,34 @@ margin/bottom = 580.0
 popup/exclusive = false
 window/title = "Error"
 dialog/hide_on_ok = true
+
+[node name="StreamPlayer" type="StreamPlayer" parent="."]
+
+stream/stream = null
+stream/play = false
+stream/loop = false
+stream/volume_db = 12.0
+stream/autoplay = true
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
+[node name="SamplePlayer" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = ExtResource( 6 )
+default/volume_db = 12.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
 [connection signal="pressed" from="UI/UI/Panel/LoadButton" to="." method="_on_LoadButton_pressed"]
 
