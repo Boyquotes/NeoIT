@@ -561,6 +561,8 @@ func load_map(path):
 			
 		else:
 			logger.log_error("Unknown collision shape type.")
+			
+	#
 	
 	return true
 	
