@@ -402,7 +402,7 @@ func import_world(old_folder, new_folder, name):
 				material = section[4]
 				
 			if section.size() > 5:
-				sound = section[5]
+				sound = section[5].split(".")[0]
 				
 			if section.size() > 6:
 				is_solid = (true if section[6] == "true" else false)
@@ -425,7 +425,7 @@ func import_world(old_folder, new_folder, name):
 			var material = ""
 			
 			if section.size() > 5:
-				sound = section[5]
+				sound = section[5].split(".")[0]
 				
 			if section.size() > 6:
 				material = section[6]
@@ -446,7 +446,7 @@ func import_world(old_folder, new_folder, name):
 			var sound = ""
 			
 			if section.size() > 3:
-				sound = section[3]
+				sound = section[3].split(".")[0]
 				
 			new_world["particles"].append({
 			    "name": name,
@@ -604,7 +604,7 @@ func import_world(old_folder, new_folder, name):
 			var music = []
 			
 			for i in range(section.size() - 1):
-				music.append(section[i + 1])
+				music.append(section[i + 1].split(".")[0])
 				
 			new_world["music"] = music
 			

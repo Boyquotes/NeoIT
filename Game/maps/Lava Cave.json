@@ -51,7 +51,7 @@
                 1,
                 1
             ],
-            "sound":"lava1.wav",
+            "sound":"lava1",
             "pos":[
                 50.000001,
                 8,
@@ -65,7 +65,7 @@
                 0.1,
                 0.1
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 50.000001,
                 9,

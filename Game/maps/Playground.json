@@ -35,7 +35,7 @@
                 0.12,
                 0.12
             ],
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "pos":[
                 41.500001,
                 72.700001,
@@ -1479,6 +1479,34 @@
             ]
         }
     ],
+    "critters":{
+        "limit":80,
+        "critters":[
+            {
+                "rate":0.1,
+                "roam_area":-1,
+                "type":"Red Panda"
+            },
+            {
+                "rate":0.1,
+                "roam_area":-1,
+                "type":"Peacock"
+            },
+            {
+                "rate":0.1,
+                "roam_area":-1,
+                "type":"Frog"
+            },
+            {
+                "rate":0.1,
+                "roam_area":-1,
+                "type":"Mouse"
+            }
+        ],
+        "roam_areas":[
+            
+        ]
+    },
     "weather":"ThunderstormRain",
     "grass":{
         "grass_color_map":"Flower2.png",
@@ -7081,7 +7109,7 @@
                 0.1,
                 0.1
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 209.400003,
                 6.1,

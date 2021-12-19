@@ -306,7 +306,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 398.910016,
@@ -333,7 +333,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 308.801006,
@@ -351,7 +351,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 188.426004,
@@ -360,7 +360,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 188.876004,
@@ -378,7 +378,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 86.400001,
@@ -396,7 +396,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 44.861701,
@@ -414,7 +414,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 44.861701,

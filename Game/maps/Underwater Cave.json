@@ -142,7 +142,7 @@
     ],
     "particles":[
         {
-            "sound":"water1.wav",
+            "sound":"water1",
             "name":"WaterSplash",
             "pos":[
                 82.700001,

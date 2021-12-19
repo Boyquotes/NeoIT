@@ -33,7 +33,7 @@
                 0.2,
                 0.2
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 284.900004,
                 22.8,
@@ -313,7 +313,7 @@
             ]
         },
         {
-            "sound":"ghostloop.mp3",
+            "sound":"ghostloop",
             "name":"Ghostfire",
             "pos":[
                 431.200006,
@@ -322,7 +322,7 @@
             ]
         },
         {
-            "sound":"ghostloop.mp3",
+            "sound":"ghostloop",
             "name":"Ghostfire",
             "pos":[
                 201.800003,

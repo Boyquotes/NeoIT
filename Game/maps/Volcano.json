@@ -21,7 +21,7 @@
                 0.12,
                 0.12
             ],
-            "sound":"lava1.wav",
+            "sound":"lava1",
             "pos":[
                 324.000005,
                 170.000003,
@@ -35,7 +35,7 @@
                 0.14,
                 0.14
             ],
-            "sound":"lava1.wav",
+            "sound":"lava1",
             "pos":[
                 605.000009,
                 60.000001,
@@ -49,7 +49,7 @@
                 0.55,
                 0.75
             ],
-            "sound":"lava1.wav",
+            "sound":"lava1",
             "pos":[
                 689.20001,
                 42.500001,
@@ -63,7 +63,7 @@
                 0.15,
                 0.15
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 212.500003,
                 29.5,
@@ -77,7 +77,7 @@
                 0.2,
                 0.2
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 243.500004,
                 46.000001,
@@ -223,7 +223,7 @@
             ]
         },
         {
-            "sound":"Steam2.wav",
+            "sound":"Steam2",
             "name":"Geyser",
             "pos":[
                 196.200003,
@@ -233,7 +233,7 @@
             ]
         },
         {
-            "sound":"Steam2.wav",
+            "sound":"Steam2",
             "name":"Geyser",
             "pos":[
                 564.000008,
@@ -243,7 +243,7 @@
             ]
         },
         {
-            "sound":"Steam2.wav",
+            "sound":"Steam2",
             "name":"Geyser",
             "pos":[
                 51.000001,
@@ -252,7 +252,7 @@
             ]
         },
         {
-            "sound":"Steam2.wav",
+            "sound":"Steam2",
             "name":"Geyser",
             "pos":[
                 236.400004,

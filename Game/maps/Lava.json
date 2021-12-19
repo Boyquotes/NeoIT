@@ -33,7 +33,7 @@
                 0.2,
                 0.2
             ],
-            "sound":"lava1.wav",
+            "sound":"lava1",
             "pos":[
                 531.600008,
                 38.000001,
@@ -47,7 +47,7 @@
                 0.03,
                 0.03
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 15.7,
                 55.100001,
@@ -61,7 +61,7 @@
                 0.04,
                 0.04
             ],
-            "sound":"lava1.wav",
+            "sound":"lava1",
             "pos":[
                 576.600009,
                 7,
@@ -75,7 +75,7 @@
                 0.04,
                 0.04
             ],
-            "sound":"lava1.wav",
+            "sound":"lava1",
             "pos":[
                 352.100005,
                 40.000001,
@@ -89,7 +89,7 @@
                 0.08,
                 0.1
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 677.20001,
                 25,
@@ -103,7 +103,7 @@
                 0.074,
                 0.1
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 390.700006,
                 38.000001,
@@ -117,7 +117,7 @@
                 10,
                 10
             ],
-            "sound":"lava1.wav",
+            "sound":"lava1",
             "pos":[
                 417.800006,
                 13.5,
@@ -218,7 +218,7 @@
             ]
         },
         {
-            "sound":"Steam2.wav",
+            "sound":"Steam2",
             "name":"Geyser",
             "pos":[
                 390.500006,
@@ -227,7 +227,7 @@
             ]
         },
         {
-            "sound":"Steam2.wav",
+            "sound":"Steam2",
             "name":"Geyser",
             "pos":[
                 385.600006,
@@ -236,7 +236,7 @@
             ]
         },
         {
-            "sound":"Steam1.wav",
+            "sound":"Steam1",
             "name":"Geyser",
             "pos":[
                 390.800006,
@@ -245,7 +245,7 @@
             ]
         },
         {
-            "sound":"Steam1.wav",
+            "sound":"Steam1",
             "name":"Geyser",
             "pos":[
                 611.300009,
@@ -254,7 +254,7 @@
             ]
         },
         {
-            "sound":"Steam2.wav",
+            "sound":"Steam2",
             "name":"Geyser",
             "pos":[
                 444.700007,
@@ -263,7 +263,7 @@
             ]
         },
         {
-            "sound":"Steam2.wav",
+            "sound":"Steam2",
             "name":"Geyser",
             "pos":[
                 492.800007,

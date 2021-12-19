@@ -73,7 +73,7 @@
                 0.03,
                 0.03
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 729.700011,
                 14.2,
@@ -749,7 +749,7 @@
     ],
     "particles":[
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 888.700013,
@@ -758,7 +758,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 856.600013,
@@ -767,7 +767,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 894.500013,
@@ -776,7 +776,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 160.800002,
@@ -785,7 +785,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 109.100002,
@@ -794,7 +794,7 @@
             ]
         },
         {
-            "sound":"waterfall.mp3",
+            "sound":"waterfall",
             "name":"WaterfallSmoke",
             "pos":[
                 106.900002,
@@ -2016,7 +2016,7 @@
             ]
         },
         {
-            "mesh":"Waterfall",
+            "mesh":"waterfall",
             "material":"Waterfall2",
             "instances":[
                 {

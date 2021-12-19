@@ -1,11 +1,57 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://scripts/TestScene.gd" type="Script" id=1]
-[ext_resource path="res://addons/FlyCam/FlyCam.gd" type="Script" id=2]
-[ext_resource path="res://addons/FlyCam/icon.png" type="Texture" id=3]
-[ext_resource path="res://scenes/WorldManager.tscn" type="PackedScene" id=4]
-[ext_resource path="res://themes/Default.tres" type="Theme" id=5]
+[ext_resource path="res://skyboxes/Miramar/Miramar.cbm" type="CubeMap" id=2]
+[ext_resource path="res://addons/FlyCam/FlyCam.gd" type="Script" id=3]
+[ext_resource path="res://addons/FlyCam/icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/WorldManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://audio/sfx/SampleLibrary.tres" type="SampleLibrary" id=6]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=7]
+
+[sub_resource type="Environment" id=1]
+
+ambient_light/enabled = true
+ambient_light/color = Color( 0.25098, 0.25098, 0.25098, 1 )
+ambient_light/energy = 1.0
+fxaa/enabled = false
+background/mode = 4
+background/color = Color( 0, 0.648438, 1, 1 )
+background/cubemap = ExtResource( 2 )
+background/energy = 1.0
+background/scale = 1.0
+background/glow = 0.0
+background/canvas_max_layer = null
+glow/enabled = false
+glow/blur_passes = 1
+glow/blur_scale = 1
+glow/blur_strength = 1
+glow/blur_blend_mode = null
+glow/bloom = 0.0
+glow/bloom_treshold = 0.5
+dof_blur/enabled = false
+dof_blur/blur_passes = 1
+dof_blur/begin = 100.0
+dof_blur/range = 10.0
+hdr/enabled = false
+hdr/tonemapper = 0
+hdr/exposure = 0.4
+hdr/white = 1.0
+hdr/glow_treshold = 0.95
+hdr/glow_scale = 0.2
+hdr/min_luminance = 0.4
+hdr/max_luminance = 8.0
+hdr/exposure_adj_speed = 0.5
+fog/enabled = false
+fog/begin = 100.0
+fog/begin_color = Color( 0, 0, 0, 1 )
+fog/end_color = Color( 1, 1, 1, 1 )
+fog/attenuation = 1.0
+fog/bg = true
+bcs/enabled = false
+bcs/brightness = 1.0
+bcs/contrast = 1.0
+bcs/saturation = 1.0
+srgb/enabled = false
 
 [node name="TestScene" type="Node"]
 
@@ -20,14 +66,14 @@ fov = 45.0
 near = 0.1
 far = 1000.0
 keep_aspect = 1
-current = false
+current = true
 visible_layers = 1048575
-environment = null
+environment = SubResource( 1 )
 h_offset = 0.0
 v_offset = 0.0
-script/script = ExtResource( 2 )
+script/script = ExtResource( 3 )
 __meta__ = {
-"_editor_icon": ExtResource( 3 )
+"_editor_icon": ExtResource( 4 )
 }
 speed = 8
 rot = Vector3( 0, -135, 0 )
@@ -56,7 +102,9 @@ shadow/max_distance = 0.0
 shadow/split_weight = 0.5
 shadow/zoffset_scale = 2.0
 
-[node name="WorldManager" parent="." instance=ExtResource( 4 )]
+[node name="WorldManager" parent="." instance=ExtResource( 5 )]
+
+sfx = ExtResource( 6 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -71,7 +119,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = ExtResource( 5 )
+theme/theme = ExtResource( 7 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
@@ -150,34 +198,6 @@ margin/bottom = 580.0
 popup/exclusive = false
 window/title = "Error"
 dialog/hide_on_ok = true
-
-[node name="StreamPlayer" type="StreamPlayer" parent="."]
-
-stream/stream = null
-stream/play = false
-stream/loop = false
-stream/volume_db = 12.0
-stream/autoplay = true
-stream/paused = false
-stream/loop_restart_time = 0.0
-stream/buffering_ms = 500
-
-[node name="SamplePlayer" type="SamplePlayer" parent="."]
-
-config/polyphony = 1
-config/samples = ExtResource( 6 )
-default/volume_db = 12.0
-default/pitch_scale = 1.0
-default/pan = 0.0
-default/depth = 0.0
-default/height = 0.0
-default/filter/type = 0
-default/filter/cutoff = 5000.0
-default/filter/resonance = 1.0
-default/filter/gain = 1.0
-default/reverb_room = 2
-default/reverb_send = 0.0
-default/chorus_send = 0.0
 
 [connection signal="pressed" from="UI/UI/Panel/LoadButton" to="." method="_on_LoadButton_pressed"]
 

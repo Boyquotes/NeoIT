@@ -9,6 +9,7 @@ export (PackedScene) var BoxWall
 export (PackedScene) var CollisionBox
 export (PackedScene) var CollisionSphere
 export (Material) var missing_mat
+export (SampleLibrary) var sfx
 
 onready var logger = get_node("Logger")
 
@@ -254,6 +255,7 @@ func load_map(path):
 	map_size = Vector3(scale[0], scale[1], scale[2])
 	var spawn = map["spawn_pos"]
 	spawn_pos = Vector3(spawn[0], spawn[1], spawn[2])
+	logger.log_info("Terrain loaded.")
 	
 	#Load portals
 	for portal_data in map["portals"]:
@@ -275,6 +277,7 @@ func load_map(path):
 		
 		#Add portal to scene
 		add_child(portal)
+		logger.log_info("Added portal to scene.")
 		
 	#Load gates
 	for gate_data in map["gates"]:
@@ -298,6 +301,7 @@ func load_map(path):
 		
 		#Add gate to scene
 		add_child(gate)
+		logger.log_info("Added gate to scene.")
 		
 	#Load water planes
 	for water_plane_data in map["water_planes"]:
@@ -305,7 +309,7 @@ func load_map(path):
 		var pos = water_plane_data["pos"]
 		var scale = water_plane_data["scale"]
 		var material = water_plane_data["material"]
-		var sound = (water_plane_data["sound"] if "sound" in water_plane_data else "")
+		var sound = (water_plane_data["sound"] if "sound" in water_plane_data else null)
 		var is_solid = (true if "is_solid" in water_plane_data and water_plane_data["is_solid"] else false)
 		#print("Water Plane: " + str(water_plane_data))
 		
@@ -319,8 +323,17 @@ func load_map(path):
 		#Set material
 		water_plane.set_material(compile_material(material))
 		
+		#Add sound effect if given
+		if sound:
+			var sample_player = SpatialSamplePlayer.new()
+			sample_player.set_sample_library(sfx)
+			water_plane.add_child(sample_player)
+			sample_player.play(sound)
+			logger.log_info("Added spatial sound effect '" + sound + "'.")
+		
 		#Add water plane to scene
 		add_child(water_plane)
+		logger.log_info("Added water plane to scene.")
 		
 	#Load scenery
 	for object in map["objects"]:
@@ -329,7 +342,7 @@ func load_map(path):
 		var pos = (object["pos"] if "pos" in object else [0, 0, 0])
 		var scale = (object["scale"] if "scale" in object else [1, 1, 1])
 		var rot = (object["rot"] if "rot" in object else [0, 0, 0])
-		var sound = (object["sound"] if "sound" in object else "")
+		var sound = (object["sound"] if "sound" in object else null)
 		var material = (object["material"] if "material" in object else "")
 		var instances = (object["instances"] if "instances" in object else null)
 		
@@ -361,6 +374,14 @@ func load_map(path):
 				for child in object.get_children():
 					if child.is_type("MeshInstance"):
 						child.set_material_override(compile_material(material))
+						
+			#Add sound effect if given
+			if sound:
+				var sample_player = SpatialSamplePlayer.new()
+				sample_player.set_sample_library(sfx)
+				object.add_child(sample_player)
+				sample_player.play(sound)
+				logger.log_info("Added spatial sound effect '" + sound + "'.")
 			
 			#Add object to scene
 			object.add_to_group("WorldObjects")
@@ -404,7 +425,7 @@ func load_map(path):
 		#Fetch particle properties
 		var name = particle["name"]
 		var pos = (particle["pos"] if "pos" in particle else [0, 0, 0])
-		var sound = (particle["sound"] if "sound" in particle else "")
+		var sound = (particle["sound"] if "sound" in particle else null)
 		
 		#Ensure that the particle system exists
 		if not name in particles:
@@ -415,6 +436,14 @@ func load_map(path):
 		var particle = particles[name].instance()
 		particle.add_to_group("WorldObjects")
 		particle.add_to_group("ParticleSystems")
+		
+		#Add sound effect if given
+		if sound:
+			var sample_player = SpatialSamplePlayer.new()
+			sample_player.set_sample_library(sfx)
+			particle.add_child(sample_player)
+			sample_player.play(sound)
+			logger.log_info("Added spatial sound effect '" + sound + "'.")
 		
 		#Set position and add to scene
 		var transform = particle.get_transform()
@@ -562,7 +591,10 @@ func load_map(path):
 		else:
 			logger.log_error("Unknown collision shape type.")
 			
-	#
+	#Load music
+	for song in map["music"]:
+		get_node("QueuedStreamPlayer").queue_song(load("res://audio/music/" + song + ".ogg"))
+		logger.log_info("Queued song '" + song + "' for playback.")
 	
 	return true
 	
@@ -572,6 +604,7 @@ func unload_map():
 	get_node("TerrainSystem").unload_terrain()
 	get_tree().call_group(get_tree().GROUP_CALL_DEFAULT, 
 	    "WorldObjects", "queue_free")
+	get_node("QueuedStreamPlayer").clear_queue()
 	
 	
 func compile_material(name):

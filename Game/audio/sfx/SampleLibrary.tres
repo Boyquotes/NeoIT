@@ -1,26 +1,27 @@
-[gd_resource type="SampleLibrary" load_steps=22 format=1]
+[gd_resource type="SampleLibrary" load_steps=23 format=1]
 
-[ext_resource path="res://audio/sfx/click.wav" type="Sample" id=1]
-[ext_resource path="res://audio/sfx/draw.wav" type="Sample" id=2]
-[ext_resource path="res://audio/sfx/fireloop.wav" type="Sample" id=3]
-[ext_resource path="res://audio/sfx/hawkCall.wav" type="Sample" id=4]
-[ext_resource path="res://audio/sfx/healhit.wav" type="Sample" id=5]
-[ext_resource path="res://audio/sfx/hit.wav" type="Sample" id=6]
-[ext_resource path="res://audio/sfx/lava1.wav" type="Sample" id=7]
-[ext_resource path="res://audio/sfx/mantaCall.wav" type="Sample" id=8]
-[ext_resource path="res://audio/sfx/quake.wav" type="Sample" id=9]
-[ext_resource path="res://audio/sfx/rain1.wav" type="Sample" id=10]
-[ext_resource path="res://audio/sfx/roar1.wav" type="Sample" id=11]
-[ext_resource path="res://audio/sfx/roar2.wav" type="Sample" id=12]
-[ext_resource path="res://audio/sfx/run_grass.wav" type="Sample" id=13]
-[ext_resource path="res://audio/sfx/splash.wav" type="Sample" id=14]
-[ext_resource path="res://audio/sfx/thunder1.wav" type="Sample" id=15]
-[ext_resource path="res://audio/sfx/thunder2.wav" type="Sample" id=16]
-[ext_resource path="res://audio/sfx/walk_grass.wav" type="Sample" id=17]
-[ext_resource path="res://audio/sfx/water1.wav" type="Sample" id=18]
-[ext_resource path="res://audio/sfx/waterfall.wav" type="Sample" id=19]
-[ext_resource path="res://audio/sfx/waterwade.wav" type="Sample" id=20]
-[ext_resource path="res://audio/sfx/wind1.wav" type="Sample" id=21]
+[ext_resource path="res://audio/sfx/click.smp" type="Sample" id=1]
+[ext_resource path="res://audio/sfx/draw.smp" type="Sample" id=2]
+[ext_resource path="res://audio/sfx/fireloop.smp" type="Sample" id=3]
+[ext_resource path="res://audio/sfx/ghostloop.smp" type="Sample" id=4]
+[ext_resource path="res://audio/sfx/hawkCall.smp" type="Sample" id=5]
+[ext_resource path="res://audio/sfx/healhit.smp" type="Sample" id=6]
+[ext_resource path="res://audio/sfx/hit.smp" type="Sample" id=7]
+[ext_resource path="res://audio/sfx/lava1.smp" type="Sample" id=8]
+[ext_resource path="res://audio/sfx/mantaCall.smp" type="Sample" id=9]
+[ext_resource path="res://audio/sfx/quake.smp" type="Sample" id=10]
+[ext_resource path="res://audio/sfx/rain1.smp" type="Sample" id=11]
+[ext_resource path="res://audio/sfx/roar1.smp" type="Sample" id=12]
+[ext_resource path="res://audio/sfx/roar2.smp" type="Sample" id=13]
+[ext_resource path="res://audio/sfx/run_grass.smp" type="Sample" id=14]
+[ext_resource path="res://audio/sfx/splash.smp" type="Sample" id=15]
+[ext_resource path="res://audio/sfx/thunder1.smp" type="Sample" id=16]
+[ext_resource path="res://audio/sfx/thunder2.smp" type="Sample" id=17]
+[ext_resource path="res://audio/sfx/walk_grass.smp" type="Sample" id=18]
+[ext_resource path="res://audio/sfx/water1.smp" type="Sample" id=19]
+[ext_resource path="res://audio/sfx/waterfall.smp" type="Sample" id=20]
+[ext_resource path="res://audio/sfx/waterwade.smp" type="Sample" id=21]
+[ext_resource path="res://audio/sfx/wind1.smp" type="Sample" id=22]
 
 [resource]
 
@@ -42,112 +43,118 @@ samples/fireloop = {
 "priority": 0,
 "sample": ExtResource( 3 )
 }
-samples/hawkCall = {
+samples/ghostloop = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 4 )
 }
-samples/healhit = {
+samples/hawkCall = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 5 )
 }
-samples/hit = {
+samples/healhit = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 6 )
 }
-samples/lava1 = {
+samples/hit = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 7 )
 }
-samples/mantaCall = {
+samples/lava1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 8 )
 }
-samples/quake = {
+samples/mantaCall = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 9 )
 }
-samples/rain1 = {
+samples/quake = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 10 )
 }
-samples/roar1 = {
+samples/rain1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 11 )
 }
-samples/roar2 = {
+samples/roar1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 12 )
 }
-samples/run_grass = {
+samples/roar2 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 13 )
 }
-samples/splash = {
+samples/run_grass = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 14 )
 }
-samples/thunder1 = {
+samples/splash = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 15 )
 }
-samples/thunder2 = {
+samples/thunder1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 16 )
 }
-samples/walk_grass = {
+samples/thunder2 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 17 )
 }
-samples/water1 = {
+samples/walk_grass = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 18 )
 }
-samples/waterfall = {
+samples/water1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 19 )
 }
-samples/waterwade = {
+samples/waterfall = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 20 )
 }
-samples/wind1 = {
+samples/waterwade = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 21 )
+}
+samples/wind1 = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 22 )
 }
 

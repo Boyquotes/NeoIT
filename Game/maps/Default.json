@@ -46,7 +46,7 @@
                 0.0175,
                 0.0155
             ],
-            "sound":"water1.wav",
+            "sound":"water1",
             "pos":[
                 165.500002,
                 20,
@@ -311,7 +311,7 @@
     ],
     "particles":[
         {
-            "sound":"water1.wav",
+            "sound":"water1",
             "name":"WaterSplash",
             "pos":[
                 164.900002,
