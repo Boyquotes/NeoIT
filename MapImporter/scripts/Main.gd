@@ -456,8 +456,7 @@ func import_world(old_folder, new_folder, name):
 			
 		#Weather section
 		elif section[0] == "WeatherCycle":
-			var weather = section[1].replace(".weather", 
-			    ".json")
+			var weather = section[1].replace(".weather", "")
 			new_world["weather"] = weather
 			
 		#Interior section

@@ -1,36 +1,4 @@
 {
-    "Ghostfire":{
-        "texture_units":[
-            {
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"Ghostfire.png",
-                "type":"base"
-            }
-        ]
-    },
-    "Terrain/FrozenWater":{
-        "texture_units":[
-            {
-                "scale":[
-                    0.05,
-                    0.05
-                ],
-                "texture":"Water01.png",
-                "type":"base"
-            },
-            {
-                "scale":[
-                    0.05,
-                    0.05
-                ],
-                "texture":"Water02.png",
-                "type":"base"
-            }
-        ]
-    },
     "Terrain/WaterfallTerrain":{
         "texture_units":[
             {
@@ -87,26 +55,34 @@
             }
         ]
     },
-    "Material.001/TEXFACE/hiveTex.png":{
+    "Terrain/FrozenWater":{
         "texture_units":[
             {
                 "scale":[
-                    1,
-                    1
+                    0.05,
+                    0.05
                 ],
-                "texture":"hiveTex.png",
+                "texture":"Water01.png",
+                "type":"base"
+            },
+            {
+                "scale":[
+                    0.05,
+                    0.05
+                ],
+                "texture":"Water02.png",
                 "type":"base"
             }
         ]
     },
-    "Bee":{
+    "Ghostfire":{
         "texture_units":[
             {
                 "scale":[
                     1,
                     1
                 ],
-                "texture":"beez.png",
+                "texture":"Ghostfire.png",
                 "type":"base"
             }
         ]
@@ -119,18 +95,6 @@
                     0.1
                 ],
                 "texture":"rock_tex1.png",
-                "type":"base"
-            }
-        ]
-    },
-    "Horror":{
-        "texture_units":[
-            {
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"Horror.png",
                 "type":"base"
             }
         ]
@@ -199,6 +163,54 @@
             }
         ]
     },
+    "Material.001/TEXFACE/hiveTex.png":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"hiveTex.png",
+                "type":"base"
+            }
+        ]
+    },
+    "Bee":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"beez.png",
+                "type":"base"
+            }
+        ]
+    },
+    "Horror":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"Horror.png",
+                "type":"base"
+            }
+        ]
+    },
+    "Portal/Template":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"portalTemplate.png",
+                "type":"base"
+            }
+        ]
+    },
     "Portal/Shrieking_Hill":{
         "texture_units":[
             {
@@ -243,18 +255,6 @@
             }
         ]
     },
-    "Portal/Template":{
-        "texture_units":[
-            {
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"portalTemplate.png",
-                "type":"base"
-            }
-        ]
-    },
     "Terrain/DefaultTerrain":{
         "texture_units":[
             {
@@ -291,14 +291,14 @@
             }
         ]
     },
-    "Terrain/PlaygroundTerrain":{
+    "Terrain/GreatFallsTerrain":{
         "texture_units":[
             {
                 "scale":[
-                    0.01,
-                    0.01
+                    0.1,
+                    0.1
                 ],
-                "texture":"grass_tex2.png",
+                "texture":"rock_tex1.png",
                 "type":"base"
             }
         ]
@@ -315,14 +315,14 @@
             }
         ]
     },
-    "Terrain/GreatFallsTerrain":{
+    "Terrain/PlaygroundTerrain":{
         "texture_units":[
             {
                 "scale":[
-                    0.1,
-                    0.1
+                    0.01,
+                    0.01
                 ],
-                "texture":"rock_tex1.png",
+                "texture":"grass_tex2.png",
                 "type":"base"
             }
         ]
@@ -335,30 +335,6 @@
                     1
                 ],
                 "texture":"flower2.png",
-                "type":"base"
-            }
-        ]
-    },
-    "DeadTreeMat":{
-        "texture_units":[
-            {
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"deadtree.jpg",
-                "type":"base"
-            }
-        ]
-    },
-    "GateMatValley":{
-        "texture_units":[
-            {
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"portalHiddenValley.jpg",
                 "type":"base"
             }
         ]
@@ -387,14 +363,38 @@
             }
         ]
     },
-    "Terrain/HiddenValleyTerrain":{
+    "DeadTreeMat":{
         "texture_units":[
             {
                 "scale":[
-                    0.025,
-                    0.025
+                    1,
+                    1
                 ],
-                "texture":"grass_tex2.png",
+                "texture":"deadtree.jpg",
+                "type":"base"
+            }
+        ]
+    },
+    "GateMatValley":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"portalHiddenValley.jpg",
+                "type":"base"
+            }
+        ]
+    },
+    "Portal/Ice":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"portalIce.jpg",
                 "type":"base"
             }
         ]
@@ -479,18 +479,6 @@
             }
         ]
     },
-    "Portal/Ice":{
-        "texture_units":[
-            {
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"portalIce.jpg",
-                "type":"base"
-            }
-        ]
-    },
     "JungleTree/Leaves/TWOSIDE":{
         "texture_units":[
             {
@@ -499,6 +487,18 @@
                     1
                 ],
                 "texture":"canopy.png alpha",
+                "type":"base"
+            }
+        ]
+    },
+    "Terrain/HiddenValleyTerrain":{
+        "texture_units":[
+            {
+                "scale":[
+                    0.025,
+                    0.025
+                ],
+                "texture":"grass_tex2.png",
                 "type":"base"
             }
         ]
@@ -527,18 +527,6 @@
             }
         ]
     },
-    "rockMat2":{
-        "texture_units":[
-            {
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"rock_tex2.png",
-                "type":"base"
-            }
-        ]
-    },
     "Terrain/Flower":{
         "texture_units":[
             {
@@ -551,14 +539,14 @@
             }
         ]
     },
-    "den/TEXFACE/rockTex.jpg":{
+    "rockMat2":{
         "texture_units":[
             {
                 "scale":[
                     1,
                     1
                 ],
-                "texture":"rockTex.jpg",
+                "texture":"rock_tex2.png",
                 "type":"base"
             }
         ]
@@ -600,58 +588,6 @@
                 ],
                 "texture":"stone_tex.png",
                 "type":"layer"
-            }
-        ]
-    },
-    "Waterfall2":{
-        "texture_units":[
-            {
-                "scroll":[
-                    0,
-                    0.75
-                ],
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"waterfall2.png",
-                "type":"base"
-            },
-            {
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"waterfallmask.png",
-                "type":"layer_mask"
-            }
-        ]
-    },
-    "Terrain/CalmWater":{
-        "texture_units":[
-            {
-                "scroll":[
-                    -0.03,
-                    -0.05
-                ],
-                "scale":[
-                    2.5,
-                    2.5
-                ],
-                "texture":"Water01.png",
-                "type":"base"
-            },
-            {
-                "scroll":[
-                    -0.05,
-                    0.01
-                ],
-                "scale":[
-                    2.5,
-                    2.5
-                ],
-                "texture":"Water02.png",
-                "type":"base"
             }
         ]
     },
@@ -735,26 +671,42 @@
             }
         ]
     },
-    "JungleTree/Bark":{
+    "Terrain/CalmWater":{
         "texture_units":[
             {
-                "scale":[
-                    1,
-                    1
+                "scroll":[
+                    -0.03,
+                    -0.05
                 ],
-                "texture":"bark.png",
+                "scale":[
+                    2.5,
+                    2.5
+                ],
+                "texture":"Water01.png",
+                "type":"base"
+            },
+            {
+                "scroll":[
+                    -0.05,
+                    0.01
+                ],
+                "scale":[
+                    2.5,
+                    2.5
+                ],
+                "texture":"Water02.png",
                 "type":"base"
             }
         ]
     },
-    "Tree1/trunk":{
+    "den/TEXFACE/rockTex.jpg":{
         "texture_units":[
             {
                 "scale":[
                     1,
                     1
                 ],
-                "texture":"trunk01.jpg",
+                "texture":"rockTex.jpg",
                 "type":"base"
             }
         ]
@@ -787,6 +739,54 @@
             }
         ]
     },
+    "JungleTree/Bark":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"bark.png",
+                "type":"base"
+            }
+        ]
+    },
+    "Tree1/trunk":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"trunk01.jpg",
+                "type":"base"
+            }
+        ]
+    },
+    "Waterfall2":{
+        "texture_units":[
+            {
+                "scroll":[
+                    0,
+                    0.75
+                ],
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"waterfall2.png",
+                "type":"base"
+            },
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"waterfallmask.png",
+                "type":"layer_mask"
+            }
+        ]
+    },
     "Terrain/WaterfallCave":{
         "texture_units":[
             {
@@ -815,22 +815,14 @@
             }
         ]
     },
-    "Terrain/Shrieking_HillTerrain":{
+    "Terrain/TemplateTerrain":{
         "texture_units":[
             {
                 "scale":[
                     0.01,
                     0.01
                 ],
-                "texture":"grass_tex2.png",
-                "type":"base"
-            },
-            {
-                "scale":[
-                    0.05,
-                    0.05
-                ],
-                "texture":"stone_tex.png",
+                "texture":"green_grass.png",
                 "type":"base"
             }
         ]
@@ -859,26 +851,22 @@
             }
         ]
     },
-    "Terrain/TemplateTerrain":{
+    "Terrain/Shrieking_HillTerrain":{
         "texture_units":[
             {
                 "scale":[
                     0.01,
                     0.01
                 ],
-                "texture":"green_grass.png",
+                "texture":"grass_tex2.png",
                 "type":"base"
-            }
-        ]
-    },
-    "Portal/GreatFalls":{
-        "texture_units":[
+            },
             {
                 "scale":[
-                    1,
-                    1
+                    0.05,
+                    0.05
                 ],
-                "texture":"portalGreatFalls.png",
+                "texture":"stone_tex.png",
                 "type":"base"
             }
         ]
@@ -907,6 +895,23 @@
             }
         ]
     },
+    "DefaultSettings":{
+        "texture_units":[
+            
+        ]
+    },
+    "Portal/GreatFalls":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"portalGreatFalls.png",
+                "type":"base"
+            }
+        ]
+    },
     "Portal/Playground":{
         "texture_units":[
             {
@@ -919,35 +924,14 @@
             }
         ]
     },
-    "DefaultSettings":{
-        "texture_units":[
-            
-        ]
-    },
-    "Terrain/RapidWater":{
+    "Portal/Ocean":{
         "texture_units":[
             {
-                "scroll":[
-                    -1,
-                    0.05
-                ],
                 "scale":[
                     1,
                     1
                 ],
-                "texture":"Water01.png",
-                "type":"base"
-            },
-            {
-                "scroll":[
-                    -1.01,
-                    0.01
-                ],
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"Water04.png",
+                "texture":"portalOcean.jpg",
                 "type":"base"
             }
         ]
@@ -996,31 +980,35 @@
             }
         ]
     },
-    "Portal/Ocean":{
-        "texture_units":[
-            {
-                "scale":[
-                    1,
-                    1
-                ],
-                "texture":"portalOcean.jpg",
-                "type":"base"
-            }
-        ]
-    },
     "pass":{
         "texture_units":[
             
         ]
     },
-    "GlowingIce":{
+    "Terrain/RapidWater":{
         "texture_units":[
             {
-                "scale":[
-                    2,
-                    2
+                "scroll":[
+                    -1,
+                    0.05
                 ],
-                "texture":"rock_tex2.png",
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"Water01.png",
+                "type":"base"
+            },
+            {
+                "scroll":[
+                    -1.01,
+                    0.01
+                ],
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"Water04.png",
                 "type":"base"
             }
         ]
@@ -1065,14 +1053,14 @@
             }
         ]
     },
-    "eheart":{
+    "GlowingIce":{
         "texture_units":[
             {
                 "scale":[
-                    1,
-                    1
+                    2,
+                    2
                 ],
-                "texture":"heart.png",
+                "texture":"rock_tex2.png",
                 "type":"base"
             }
         ]
@@ -1085,6 +1073,18 @@
                     1
                 ],
                 "texture":"nalasdenTex.png",
+                "type":"base"
+            }
+        ]
+    },
+    "eheart":{
+        "texture_units":[
+            {
+                "scale":[
+                    1,
+                    1
+                ],
+                "texture":"heart.png",
                 "type":"base"
             }
         ]
