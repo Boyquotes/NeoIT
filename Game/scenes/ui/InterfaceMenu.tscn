@@ -1,17 +1,8 @@
-[gd_scene load_steps=18 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/InterfaceMenu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/images/border.png" type="Texture" id=3]
-[ext_resource path="res://scenes/ui/images/borderCenter.png" type="Texture" id=4]
-[ext_resource path="res://scenes/ui/images/grabberUp.png" type="Texture" id=5]
-[ext_resource path="res://scenes/ui/images/slider.png" type="Texture" id=6]
-[ext_resource path="res://scenes/ui/images/buttonOver.png" type="Texture" id=7]
-[ext_resource path="res://scenes/ui/images/buttonDown.png" type="Texture" id=8]
-[ext_resource path="res://scenes/ui/images/buttonUp.png" type="Texture" id=9]
-
-
-
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -54,100 +45,9 @@ shader/shading_mode = 0
 shader_param/border = ExtResource( 3 )
 shader_param/border_width = 8.0
 
-[sub_resource type="StyleBoxTexture" id=3]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 4 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=4]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 6 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=5]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 7 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=6]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 8 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxEmpty" id=7]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxTexture" id=8]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 9 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
 [node name="InterfaceMenu" type="Control"]
 
+visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -163,7 +63,6 @@ script/script = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="."]
 
-visibility/visible = false
 material/material = SubResource( 2 )
 anchor/left = 3
 anchor/top = 3
@@ -177,7 +76,6 @@ margin/left = -110.0
 margin/top = -40.0
 margin/right = -880.0
 margin/bottom = -510.0
-custom_styles/panel = SubResource( 3 )
 
 [node name="SensitivityLabel" type="Label" parent="Panel"]
 
@@ -204,9 +102,6 @@ margin/left = 380.0
 margin/top = 40.0
 margin/right = 690.0
 margin/bottom = 64.0
-custom_icons/grabber_hilite = ExtResource( 5 )
-custom_icons/grabber = ExtResource( 5 )
-custom_styles/slider = SubResource( 4 )
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -381,14 +276,6 @@ margin/left = 300.0
 margin/top = 390.0
 margin/right = 480.0
 margin/bottom = 421.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

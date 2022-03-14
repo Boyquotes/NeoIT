@@ -78,7 +78,8 @@ func _on_color_changed(value):
 	var color = Color(
 	    get_node("Panel/TabContainer/Colors/Red").get_value(),
 	    get_node("Panel/TabContainer/Colors/Green").get_value(),
-	    get_node("Panel/TabContainer/Colors/Blue").get_value()
+	    get_node("Panel/TabContainer/Colors/Blue").get_value(),
+	    255
 	)
 	
 	emit_signal("color_changed", idx, color)

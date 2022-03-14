@@ -1,15 +1,8 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/PauseMenu.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/images/border.png" type="Texture" id=3]
-[ext_resource path="res://scenes/ui/images/borderCenter.png" type="Texture" id=4]
-[ext_resource path="res://scenes/ui/images/buttonOver.png" type="Texture" id=5]
-[ext_resource path="res://scenes/ui/images/buttonDown.png" type="Texture" id=6]
-[ext_resource path="res://scenes/ui/images/buttonUp.png" type="Texture" id=7]
-
-
-
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -52,83 +45,9 @@ shader/shading_mode = 0
 shader_param/border = ExtResource( 3 )
 shader_param/border_width = 8.0
 
-[sub_resource type="StyleBoxTexture" id=3]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 4 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=4]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 5 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=5]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 6 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxEmpty" id=6]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxTexture" id=7]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 7 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
 [node name="PauseMenu" type="Control"]
 
+visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -144,7 +63,6 @@ script/script = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="."]
 
-visibility/visible = false
 material/material = SubResource( 2 )
 anchor/left = 3
 anchor/top = 3
@@ -158,7 +76,6 @@ margin/left = -360.0
 margin/top = -110.0
 margin/right = -630.0
 margin/bottom = -440.0
-custom_styles/panel = SubResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 
@@ -185,15 +102,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 210.0
-margin/bottom = 28.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+margin/bottom = 34.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -207,17 +116,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 60.0
+margin/top = 66.0
 margin/right = 210.0
-margin/bottom = 88.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+margin/bottom = 100.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -231,17 +132,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 120.0
+margin/top = 132.0
 margin/right = 210.0
-margin/bottom = 148.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+margin/bottom = 166.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -255,17 +148,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 180.0
+margin/top = 198.0
 margin/right = 210.0
-margin/bottom = 208.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+margin/bottom = 232.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -279,17 +164,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 240.0
+margin/top = 264.0
 margin/right = 210.0
-margin/bottom = 268.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+margin/bottom = 298.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

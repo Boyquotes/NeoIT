@@ -1,72 +1,8 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/CharacterSelectScreen.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/images/backdrop2.png" type="Texture" id=3]
-[ext_resource path="res://scenes/ui/images/buttonOver.png" type="Texture" id=4]
-[ext_resource path="res://scenes/ui/images/buttonDown.png" type="Texture" id=5]
-[ext_resource path="res://scenes/ui/images/buttonUp.png" type="Texture" id=6]
-
-
-
-
-[sub_resource type="StyleBoxTexture" id=1]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 4 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=2]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 5 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxEmpty" id=3]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxTexture" id=4]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 6 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
 
 [node name="CharacterSelectScreen" type="Control"]
 
@@ -126,10 +62,6 @@ margin/left = 60.0
 margin/top = 40.0
 margin/right = 240.0
 margin/bottom = 71.0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -148,10 +80,6 @@ margin/left = -740.0
 margin/top = 40.0
 margin/right = -920.0
 margin/bottom = 71.0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -170,10 +98,6 @@ margin/left = 60.0
 margin/top = -490.0
 margin/right = 240.0
 margin/bottom = -521.0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -191,10 +115,6 @@ margin/left = 420.0
 margin/top = 530.0
 margin/right = 600.0
 margin/bottom = 561.0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -215,10 +135,6 @@ margin/left = -740.0
 margin/top = -490.0
 margin/right = -920.0
 margin/bottom = -521.0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

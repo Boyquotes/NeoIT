@@ -1,16 +1,9 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/NewAccountScreen.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/images/backdrop1.png" type="Texture" id=3]
 [ext_resource path="res://scenes/ui/images/startscreen.png" type="Texture" id=4]
-[ext_resource path="res://scenes/ui/images/borderCenter.png" type="Texture" id=5]
-[ext_resource path="res://scenes/ui/images/buttonOver.png" type="Texture" id=6]
-[ext_resource path="res://scenes/ui/images/buttonDown.png" type="Texture" id=7]
-[ext_resource path="res://scenes/ui/images/buttonUp.png" type="Texture" id=8]
-
-
-
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -19,81 +12,6 @@ content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 texture = ExtResource( 4 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=2]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 5 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=3]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 6 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=4]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 7 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxEmpty" id=5]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxTexture" id=6]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 8 )
 margin/left = 0.0
 margin/right = 0.0
 margin/top = 0.0
@@ -175,7 +93,7 @@ size_flags/vertical = 0
 margin/left = 50.0
 margin/top = 100.0
 margin/right = 165.0
-margin/bottom = 125.0
+margin/bottom = 128.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "USERNAME"
 percent_visible = 1.0
@@ -192,7 +110,6 @@ margin/left = 320.0
 margin/top = 100.0
 margin/right = 500.0
 margin/bottom = 125.0
-custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -207,7 +124,7 @@ size_flags/vertical = 0
 margin/left = 50.0
 margin/top = 140.0
 margin/right = 165.0
-margin/bottom = 165.0
+margin/bottom = 168.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "PASSWORD"
 percent_visible = 1.0
@@ -224,7 +141,6 @@ margin/left = 320.0
 margin/top = 140.0
 margin/right = 500.0
 margin/bottom = 165.0
-custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 secret = true
 focus_mode = 2
@@ -240,7 +156,7 @@ size_flags/vertical = 0
 margin/left = 50.0
 margin/top = 180.0
 margin/right = 253.0
-margin/bottom = 205.0
+margin/bottom = 208.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "CONFIRM_PASSWORD"
 percent_visible = 1.0
@@ -257,7 +173,6 @@ margin/left = 320.0
 margin/top = 180.0
 margin/right = 500.0
 margin/bottom = 205.0
-custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 secret = true
 focus_mode = 2
@@ -273,7 +188,7 @@ size_flags/vertical = 0
 margin/left = 50.0
 margin/top = 220.0
 margin/right = 111.0
-margin/bottom = 245.0
+margin/bottom = 248.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "EMAIL"
 percent_visible = 1.0
@@ -290,7 +205,6 @@ margin/left = 320.0
 margin/top = 220.0
 margin/right = 500.0
 margin/bottom = 245.0
-custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -305,7 +219,7 @@ size_flags/vertical = 0
 margin/left = 50.0
 margin/top = 260.0
 margin/right = 150.0
-margin/bottom = 285.0
+margin/bottom = 288.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "QUESTION"
 percent_visible = 1.0
@@ -322,7 +236,6 @@ margin/left = 320.0
 margin/top = 260.0
 margin/right = 500.0
 margin/bottom = 285.0
-custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -337,7 +250,7 @@ size_flags/vertical = 0
 margin/left = 50.0
 margin/top = 300.0
 margin/right = 150.0
-margin/bottom = 325.0
+margin/bottom = 328.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "ANSWER"
 percent_visible = 1.0
@@ -354,7 +267,6 @@ margin/left = 320.0
 margin/top = 300.0
 margin/right = 500.0
 margin/bottom = 325.0
-custom_styles/normal = SubResource( 2 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -372,10 +284,6 @@ margin/left = 50.0
 margin/top = 80.0
 margin/right = 230.0
 margin/bottom = 49.0
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -400,10 +308,6 @@ margin/left = 290.0
 margin/top = 80.0
 margin/right = 110.0
 margin/bottom = 49.0
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )

@@ -1,17 +1,8 @@
-[gd_scene load_steps=20 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/CharacterEditScreen.gd" type="Script" id=2]
 [ext_resource path="res://scenes/ui/images/startscreen.png" type="Texture" id=3]
-[ext_resource path="res://scenes/ui/images/buttonUp.png" type="Texture" id=4]
-[ext_resource path="res://scenes/ui/images/buttonDown.png" type="Texture" id=5]
-[ext_resource path="res://scenes/ui/images/grabberUp.png" type="Texture" id=6]
-[ext_resource path="res://scenes/ui/images/slider.png" type="Texture" id=7]
-[ext_resource path="res://scenes/ui/images/borderCenter.png" type="Texture" id=8]
-[ext_resource path="res://scenes/ui/images/buttonOver.png" type="Texture" id=9]
-
-
-
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -20,139 +11,6 @@ content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
 texture = ExtResource( 3 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=2]
-
-content_margin/left = 8.0
-content_margin/right = 8.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 4 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=3]
-
-content_margin/left = 8.0
-content_margin/right = 8.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 5 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxEmpty" id=4]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxTexture" id=5]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 7 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=6]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 8 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=7]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 9 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxTexture" id=8]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 5 )
-margin/left = 0.0
-margin/right = 0.0
-margin/top = 0.0
-margin/bottom = 0.0
-expand_margin/left = 0.0
-expand_margin/right = 0.0
-expand_margin/top = 0.0
-expand_margin/bottom = 0.0
-draw_center = true
-
-[sub_resource type="StyleBoxEmpty" id=9]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
-[sub_resource type="StyleBoxTexture" id=10]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-texture = ExtResource( 4 )
 margin/left = 0.0
 margin/right = 0.0
 margin/top = 0.0
@@ -203,9 +61,6 @@ margin/left = 20.0
 margin/top = 30.0
 margin/right = 20.0
 margin/bottom = 110.0
-custom_styles/tab_fg = SubResource( 2 )
-custom_styles/tab_bg = SubResource( 3 )
-custom_styles/panel = SubResource( 4 )
 custom_colors/font_color_bg = Color( 0, 0, 0, 1 )
 custom_colors/font_color_fg = Color( 0, 0, 0, 1 )
 tab_align = 1
@@ -213,7 +68,6 @@ tabs_visible = true
 
 [node name="Body" type="Control" parent="Panel/TabContainer"]
 
-visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -221,7 +75,7 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 28.0
+margin/top = 36.0
 margin/right = 0.0
 margin/bottom = 0.0
 
@@ -234,7 +88,7 @@ size_flags/vertical = 0
 margin/left = 16.0
 margin/top = 315.0
 margin/right = 84.0
-margin/bottom = 340.0
+margin/bottom = 343.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "SIZE"
 percent_visible = 1.0
@@ -251,9 +105,6 @@ margin/left = 140.0
 margin/top = 315.0
 margin/right = 450.0
 margin/bottom = 339.0
-custom_icons/grabber_hilite = ExtResource( 6 )
-custom_icons/grabber = ExtResource( 6 )
-custom_styles/slider = SubResource( 5 )
 range/min = 0.25
 range/max = 1.5
 range/step = 0.01
@@ -274,7 +125,7 @@ size_flags/vertical = 0
 margin/left = 260.0
 margin/top = 355.0
 margin/right = 320.0
-margin/bottom = 380.0
+margin/bottom = 383.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "1"
 align = 1
@@ -343,7 +194,7 @@ size_flags/vertical = 2
 margin/left = 140.0
 margin/top = 215.0
 margin/right = 450.0
-margin/bottom = 246.0
+margin/bottom = 249.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -501,10 +352,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 14.0
-margin/right = 0.0
-margin/bottom = 0.0
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
 
 [node name="TailMarkingsLabel" type="Label" parent="Panel/TabContainer/Markings"]
 
@@ -613,16 +464,17 @@ items = [  ]
 
 [node name="Colors" type="Control" parent="Panel/TabContainer"]
 
+visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 14.0
-margin/right = 0.0
-margin/bottom = 0.0
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
 
 [node name="RedLabel" type="Label" parent="Panel/TabContainer/Colors"]
 
@@ -651,11 +503,8 @@ margin/left = 130.0
 margin/top = 65.0
 margin/right = 450.0
 margin/bottom = 89.0
-custom_icons/grabber_hilite = ExtResource( 6 )
-custom_icons/grabber = ExtResource( 6 )
-custom_styles/slider = SubResource( 5 )
 range/min = 0.0
-range/max = 100.0
+range/max = 255.0
 range/step = 1.0
 range/page = 0.0
 range/value = 0.0
@@ -692,11 +541,8 @@ margin/left = 130.0
 margin/top = 115.0
 margin/right = 450.0
 margin/bottom = 139.0
-custom_icons/grabber_hilite = ExtResource( 6 )
-custom_icons/grabber = ExtResource( 6 )
-custom_styles/slider = SubResource( 5 )
 range/min = 0.0
-range/max = 100.0
+range/max = 255.0
 range/step = 1.0
 range/page = 0.0
 range/value = 0.0
@@ -733,11 +579,8 @@ margin/left = 130.0
 margin/top = 165.0
 margin/right = 450.0
 margin/bottom = 189.0
-custom_icons/grabber_hilite = ExtResource( 6 )
-custom_icons/grabber = ExtResource( 6 )
-custom_styles/slider = SubResource( 5 )
 range/min = 0.0
-range/max = 100.0
+range/max = 255.0
 range/step = 1.0
 range/page = 0.0
 range/value = 0.0
@@ -764,6 +607,22 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="RGBDisplay" type="LineEdit" parent="Panel/TabContainer/Colors"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 126.0
+margin/top = 218.0
+margin/right = 270.0
+margin/bottom = 246.0
+text = "0,0,0,255"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
 [node name="ColorType" type="OptionButton" parent="Panel/TabContainer/Colors"]
 
 focus/ignore_mouse = false
@@ -777,30 +636,11 @@ margin/bottom = 49.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Item 0"
+text = "PELT"
 flat = false
 align = 0
 selected = 0
 items = [ "PELT", null, false, -1, null, "UNDERFUR", null, false, -1, null, "NOSE", null, false, -1, null, "ABOVE_EYES", null, false, -1, null, "BELOW_EYES", null, false, -1, null, "EARS", null, false, -1, null, "TAIL_TIP", null, false, -1, null, "EYES", null, false, -1, null ]
-
-[node name="RGBDisplay" type="LineEdit" parent="Panel/TabContainer/Colors"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 130.0
-margin/top = 215.0
-margin/right = 260.0
-margin/bottom = 240.0
-custom_styles/read_only = SubResource( 6 )
-custom_styles/normal = SubResource( 6 )
-text = "0,0,0,1"
-placeholder/alpha = 0.6
-editable = false
-focus_mode = 2
-caret/caret_blink = false
-caret/caret_blink_speed = 0.65
 
 [node name="Save" type="Control" parent="Panel/TabContainer"]
 
@@ -811,10 +651,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 14.0
-margin/right = 0.0
-margin/bottom = 0.0
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
 
 [node name="NameLabel" type="Label" parent="Panel/TabContainer/Save"]
 
@@ -843,7 +683,6 @@ margin/left = 140.0
 margin/top = 20.0
 margin/right = 440.0
 margin/bottom = 45.0
-custom_styles/normal = SubResource( 6 )
 placeholder/alpha = 0.6
 focus_mode = 2
 caret/caret_blink = false
@@ -859,10 +698,6 @@ margin/left = 140.0
 margin/top = 80.0
 margin/right = 360.0
 margin/bottom = 120.0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 9 )
-custom_styles/normal = SubResource( 10 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -883,10 +718,6 @@ margin/left = 140.0
 margin/top = 130.0
 margin/right = 360.0
 margin/bottom = 170.0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 9 )
-custom_styles/normal = SubResource( 10 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -910,10 +741,6 @@ margin/left = 160.0
 margin/top = 80.0
 margin/right = 160.0
 margin/bottom = 40.0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 9 )
-custom_styles/normal = SubResource( 10 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
