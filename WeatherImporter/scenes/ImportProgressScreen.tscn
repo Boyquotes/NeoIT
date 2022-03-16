@@ -3,7 +3,6 @@
 [ext_resource path="res://themes/Default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ImportProgressScreen.gd" type="Script" id=2]
 
-
 [node name="ImportProgressScreen" type="Control"]
 
 focus/ignore_mouse = false
@@ -25,10 +24,11 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 1020.0
-margin/bottom = 25.0
+margin/right = 1022.0
+margin/bottom = 40.0
 text = "IMPORT_PROGRESS"
 align = 1
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -39,10 +39,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 240.0
-margin/top = 280.0
-margin/right = 790.0
-margin/bottom = 308.0
+margin/left = 310.0
+margin/top = 270.0
+margin/right = 750.0
+margin/bottom = 296.0
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -52,18 +52,18 @@ range/exp_edit = false
 range/rounded = false
 percent/visible = true
 
-[node name="Progress" type="Label" parent="."]
+[node name="StatusLabel" type="Label" parent="."]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 240.0
-margin/top = 310.0
-margin/right = 790.0
-margin/bottom = 335.0
-text = "INITIALIZING"
+margin/left = 310.0
+margin/top = 300.0
+margin/right = 750.0
+margin/bottom = 330.0
 align = 1
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
