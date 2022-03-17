@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/WeatherFolderSelectScreen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ImportProgressScreen.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node"]
 
 script/script = ExtResource( 1 )
 
 [node name="WeatherFolderSelectScreen" parent="." instance=ExtResource( 2 )]
+
+[node name="ImportProgressScreen" parent="." instance=ExtResource( 3 )]
+
+visibility/visible = false
 
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
 
@@ -23,6 +28,12 @@ margin/bottom = 580.0
 popup/exclusive = false
 window/title = "Error"
 dialog/hide_on_ok = true
+
+[connection signal="begin_step" from="." to="." method="_on_Main_begin_step" flags=3]
+
+[connection signal="end_step" from="." to="." method="_on_Main_end_step" flags=3]
+
+[connection signal="import_complete" from="." to="." method="_on_Main_import_complete" flags=3]
 
 [connection signal="next" from="WeatherFolderSelectScreen" to="." method="_on_WeatherFolderSelectScreen_next"]
 
