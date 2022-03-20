@@ -2461,7 +2461,6 @@
         },
         {
             "mesh":"shrub",
-            "material":"shrubMat",
             "instances":[
                 {
                     "rot":[

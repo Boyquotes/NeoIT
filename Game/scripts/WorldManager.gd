@@ -147,7 +147,7 @@ func initialize():
 			
 			if particle:
 				logger.log_info("Loaded particle system '" + file + "'.")
-				particles[file.replace(".scn", "").replace(".tscn", "")] = particle
+				particles[file.replace(".scn", "").replace(".tscn", "").replace(".converted", "")] = particle
 				
 			else:
 				logger.log_error("Failed to load particle system '" + file + "'.")
