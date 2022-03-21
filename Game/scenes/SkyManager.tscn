@@ -1,24 +1,202 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://scripts/SkyManager.gd" type="Script" id=1]
-[ext_resource path="res://addons/Logger/Logger.gd" type="Script" id=2]
-[ext_resource path="res://addons/Logger/icon.png" type="Texture" id=3]
-[ext_resource path="res://meshes/scenery/sky_sphere.scn" type="PackedScene" id=4]
+[ext_resource path="res://meshes/scenery/images/skyTex.jpg" type="Texture" id=2]
+[ext_resource path="res://meshes/scenery/images/cloudTex.jpg" type="Texture" id=3]
+[ext_resource path="res://addons/Logger/Logger.gd" type="Script" id=4]
+[ext_resource path="res://addons/Logger/icon.png" type="Texture" id=5]
+[ext_resource path="res://meshes/scenery/sky_sphere.scn" type="PackedScene" id=6]
+[ext_resource path="res://meshes/scenery/cloud_sphere.scn" type="PackedScene" id=7]
+[ext_resource path="res://meshes/scenery/sun.scn" type="PackedScene" id=8]
+[ext_resource path="res://meshes/scenery/moon.scn" type="PackedScene" id=9]
+
+[sub_resource type="MaterialShader" id=1]
+
+_code = {
+"fragment": "uniform vec3 sky_color;
+uniform texture base;
+
+DIFFUSE = tex(base, UV).rgb * sky_color;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = true
+flags/unshaded = true
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = false
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 1.18597e-31
+shader/shader = SubResource( 1 )
+shader_param/sky_color = Vector3( 1, 1, 1 )
+shader_param/base = ExtResource( 2 )
+
+[sub_resource type="MaterialShader" id=3]
+
+_code = {
+"fragment": "uniform texture base;
+
+DIFFUSE = tex(base, UV).rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="ShaderMaterial" id=4]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = true
+flags/unshaded = true
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = false
+params/blend_mode = 1
+params/depth_draw = 1
+params/line_width = 0.0
+shader/shader = SubResource( 3 )
+shader_param/base = ExtResource( 3 )
+
+[sub_resource type="Animation" id=5]
+
+resource/name = "day-night-cycle"
+length = 60.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("CelestialPivot:transform/rotation")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 60 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 359 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CelestialPivot/SunLight:params/enabled")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 30 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CelestialPivot/MoonLight:params/enabled")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0, 30 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [node name="SkyManager" type="Spatial"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 1 )
+sky_mat = SubResource( 2 )
+cloud_mat = SubResource( 4 )
 
 [node name="Logger" type="Node" parent="."]
 
-script/script = ExtResource( 2 )
+script/script = ExtResource( 4 )
 __meta__ = {
-"_editor_icon": ExtResource( 3 )
+"_editor_icon": ExtResource( 5 )
 }
 
-[node name="SkySphere" parent="." instance=ExtResource( 4 )]
+[node name="SkySphere" parent="." instance=ExtResource( 6 )]
 
 transform/local = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
+
+[node name="CloudSphere" parent="." instance=ExtResource( 7 )]
+
+transform/local = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
+
+[node name="CelestialPivot" type="Spatial" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( -0.999962, -0.0087264, 0, 0.0087264, -0.999962, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="SunSprite" parent="CelestialPivot" instance=ExtResource( 8 )]
+
+transform/local = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 90, 0, 0 )
+
+[node name="MoonSprite" parent="CelestialPivot" instance=ExtResource( 9 )]
+
+transform/local = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, -90, 0, 0 )
+
+[node name="SunLight" type="DirectionalLight" parent="CelestialPivot"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 90, 0, 0 )
+layers = 1
+params/enabled = false
+params/editor_only = false
+params/bake_mode = 0
+params/energy = 1.0
+colors/diffuse = Color( 1, 1, 0.8, 1 )
+colors/specular = Color( 1, 1, 0.8, 1 )
+shadow/shadow = false
+shadow/darkening = 0.0
+shadow/z_offset = 0.05
+shadow/z_slope_scale = 0.0
+shadow/esm_multiplier = 60.0
+shadow/blur_passes = 1.0
+projector = null
+operator = 0
+shadow/mode = 0
+shadow/max_distance = 0.0
+shadow/split_weight = 0.5
+shadow/zoffset_scale = 2.0
+
+[node name="MoonLight" type="DirectionalLight" parent="CelestialPivot"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -90, 0, 0 )
+layers = 1
+params/enabled = true
+params/editor_only = false
+params/bake_mode = 0
+params/energy = 1.0
+colors/diffuse = Color( 0.25098, 0.25098, 0.25098, 1 )
+colors/specular = Color( 0.25098, 0.25098, 0.25098, 1 )
+shadow/shadow = false
+shadow/darkening = 0.0
+shadow/z_offset = 0.05
+shadow/z_slope_scale = 0.0
+shadow/esm_multiplier = 60.0
+shadow/blur_passes = 1.0
+projector = null
+operator = 0
+shadow/mode = 0
+shadow/max_distance = 0.0
+shadow/split_weight = 0.5
+shadow/zoffset_scale = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/day-night-cycle = SubResource( 5 )
+playback/active = true
+playback/speed = 0.04
+blend_times = [  ]
+autoplay = "day-night-cycle"
 
 
