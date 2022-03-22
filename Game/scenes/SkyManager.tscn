@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://scripts/SkyManager.gd" type="Script" id=1]
 [ext_resource path="res://meshes/scenery/images/skyTex.jpg" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://meshes/scenery/cloud_sphere.scn" type="PackedScene" id=7]
 [ext_resource path="res://meshes/scenery/sun.scn" type="PackedScene" id=8]
 [ext_resource path="res://meshes/scenery/moon.scn" type="PackedScene" id=9]
+[ext_resource path="res://audio/sfx/SampleLibrary.tres" type="SampleLibrary" id=10]
 
 [sub_resource type="MaterialShader" id=1]
 
@@ -111,6 +112,7 @@ _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 1 )
 sky_mat = SubResource( 2 )
 cloud_mat = SubResource( 4 )
+weather = ""
 
 [node name="Logger" type="Node" parent="."]
 
@@ -130,7 +132,6 @@ transform/local = Transform( 100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0 )
 [node name="CelestialPivot" type="Spatial" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( -0.999962, -0.0087264, 0, 0.0087264, -0.999962, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="SunSprite" parent="CelestialPivot" instance=ExtResource( 8 )]
 
@@ -145,7 +146,7 @@ transform/local = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, -90, 0, 0 )
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 90, 0, 0 )
 layers = 1
-params/enabled = false
+params/enabled = true
 params/editor_only = false
 params/bake_mode = 0
 params/energy = 1.0
@@ -169,7 +170,7 @@ shadow/zoffset_scale = 2.0
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -90, 0, 0 )
 layers = 1
-params/enabled = true
+params/enabled = false
 params/editor_only = false
 params/bake_mode = 0
 params/energy = 1.0
@@ -188,7 +189,7 @@ shadow/max_distance = 0.0
 shadow/split_weight = 0.5
 shadow/zoffset_scale = 2.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="DayNightPlayer" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
@@ -198,5 +199,32 @@ playback/active = true
 playback/speed = 0.04
 blend_times = [  ]
 autoplay = "day-night-cycle"
+
+[node name="WeatherCyclePlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="SamplePlayer" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = ExtResource( 10 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
 

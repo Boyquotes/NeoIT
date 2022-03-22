@@ -253,4 +253,6 @@ volume = 1.0
 
 [node name="SkyManager" parent="." instance=ExtResource( 40 )]
 
+weather = ""
+
 

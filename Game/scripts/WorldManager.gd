@@ -196,6 +196,8 @@ func initialize():
 	else:
 		logger.log_warning("No user particle system folder detected.")
 		
+	#Pass particle lib reference to sky manager
+	get_node("SkyManager").particles = particles
 	return true
 	
 	
