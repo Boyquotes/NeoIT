@@ -23,10 +23,6 @@ var spawn_pos = Vector3()
 
 
 func _ready():
-	pass
-	
-
-func initialize():
 	#Enumerate all official meshes
 	dir.open("res://meshes/scenery")
 	dir.list_dir_begin()

@@ -2,11 +2,11 @@ extends Node
 
 
 func _ready():
-	#Initialize world manager
-	get_node("WorldManager").initialize()
-	
 	#Turn on event processing
 	set_process_unhandled_input(true)
+	
+	#Set target FPS
+	OS.set_target_fps(30)
 	
 	
 func _unhandled_input(event):

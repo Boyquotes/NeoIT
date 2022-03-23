@@ -113,6 +113,7 @@ script/script = ExtResource( 1 )
 sky_mat = SubResource( 2 )
 cloud_mat = SubResource( 4 )
 weather = ""
+sky_color = Vector3( 0.8, 0.8, 0.8 )
 
 [node name="Logger" type="Node" parent="."]
 
