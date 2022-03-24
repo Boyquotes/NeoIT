@@ -407,76 +407,76 @@
     "weather":{
         "Slowsnow":{
             "particle":"Slowsnow",
-            "sound":"",
-            "pos":[
-                -400,
-                700,
-                -600
-            ]
+            "offset":[
+                -4,
+                7,
+                -6
+            ],
+            "sound":""
         },
         "Fireworks":{
             "particle":"Fireworks",
-            "sound":"",
-            "pos":[
-                -1000,
-                500,
-                -1000
-            ]
+            "offset":[
+                -10,
+                5,
+                -10
+            ],
+            "sound":""
         },
         "Limelight":{
             "particle":"Limelight",
-            "sound":"#",
-            "pos":[
+            "offset":[
                 0,
                 0,
                 0
-            ]
+            ],
+            "sound":"#"
         },
         "Snow":{
             "particle":"Snow",
-            "sound":"",
-            "pos":[
-                -400,
-                700,
-                -600
-            ]
+            "offset":[
+                -4,
+                7,
+                -6
+            ],
+            "sound":""
         },
         "Petals":{
             "particle":"Petals",
-            "sound":"common_f1.mp3",
-            "pos":[
+            "offset":[
                 0,
                 0,
                 0,
                 0
-            ]
+            ],
+            "sound":"common_f1"
         },
         "Snow2":{
             "particle":"Snow2",
-            "sound":"",
-            "pos":[
+            "offset":[
                 0,
-                600,
+                6,
                 0
-            ]
+            ],
+            "sound":""
         },
         "Starfall":{
             "particle":"Starfall",
-            "sound":"",
-            "pos":[
-                800,
-                1200,
-                1200
-            ]
+            "offset":[
+                8,
+                12,
+                12
+            ],
+            "sound":""
         },
         "Rain":{
             "particle":"Rain",
-            "sound":"rain1.wav",
-            "pos":[
+            "offset":[
                 0,
-                400,
+                4,
                 0
-            ]
+            ],
+            "sound":"rain1"
         }
     }
 }

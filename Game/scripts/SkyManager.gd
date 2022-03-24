@@ -5,9 +5,10 @@ export (ShaderMaterial) var cloud_mat
 export (String) var weather = "" setget set_weather
 export (Vector3) var sky_color = Vector3(.8, .8, .8) setget set_sky_color
 
-var weathers = null
-var user_weathers = null
+var weathers = {}
+var user_weathers = {}
 var particles = null
+var particle_offset = Vector3(0, 0, 0)
 
 onready var logger = get_node("Logger")
 
@@ -32,6 +33,7 @@ func _ready():
 		anim.set_loop(true)
 		var weather_track = anim.add_track(Animation.TYPE_VALUE)
 		anim.track_set_path(weather_track, ".:weather")
+		anim.track_set_interpolation_type(weather_track, Animation.INTERPOLATION_NEAREST)
 		var sky_color_track = anim.add_track(Animation.TYPE_VALUE)
 		anim.track_set_path(sky_color_track, ".:sky_color")
 		
@@ -39,24 +41,24 @@ func _ready():
 		for keyframe in weather_lib["cycles"][weather_cycle]:
 			anim.track_insert_key(
 			    weather_track, 
-			    keyframe["start"] if "start" in keyframe else 0,
+			    keyframe["start"] * .1 if "start" in keyframe else 0,
 			    keyframe["weather"] if "weather" in keyframe else ""
 			)
 			anim.track_insert_key(
 			    sky_color_track,
-			    keyframe["start"] * .01 if "start" in keyframe else 0,
+			    keyframe["start"] * .1 if "start" in keyframe else 0,
 			    list2color(keyframe["sky"]["shader"]) if "shader" in keyframe["sky"] else Vector3(1.0, 1.0, 1.0)
 			)
 			
 			if "end" in keyframe:
 				anim.track_insert_key(
 				    weather_track,
-				    keyframe["end"],
+				    keyframe["end"] * .1,
 				    ""
 				)
 				anim.track_insert_key(
 				    sky_color_track,
-				    keyframe["end"] * .01,
+				    keyframe["end"] * .1,
 				    Vector3(.8, .8, .8)
 				)
 			
@@ -79,6 +81,7 @@ func _ready():
 			anim.set_loop(true)
 			var weather_track = anim.add_track(Animation.TYPE_VALUE)
 			anim.track_set_path(weather_track, ".:weather")
+			anim.track_set_interpolation_type(weather_track, Animation.INTERPOLATION_NEAREST)
 			var sky_color_track = anim.add_track(Animation.TYPE_VALUE)
 			anim.track_set_path(sky_color_track, ".:sky_color")
 			
@@ -129,14 +132,21 @@ func _ready():
 func _process(delta):
 	#Move the sky and cloud domes with the camera
 	var transform = get_node("SkySphere").get_transform()
-	transform.origin = get_viewport().get_camera().get_transform().origin
+	var cam_pos = get_viewport().get_camera().get_transform().origin
+	transform.origin = cam_pos
 	get_node("SkySphere").set_transform(transform)
 	get_node("CloudSphere").set_transform(transform)
 	
 	#Move the celestial pivot too
 	transform = get_node("CelestialPivot").get_transform()
-	transform.origin = get_viewport().get_camera().get_transform().origin
+	transform.origin = cam_pos
 	get_node("CelestialPivot").set_transform(transform)
+	
+	#Move the weather particle system as well
+	if has_node("Weather"):
+		transform = get_node("Weather").get_transform()
+		transform.origin = cam_pos + particle_offset
+		get_node("Weather").set_transform(transform)
 	
 	
 func set_weather_cycle(name):
@@ -144,10 +154,51 @@ func set_weather_cycle(name):
 	
 	
 func set_weather(name):
-	return
-	
-	if name == "":
-		print("No weather.")
+	if name != weather:
+		#Stop current weather
+		if has_node("Weather"):
+			get_node("Weather").queue_free()
+			
+		get_node("SamplePlayer").stop_all()
+		
+		#Start new weather
+		var particle = null
+		
+		if name in weathers:
+			#Create new particle system
+			var particle_name = weathers[name]["particle"]
+			var offset = weathers[name]["offset"]
+			var particle = particles[particle_name].instance()
+			particle.set_name("Weather")
+			particle_offset = Vector3(
+			    offset[0], 
+			    offset[1], 
+			    offset[2]
+			)
+			add_child(particle)
+			
+			#Start new sound effect
+			get_node("SamplePlayer").play(
+			    weathers[name]["sound"])
+			
+		elif name in user_weathers:
+			#Create new particle system
+			var particle_name = user_weathers[name]["particle"]
+			var offset = user_weathers[name]["offset"]
+			var particle = particles[particle_name].instance()
+			particle.set_name("Weather")
+			particle_offset = Vector3(
+			    particle_offset[0], 
+			    particle_offset[1], 
+			    particle_offset[2]
+			)
+			add_child(particle)
+			
+			#Start new sound effect
+			get_node("SamplePlayer").play(
+			    user_weathers[name]["sound"])
+		
+	weather = name
 		
 		
 func set_sky_color(color):

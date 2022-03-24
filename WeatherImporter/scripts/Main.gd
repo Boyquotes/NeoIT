@@ -153,12 +153,12 @@ func import_weather(filename, weather):
 		#Import weather data
 		var name = section[0]
 		var particle = section[1].split("/")[1]
-		var pos = section[2].split_floats(" ")
+		var offset = parse_vec(section[2])
 		var sound = section[3] if section.size() >= 4 else ""
 		weather["weather"][name] = {
 		    "particle": particle,
-		    "pos": pos,
-		    "sound": sound
+		    "offset": offset,
+		    "sound": sound.split(".")[0]
 		}
 	
 	
@@ -227,6 +227,14 @@ func import_weather_cycle(name, filename, weather):
 func show_error(msg):
 	get_node("ErrorDialog").set_text(msg)
 	get_node("ErrorDialog").popup()
+	
+	
+func parse_vec(s):
+	var vec = s.split_floats(" ")
+	vec[0] *= .01
+	vec[1] *= .01
+	vec[2] *= .01
+	return vec
 	
 	
 func pretty_json(json):
