@@ -126,7 +126,7 @@ func _ready():
 	
 	#Enable event processing
 	set_process(true)
-	get_node("WeatherCyclePlayer").play("Rain")
+	set_weather_cycle("Rain")
 	
 	
 func _process(delta):
@@ -150,7 +150,8 @@ func _process(delta):
 	
 	
 func set_weather_cycle(name):
-	pass
+	#Play weather cycle
+	get_node("WeatherCyclePlayer").play(name)
 	
 	
 func set_weather(name):

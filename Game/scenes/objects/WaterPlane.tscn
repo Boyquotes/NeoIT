@@ -8,8 +8,8 @@
 extents = Vector3( 256, 500, 256 )
 
 [node name="WaterPlane" type="Area" groups=[
-"WaterPlanes",
 "WorldObjects",
+"WaterPlanes",
 ]]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
