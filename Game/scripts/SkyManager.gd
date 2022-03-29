@@ -41,24 +41,24 @@ func _ready():
 		for keyframe in weather_lib["cycles"][weather_cycle]:
 			anim.track_insert_key(
 			    weather_track, 
-			    keyframe["start"] * .1 if "start" in keyframe else 0,
+			    keyframe["start"] if "start" in keyframe else 0,
 			    keyframe["weather"] if "weather" in keyframe else ""
 			)
 			anim.track_insert_key(
 			    sky_color_track,
-			    keyframe["start"] * .1 if "start" in keyframe else 0,
+			    keyframe["start"] if "start" in keyframe else 0,
 			    list2color(keyframe["sky"]["shader"]) if "shader" in keyframe["sky"] else Vector3(1.0, 1.0, 1.0)
 			)
 			
 			if "end" in keyframe:
 				anim.track_insert_key(
 				    weather_track,
-				    keyframe["end"] * .1,
+				    keyframe["end"],
 				    ""
 				)
 				anim.track_insert_key(
 				    sky_color_track,
-				    keyframe["end"] * .1,
+				    keyframe["end"],
 				    Vector3(.8, .8, .8)
 				)
 			
@@ -126,7 +126,6 @@ func _ready():
 	
 	#Enable event processing
 	set_process(true)
-	set_weather_cycle("Rain")
 	
 	
 func _process(delta):
@@ -150,8 +149,13 @@ func _process(delta):
 	
 	
 func set_weather_cycle(name):
-	#Play weather cycle
-	get_node("WeatherCyclePlayer").play(name)
+	#Play or stop weather cycle
+	if name != "":
+		get_node("WeatherCyclePlayer").play(name)
+		
+	else:
+		get_node("WeatherCyclePlayer").stop_all()
+		set_weather("")
 	
 	
 func set_weather(name):

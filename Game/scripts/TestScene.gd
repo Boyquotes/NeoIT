@@ -19,6 +19,7 @@ func _unhandled_input(event):
 
 func _on_LoadButton_pressed():
 	#Load a world
+	get_node("UI/UI/Panel/LoadButton").release_focus()
 	var name = get_node("UI/UI/Panel/World").get_text()
 	
 	if not get_node("WorldManager").load_world(name):

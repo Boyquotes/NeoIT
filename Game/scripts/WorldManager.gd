@@ -8,6 +8,7 @@ export (PackedScene) var SphereWall
 export (PackedScene) var BoxWall
 export (PackedScene) var CollisionBox
 export (PackedScene) var CollisionSphere
+export (PackedScene) var Ceiling
 export (Material) var missing_mat
 export (SampleLibrary) var sfx
 
@@ -594,12 +595,58 @@ func load_map(path):
 		get_node("QueuedStreamPlayer").queue_song(load("res://audio/music/" + song + ".ogg"))
 		logger.log_info("Queued song '" + song + "' for playback.")
 	
+	#Load weather
+	if "weather" in map:
+		get_node("SkyManager").set_weather_cycle(
+		    map["weather"])
+	
+	else:
+		get_node("SkyManager").set_weather_cycle("Rain")
+	
+	#Load interior
+	if "interior" in map:
+		#Fetch interior properties
+		#Note: "color" isn't used by any of the original maps.
+		#var color = map["interior"]["color"] if map["interior"]["color"].size() == 3 else [1, 1, 1]
+		var height = map["interior"]["height"]
+		var material = map["interior"]["material"]
+		
+		#Create interior
+		var ceiling = Ceiling.instance()
+		ceiling.set_name("Ceiling")
+		ceiling.add_to_group("WorldObjects")
+		
+		#Set size and height
+		ceiling.set_scale(map_size / 2)
+		var transform = ceiling.get_transform()
+		transform.origin.y = height
+		ceiling.set_transform(transform)
+		
+		#Set material
+		if material != "":
+			for child in ceiling.get_children():
+				if child.is_type("MeshInstance"):
+					child.set_material_override(
+		    			compile_material(material))
+		
+		#Add ceiling to scene
+		add_child(ceiling)
+		
+		#Load map effect
+		if "map_effect" in map:
+			var map_effect = map["map_effect"]
+			
+			#Exhale?
+			if map_effect == "Exhale":
+				pass #<======== need to implement this
+	
 	return true
 	
 	
 func unload_map():
 	#Unload terrain and all world objects
 	get_node("TerrainSystem").unload_terrain()
+	get_node("SkyManager").set_weather_cycle("")
 	get_tree().call_group(get_tree().GROUP_CALL_DEFAULT, 
 	    "WorldObjects", "queue_free")
 	get_node("QueuedStreamPlayer").clear_queue()
