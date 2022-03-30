@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=1]
+[gd_scene load_steps=46 format=1]
 
 [ext_resource path="res://scripts/WorldManager.gd" type="Script" id=1]
 [ext_resource path="res://scenes/objects/Portal.tscn" type="PackedScene" id=2]
@@ -10,37 +10,38 @@
 [ext_resource path="res://scenes/objects/CollisionBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/objects/CollisionSphere.tscn" type="PackedScene" id=9]
 [ext_resource path="res://meshes/scenery/ceiling.scn" type="PackedScene" id=10]
-[ext_resource path="res://audio/sfx/click.smp" type="Sample" id=11]
-[ext_resource path="res://audio/sfx/draw.smp" type="Sample" id=12]
-[ext_resource path="res://audio/sfx/fireloop.smp" type="Sample" id=13]
-[ext_resource path="res://audio/sfx/ghostloop.smp" type="Sample" id=14]
-[ext_resource path="res://audio/sfx/hawkCall.smp" type="Sample" id=15]
-[ext_resource path="res://audio/sfx/healhit.smp" type="Sample" id=16]
-[ext_resource path="res://audio/sfx/hit.smp" type="Sample" id=17]
-[ext_resource path="res://audio/sfx/lava1.smp" type="Sample" id=18]
-[ext_resource path="res://audio/sfx/mantaCall.smp" type="Sample" id=19]
-[ext_resource path="res://audio/sfx/quake.smp" type="Sample" id=20]
-[ext_resource path="res://audio/sfx/rain1.smp" type="Sample" id=21]
-[ext_resource path="res://audio/sfx/roar1.smp" type="Sample" id=22]
-[ext_resource path="res://audio/sfx/roar2.smp" type="Sample" id=23]
-[ext_resource path="res://audio/sfx/run_grass.smp" type="Sample" id=24]
-[ext_resource path="res://audio/sfx/splash.smp" type="Sample" id=25]
-[ext_resource path="res://audio/sfx/thunder1.smp" type="Sample" id=26]
-[ext_resource path="res://audio/sfx/thunder2.smp" type="Sample" id=27]
-[ext_resource path="res://audio/sfx/walk_grass.smp" type="Sample" id=28]
-[ext_resource path="res://audio/sfx/water1.smp" type="Sample" id=29]
-[ext_resource path="res://audio/sfx/waterfall.smp" type="Sample" id=30]
-[ext_resource path="res://audio/sfx/waterwade.smp" type="Sample" id=31]
-[ext_resource path="res://audio/sfx/wind1.smp" type="Sample" id=32]
-[ext_resource path="res://addons/Logger/Logger.gd" type="Script" id=33]
-[ext_resource path="res://addons/Logger/icon.png" type="Texture" id=34]
-[ext_resource path="res://addons/TerrainSystem/TerrainSystem.gd" type="Script" id=35]
-[ext_resource path="res://addons/TerrainSystem/icon.png" type="Texture" id=36]
-[ext_resource path="res://addons/ThreadPool/ThreadPool.gd" type="Script" id=37]
-[ext_resource path="res://addons/ThreadPool/icon.png" type="Texture" id=38]
-[ext_resource path="res://addons/QueuedStreamPlayer/QueuedStreamPlayer.gd" type="Script" id=39]
-[ext_resource path="res://addons/QueuedStreamPlayer/icon.png" type="Texture" id=40]
-[ext_resource path="res://scenes/SkyManager.tscn" type="PackedScene" id=41]
+[ext_resource path="res://meshes/scenery/grass.msh" type="Mesh" id=11]
+[ext_resource path="res://audio/sfx/click.smp" type="Sample" id=12]
+[ext_resource path="res://audio/sfx/draw.smp" type="Sample" id=13]
+[ext_resource path="res://audio/sfx/fireloop.smp" type="Sample" id=14]
+[ext_resource path="res://audio/sfx/ghostloop.smp" type="Sample" id=15]
+[ext_resource path="res://audio/sfx/hawkCall.smp" type="Sample" id=16]
+[ext_resource path="res://audio/sfx/healhit.smp" type="Sample" id=17]
+[ext_resource path="res://audio/sfx/hit.smp" type="Sample" id=18]
+[ext_resource path="res://audio/sfx/lava1.smp" type="Sample" id=19]
+[ext_resource path="res://audio/sfx/mantaCall.smp" type="Sample" id=20]
+[ext_resource path="res://audio/sfx/quake.smp" type="Sample" id=21]
+[ext_resource path="res://audio/sfx/rain1.smp" type="Sample" id=22]
+[ext_resource path="res://audio/sfx/roar1.smp" type="Sample" id=23]
+[ext_resource path="res://audio/sfx/roar2.smp" type="Sample" id=24]
+[ext_resource path="res://audio/sfx/run_grass.smp" type="Sample" id=25]
+[ext_resource path="res://audio/sfx/splash.smp" type="Sample" id=26]
+[ext_resource path="res://audio/sfx/thunder1.smp" type="Sample" id=27]
+[ext_resource path="res://audio/sfx/thunder2.smp" type="Sample" id=28]
+[ext_resource path="res://audio/sfx/walk_grass.smp" type="Sample" id=29]
+[ext_resource path="res://audio/sfx/water1.smp" type="Sample" id=30]
+[ext_resource path="res://audio/sfx/waterfall.smp" type="Sample" id=31]
+[ext_resource path="res://audio/sfx/waterwade.smp" type="Sample" id=32]
+[ext_resource path="res://audio/sfx/wind1.smp" type="Sample" id=33]
+[ext_resource path="res://addons/Logger/Logger.gd" type="Script" id=34]
+[ext_resource path="res://addons/Logger/icon.png" type="Texture" id=35]
+[ext_resource path="res://addons/TerrainSystem/TerrainSystem.gd" type="Script" id=36]
+[ext_resource path="res://addons/TerrainSystem/icon.png" type="Texture" id=37]
+[ext_resource path="res://addons/ThreadPool/ThreadPool.gd" type="Script" id=38]
+[ext_resource path="res://addons/ThreadPool/icon.png" type="Texture" id=39]
+[ext_resource path="res://addons/QueuedStreamPlayer/QueuedStreamPlayer.gd" type="Script" id=40]
+[ext_resource path="res://addons/QueuedStreamPlayer/icon.png" type="Texture" id=41]
+[ext_resource path="res://scenes/SkyManager.tscn" type="PackedScene" id=42]
 
 [sub_resource type="MaterialShader" id=1]
 
@@ -75,133 +76,133 @@ samples/click = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 11 )
+"sample": ExtResource( 12 )
 }
 samples/draw = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 12 )
+"sample": ExtResource( 13 )
 }
 samples/fireloop = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 13 )
+"sample": ExtResource( 14 )
 }
 samples/ghostloop = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 14 )
+"sample": ExtResource( 15 )
 }
 samples/hawkCall = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 15 )
+"sample": ExtResource( 16 )
 }
 samples/healhit = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 16 )
+"sample": ExtResource( 17 )
 }
 samples/hit = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 17 )
+"sample": ExtResource( 18 )
 }
 samples/lava1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 18 )
+"sample": ExtResource( 19 )
 }
 samples/mantaCall = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 19 )
+"sample": ExtResource( 20 )
 }
 samples/quake = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 20 )
+"sample": ExtResource( 21 )
 }
 samples/rain1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 21 )
+"sample": ExtResource( 22 )
 }
 samples/roar1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 22 )
+"sample": ExtResource( 23 )
 }
 samples/roar2 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 23 )
+"sample": ExtResource( 24 )
 }
 samples/run_grass = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 24 )
+"sample": ExtResource( 25 )
 }
 samples/splash = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 25 )
+"sample": ExtResource( 26 )
 }
 samples/thunder1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 26 )
+"sample": ExtResource( 27 )
 }
 samples/thunder2 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 27 )
+"sample": ExtResource( 28 )
 }
 samples/walk_grass = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 28 )
+"sample": ExtResource( 29 )
 }
 samples/water1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 29 )
+"sample": ExtResource( 30 )
 }
 samples/waterfall = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 30 )
+"sample": ExtResource( 31 )
 }
 samples/waterwade = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 31 )
+"sample": ExtResource( 32 )
 }
 samples/wind1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 32 )
+"sample": ExtResource( 33 )
 }
 
 [node name="WorldManager" type="Spatial"]
@@ -217,42 +218,43 @@ BoxWall = ExtResource( 7 )
 CollisionBox = ExtResource( 8 )
 CollisionSphere = ExtResource( 9 )
 Ceiling = ExtResource( 10 )
+grass = ExtResource( 11 )
 missing_mat = SubResource( 2 )
 sfx = SubResource( 3 )
 
 [node name="Logger" type="Node" parent="."]
 
-script/script = ExtResource( 33 )
+script/script = ExtResource( 34 )
 __meta__ = {
-"_editor_icon": ExtResource( 34 )
+"_editor_icon": ExtResource( 35 )
 }
 
 [node name="TerrainSystem" type="Spatial" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-script/script = ExtResource( 35 )
+script/script = ExtResource( 36 )
 __meta__ = {
-"_editor_icon": ExtResource( 36 )
+"_editor_icon": ExtResource( 37 )
 }
 chunk_size = 64
 
 [node name="ThreadPool" type="Node" parent="TerrainSystem"]
 
-script/script = ExtResource( 37 )
+script/script = ExtResource( 38 )
 __meta__ = {
-"_editor_icon": ExtResource( 38 )
+"_editor_icon": ExtResource( 39 )
 }
 max_threads = 2
 
 [node name="QueuedStreamPlayer" type="Node" parent="."]
 
-script/script = ExtResource( 39 )
+script/script = ExtResource( 40 )
 __meta__ = {
-"_editor_icon": ExtResource( 40 )
+"_editor_icon": ExtResource( 41 )
 }
 loop = true
 volume = 1.0
 
-[node name="SkyManager" parent="." instance=ExtResource( 41 )]
+[node name="SkyManager" parent="." instance=ExtResource( 42 )]
 
 

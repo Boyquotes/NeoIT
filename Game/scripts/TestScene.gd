@@ -5,9 +5,6 @@ func _ready():
 	#Turn on event processing
 	set_process_unhandled_input(true)
 	
-	#Set target FPS
-	OS.set_target_fps(30)
-	
 	
 func _unhandled_input(event):
 	#Click event?

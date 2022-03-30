@@ -9,6 +9,7 @@ export (PackedScene) var BoxWall
 export (PackedScene) var CollisionBox
 export (PackedScene) var CollisionSphere
 export (PackedScene) var Ceiling
+export (Mesh) var grass
 export (Material) var missing_mat
 export (SampleLibrary) var sfx
 
@@ -632,13 +633,27 @@ func load_map(path):
 		#Add ceiling to scene
 		add_child(ceiling)
 		
-		#Load map effect
-		if "map_effect" in map:
-			var map_effect = map["map_effect"]
+	#Load map effect
+	if "map_effect" in map:
+		var map_effect = map["map_effect"]
+		
+		#Exhale?
+		if map_effect == "Exhale":
+			pass #<======== need to implement this
 			
-			#Exhale?
-			if map_effect == "Exhale":
-				pass #<======== need to implement this
+	#Load grass
+	if "grass" in map:
+		var material = map["grass"]["material"]
+		var grass_map = map["grass"]["grass_map"]
+		#var grass_color_map = map["grass"]["grass_color_map"]
+		load_grass(grass_map, material)
+		
+	#Freeze time?
+	if "freeze_time" in map:
+		pass
+		
+	else:
+		pass
 	
 	return true
 	
@@ -650,6 +665,87 @@ func unload_map():
 	get_tree().call_group(get_tree().GROUP_CALL_DEFAULT, 
 	    "WorldObjects", "queue_free")
 	get_node("QueuedStreamPlayer").clear_queue()
+	
+	
+func load_grass(grass_map, material):
+	#Load grass map
+	var tex = load("res://maps/images/" + grass_map)
+	
+	if not tex:
+		var user_map_path = OS.get_executable_path().get_base_dir() + "/user/maps"
+		tex = load(user_map_path + "/images" + grass_map)
+		
+		if not tex:
+			logger.log_error("Failed to load grass map '" + grass_map + "'.")
+			return
+			
+	var img = tex.get_data()
+	var w = img.get_width()
+	var h = img.get_height()
+			
+	#Generate grass per chunk
+	var factor = Vector2(map_size.x / w, map_size.z / h)
+	
+	for z in range(0, h, 64):
+		for x in range(0, w, 64):
+			load_grass_chunk(
+			    Vector3(x * factor.x, 0, z * factor.y),
+			    factor,
+			    img.get_rect(Rect2(x, z, 64, 64)),
+			    material
+			)
+			
+			
+func load_grass_chunk(pos, factor, grass_map, material):
+	#Create the multi-mesh for the chunk of grass
+	var multimesh = MultiMesh.new()
+	multimesh.set_mesh(grass)
+	
+	#Create a new multi-mesh instance for this chunk of
+	#grass
+	var chunk = MultiMeshInstance.new()
+	chunk.set_name("GrassChunk")
+	chunk.add_to_group("WorldObjects")
+	chunk.set_multimesh(multimesh)
+	var transform = chunk.get_transform()
+	transform.origin = pos
+	chunk.set_transform(transform)
+	
+	#Generate grass
+	var inst_cnt = 0
+	
+	for z in range(64):
+		for x in range(64):
+			#Fetch grass density value
+			var density = int(grass_map.get_pixel(x, z).r * 4)
+			
+			#Use density to determine if we will generate a
+			#clump of grass or not
+			if density == 0 or randi() % density == 0:
+				continue
+				
+			#Generate a clump of grass
+			multimesh.set_instance_count(inst_cnt + 1)
+			transform = multimesh.get_instance_transform(
+			    inst_cnt)
+			transform.origin = Vector3(x * factor.x, 0,
+			    z * factor.y)
+			transform.origin.y = get_node("TerrainSystem").get_height(
+			    pos.x + transform.origin.x, 
+			    pos.z + transform.origin.z
+			)
+			multimesh.set_instance_transform(inst_cnt, 
+			    transform)
+			inst_cnt += 1
+			
+	#If there are no grass clumps in this chunk, free it
+	if inst_cnt == 0:
+		chunk.free()
+		return
+	
+	#Add the grass chunk to the scene
+	multimesh.generate_aabb()
+	add_child(chunk)
 	
 	
 func compile_material(name):
