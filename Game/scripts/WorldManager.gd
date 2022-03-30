@@ -697,6 +697,10 @@ func load_grass(grass_map, material):
 			
 			
 func load_grass_chunk(pos, factor, grass_map, material):
+	#Compile material
+	var mat = compile_material(material)
+	mat.set_flag(Material.FLAG_DOUBLE_SIDED, true)
+	
 	#Create the multi-mesh for the chunk of grass
 	var multimesh = MultiMesh.new()
 	multimesh.set_mesh(grass)
@@ -707,6 +711,7 @@ func load_grass_chunk(pos, factor, grass_map, material):
 	chunk.set_name("GrassChunk")
 	chunk.add_to_group("WorldObjects")
 	chunk.set_multimesh(multimesh)
+	#chunk.set_material_override(mat)
 	var transform = chunk.get_transform()
 	transform.origin = pos
 	chunk.set_transform(transform)
@@ -717,7 +722,8 @@ func load_grass_chunk(pos, factor, grass_map, material):
 	for z in range(64):
 		for x in range(64):
 			#Fetch grass density value
-			var density = int(grass_map.get_pixel(x, z).r * 4)
+			var density = int(grass_map.get_pixel(x, z).r * 
+			    Globals.get("NeoIT/base_grass_density"))
 			
 			#Use density to determine if we will generate a
 			#clump of grass or not
@@ -852,6 +858,10 @@ func compile_material(name):
 		frag_shader += "DIFFUSE_ALPHA = col;\n"
 		
 	else:
+		frag_shader += "\nif(col.a < .5)\n"
+		frag_shader += "{\n"
+		frag_shader += "    DISCARD = true;\n"
+		frag_shader += "}\n\n"
 		frag_shader += "DIFFUSE = col.rgb;\n"
 		
 	#print("Frag source for material '" + name + "':")
