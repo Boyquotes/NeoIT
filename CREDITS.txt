@@ -1,12 +1,11 @@
 Programmers
 ===========
 DylanCheetah
+Lamina
 
 Localization
 ============
-Drake
 Lamina
-Orthodogs
 
 Original Game
 =============
