@@ -55,7 +55,7 @@ func _ready():
 	#Enumerate all user meshes
 	var user_mesh_path = OS.get_executable_path().get_base_dir() + "/user/meshes"
 	
-	if (Global.get("NeoIT/allow_custom_meshes") and 
+	if (Globals.get("NeoIT/allow_custom_meshes") and 
 	    dir.dir_exists(user_mesh_path)):
 		dir.open(user_mesh_path)
 		dir.list_dir_begin()
@@ -718,7 +718,7 @@ func load_grass_chunk(pos, factor, grass_map, material):
 	chunk.set_name("GrassChunk")
 	chunk.add_to_group("WorldObjects")
 	chunk.set_multimesh(multimesh)
-	chunk.set_material_override(mat)
+	#chunk.set_material_override(mat)
 	var transform = chunk.get_transform()
 	transform.origin = pos
 	chunk.set_transform(transform)

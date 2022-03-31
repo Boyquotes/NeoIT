@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset>
+	<contributor>
+		<author>Anonymous</author>
+		<authoring_tool>Collada Exporter for Blender 2.6+, by Juan Linietsky (juan@codenix.com)</authoring_tool>
+	</contributor>
+	<created>2022-03-31T00:50:13Z</created>
+	<modified>2022-03-31T00:50:13Z</modified>
+	<unit meter="1.0" name="meter"/>
+	<up_axis>Z_UP</up_axis>
+</asset>
+<library_images>
+	<image id="id-image-3" name="grassPatch.png">
+		<init_from>images\grassPatch.png</init_from>
+	</image>
+</library_images>
+<library_effects>
+	<effect id="id-fx-2" name="grass-fx">
+		<profile_COMMON>
+			<newparam sid="id-fx_surf-4">
+				<surface type="2D">
+					<init_from>id-image-3</init_from>
+					<format>A8R8G8B8</format>
+				</surface>
+			</newparam>
+			<newparam sid="id-fx_sampler-5">
+				<sampler2D>
+					<source>id-fx_surf-4</source>
+				</sampler2D>
+			</newparam>
+			<technique sid="common">
+				<blinn>
+					<emission>
+						<color>  0.0 0.0 0.0 1.0 </color>
+					</emission>
+					<ambient>
+						<color>  0.0 0.0 0.0 1.0 </color>
+					</ambient>
+					<diffuse>
+						<texture texture="id-fx_sampler-5" texcoord="CHANNEL1"/>
+					</diffuse>
+					<specular>
+						<color>  0.0 0.0 0.0 1.0 </color>
+					</specular>
+					<shininess>
+						<float>50</float>
+					</shininess>
+					<reflective>
+						<color>  1.0 1.0 1.0 1.0 </color>
+					</reflective>
+					<transparency>
+						<float>1.0</float>
+					</transparency>
+					<index_of_refraction>
+						<float>4.0</float>
+					</index_of_refraction>
+				</blinn>
+				<extra>
+					<technique profile="FCOLLADA">
+					</technique>
+					<technique profile="GOOGLEEARTH">
+						<double_sided>0</double_sided>
+					</technique>
+				</extra>
+			</technique>
+		</profile_COMMON>
+	</effect>
+</library_effects>
+<library_materials>
+	<material id="id-material-6" name="grass">
+		<instance_effect url="#id-fx-2"/>
+	</material>
+</library_materials>
+<library_geometries>
+	<geometry id="id-mesh-7" name="grass">
+		<mesh>
+			<source id="id-mesh-7-positions">
+				<float_array id="id-mesh-7-positions-array" count="48"> -0.9999999403953552 9.99125768430531e-05 0.0 0.9999999403953552 0.00010008741810452193 2.0 0.9999999403953552 0.00010008741810452193 0.0 0.00010014702274929732 -0.9999999403953552 5.960464477539063e-08 9.985297219827771e-05 0.9999999403953552 2.0 9.985297219827771e-05 0.9999999403953552 5.960464477539063e-08 -0.00010040929191745818 0.9999999403953552 5.960464477539063e-08 -9.959070303011686e-05 -0.9999999403953552 2.0 -9.959070303011686e-05 -0.9999999403953552 5.960464477539063e-08 0.9999999403953552 -9.982514893636107e-05 0.0 -0.9999999403953552 -0.00010017484601121396 2.0 -0.9999999403953552 -0.00010017484601121396 0.0 -0.9999999403953552 9.99125768430531e-05 2.0 0.00010014702274929732 -0.9999999403953552 2.0 -0.00010040929191745818 0.9999999403953552 2.0 0.9999999403953552 -9.982514893636107e-05 2.0</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-7-positions-array" count="16" stride="3">
+					<param name="X" type="float"/>
+					<param name="Y" type="float"/>
+					<param name="Z" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<source id="id-mesh-7-normals">
+				<float_array id="id-mesh-7-normals-array" count="48"> -8.742063783984122e-08 1.0 0.0 -8.742063783984122e-08 1.0 0.0 -8.742063783984122e-08 1.0 0.0 -1.0 -1.470252897206592e-07 0.0 -1.0 -1.470252897206592e-07 0.0 -1.0 -1.470252897206592e-07 0.0 1.0 4.092945005140791e-07 0.0 1.0 4.092945005140791e-07 0.0 1.0 4.092945005140791e-07 0.0 1.7484855163729662e-07 -1.0 0.0 1.7484855163729662e-07 -1.0 0.0 1.7484855163729662e-07 -1.0 0.0 -8.742063783984122e-08 1.0 0.0 -1.0 -1.470252897206592e-07 0.0 1.0 4.092945005140791e-07 0.0 1.7484855163729662e-07 -1.0 0.0</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-7-normals-array" count="16" stride="3">
+					<param name="X" type="float"/>
+					<param name="Y" type="float"/>
+					<param name="Z" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<source id="id-mesh-7-texcoord-0">
+				<float_array id="id-mesh-7-texcoord-0-array" count="32"> 0.0 0.0 1.0 1.0 1.0 0.0 -0.00010019540786743164 0.00010003958595916629 1.0000998973846436 0.9999000430107117 1.0000998973846436 9.997999586630613e-05 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 -0.00010019540786743164 0.9998999238014221 1.0 1.0 1.0 1.0</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-7-texcoord-0-array" count="16" stride="2">
+					<param name="S" type="float"/>
+					<param name="T" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<source id="id-mesh-7-colors">
+				<float_array id="id-mesh-7-colors-array" count="48"> 0.054901961237192154 0.054901961237192154 1.0 1.0 0.0313725508749485 0.0313725508749485 0.003921568859368563 0.003921568859368563 1.0 0.007843137718737125 0.007843137718737125 1.0 1.0 0.1764705926179886 0.1764705926179886 0.003921568859368563 0.003921568859368563 1.0 0.007843137718737125 0.007843137718737125 1.0 1.0 0.1764705926179886 0.1764705926179886 0.003921568859368563 0.003921568859368563 1.0 0.054901961237192154 0.054901961237192154 1.0 1.0 0.0313725508749485 0.0313725508749485 0.003921568859368563 0.003921568859368563 1.0 1.0 0.13725490868091583 0.13725490868091583 1.0 0.003921568859368563 0.003921568859368563 1.0 0.003921568859368563 0.003921568859368563 1.0 0.13725490868091583 0.13725490868091583</float_array>
+				<technique_common>
+				<accessor source="#id-mesh-7-colors-array" count="16" stride="3">
+					<param name="X" type="float"/>
+					<param name="Y" type="float"/>
+					<param name="Z" type="float"/>
+				</accessor>
+				</technique_common>
+			</source>
+			<vertices id="id-mesh-7-vertices">
+				<input semantic="POSITION" source="#id-mesh-7-positions"/>
+			</vertices>
+			<triangles count="8" material="id-trimat-8">
+				<input semantic="VERTEX" source="#id-mesh-7-vertices" offset="0"/>
+				<input semantic="NORMAL" source="#id-mesh-7-normals" offset="0"/>
+				<input semantic="TEXCOORD" source="#id-mesh-7-texcoord-0" offset="0" set="0"/>
+				<input semantic="COLOR" source="#id-mesh-7-colors" offset="0"/>
+				<p> 0 1 2 3 4 5 6 7 8 9 10 11 0 12 1 3 13 4 6 14 7 9 15 10 </p>
+			</triangles>
+		</mesh>
+	</geometry>
+</library_geometries>
+<library_visual_scenes>
+	<visual_scene id="id-scene-1" name="scene">
+		<node id="grass" name="grass" type="NODE">
+			<matrix sid="transform"> 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 1.0  </matrix>
+			<instance_geometry url="#id-mesh-7">
+				<bind_material>
+					<technique_common>
+						<instance_material symbol="id-trimat-8" target="#id-material-6"/>
+					</technique_common>
+				</bind_material>
+			</instance_geometry>
+		</node>
+	</visual_scene>
+</library_visual_scenes>
+<scene>
+	<instance_visual_scene url="#id-scene-1" />
+</scene>
+</COLLADA>
