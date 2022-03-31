@@ -68,7 +68,10 @@ func _ready():
 	#Load user weather
 	var user_maps_path = OS.get_executable_path().get_base_dir() + "/user/maps"
 	
-	if not file.open(user_maps_path + "/weather.json", File.READ):
+	if file.open(user_maps_path + "/weather.json", File.READ):
+		logger.log_warning("Failed to load user weather.")
+		
+	elif Globals.get("NeoIT/allow_custom_weather"):
 		weather_lib = {}
 		weather_lib.parse_json(file.get_as_text())
 		file.close()
@@ -112,9 +115,6 @@ func _ready():
 				
 			#Add animation to player
 			get_node("WeatherCyclePlayer").add_animation(weather_cycle, anim)
-		
-	else:
-		logger.log_warning("Failed to load user weather.")
 		
 	#Set materials
 	get_node("SkySphere/sky_sphere").set_material_override(sky_mat)

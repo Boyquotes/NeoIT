@@ -55,7 +55,8 @@ func _ready():
 	#Enumerate all user meshes
 	var user_mesh_path = OS.get_executable_path().get_base_dir() + "/user/meshes"
 	
-	if dir.dir_exists(user_mesh_path):
+	if (Global.get("NeoIT/allow_custom_meshes") and 
+	    dir.dir_exists(user_mesh_path)):
 		dir.open(user_mesh_path)
 		dir.list_dir_begin()
 		file = dir.get_next()
@@ -115,7 +116,7 @@ func _ready():
 	if file.open(user_mtl_path, File.READ):
 		logger.log_warning("Failed to load user material library.")
 		
-	else:
+	elif Globals.get("NeoIT/allow_custom_materials"):
 		#Load user material data
 		mtl_data = file.get_as_text()
 		file.close()
@@ -158,7 +159,8 @@ func _ready():
 	#Enumerate all user particle systems
 	var user_particle_dir = OS.get_executable_path().get_base_dir() + "/user/particles"
 	
-	if dir.dir_exists(user_particle_dir):
+	if (Globals.get("NeoIT/allow_custom_particles") and 
+	    dir.dir_exists(user_particle_dir)):
 		dir.open(user_particle_dir)
 		dir.list_dir_begin()
 		var file = dir.get_next()
@@ -202,6 +204,11 @@ func _ready():
 func load_world(name):
 	#Try to load official map first
 	if not load_map("res://maps/" + name + ".json"):
+		#Are custom maps allowed?
+		if not Globals.get("NeoIT/allow_custom_maps"):
+			return false
+			
+		#Try to load custom map
 		var path = OS.get_executable_path().get_base_dir()
 		path += "/user/maps/" + name + ".json"
 		return load_map(path)
@@ -711,7 +718,7 @@ func load_grass_chunk(pos, factor, grass_map, material):
 	chunk.set_name("GrassChunk")
 	chunk.add_to_group("WorldObjects")
 	chunk.set_multimesh(multimesh)
-	#chunk.set_material_override(mat)
+	chunk.set_material_override(mat)
 	var transform = chunk.get_transform()
 	transform.origin = pos
 	chunk.set_transform(transform)
