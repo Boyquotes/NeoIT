@@ -56,7 +56,7 @@ DIFFUSE = tex(TEXTURE, UV).rgb;",
 "vertex_ofs": 0
 }
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=2]
 
 flags/visible = true
 flags/double_sided = false
@@ -70,7 +70,7 @@ params/depth_draw = 1
 params/line_width = 0.0
 shader/shader = SubResource( 1 )
 
-[sub_resource type="SampleLibrary" id=6]
+[sub_resource type="SampleLibrary" id=3]
 
 samples/click = {
 "db": 0.0,
@@ -219,8 +219,8 @@ CollisionBox = ExtResource( 8 )
 CollisionSphere = ExtResource( 9 )
 Ceiling = ExtResource( 10 )
 grass = ExtResource( 11 )
-missing_mat = SubResource( 5 )
-sfx = SubResource( 6 )
+missing_mat = SubResource( 2 )
+sfx = SubResource( 3 )
 
 [node name="Logger" type="Node" parent="."]
 

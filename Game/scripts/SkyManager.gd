@@ -1,7 +1,6 @@
 extends Spatial
 
 export (ShaderMaterial) var sky_mat
-export (ShaderMaterial) var cloud_mat
 export (String) var weather = "" setget set_weather
 export (Vector3) var sky_color = Vector3(.8, .8, .8) setget set_sky_color
 
@@ -118,23 +117,17 @@ func _ready():
 		
 	#Set materials
 	get_node("SkySphere/sky_sphere").set_material_override(sky_mat)
-	get_node("CloudSphere/cloud_sphere").set_material_override(cloud_mat)
-	
-	#Turn on billboard mode for the sun
-	get_node("CelestialPivot/SunSprite/sun").set("geometry/billboard", true)
-	get_node("CelestialPivot/MoonSprite/moon").set("geometry/billboard", true)
 	
 	#Enable event processing
 	set_process(true)
 	
 	
 func _process(delta):
-	#Move the sky and cloud domes with the camera
+	#Move the sky dome with the camera
 	var transform = get_node("SkySphere").get_transform()
 	var cam_pos = get_viewport().get_camera().get_transform().origin
 	transform.origin = cam_pos
 	get_node("SkySphere").set_transform(transform)
-	get_node("CloudSphere").set_transform(transform)
 	
 	#Move the celestial pivot too
 	transform = get_node("CelestialPivot").get_transform()
@@ -154,7 +147,7 @@ func set_weather_cycle(name):
 		get_node("WeatherCyclePlayer").play(name)
 		
 	else:
-		get_node("WeatherCyclePlayer").stop_all()
+		get_node("WeatherCyclePlayer").stop()
 		set_weather("")
 	
 	
@@ -208,6 +201,28 @@ func set_weather(name):
 		
 func set_sky_color(color):
 	sky_mat.set_shader_param("sky_color", color)
+	
+	
+func freeze_time(time, weather = true):
+	#Freeze time of day progression
+	var progress_factor = time / 7000
+	get_node("DayNightPlayer").stop(false)
+	get_node("DayNightPlayer").seek(60 * progress_factor)
+	
+	#Freeze weather time progression
+	if weather:
+		get_node("WeatherCyclePlayer").stop(false)
+		get_node("WeatherCyclePlayer").seek(
+		    7000 * progress_factor)
+	
+	
+func unfreeze_time(weather = true):
+	#Unfreeze time of day progression
+	get_node("DayNightPlayer").play()
+	
+	#Unfreeze weather time progression
+	if weather:
+		get_node("WeatherCyclePlayer").play()
 		
 		
 func list2color(list):

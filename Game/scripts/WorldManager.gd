@@ -657,10 +657,11 @@ func load_map(path):
 		
 	#Freeze time?
 	if "freeze_time" in map:
-		pass
+		var time = map["freeze_time"]
+		get_node("SkyManager").freeze_time(time)
 		
 	else:
-		pass
+		get_node("SkyManager").unfreeze_time()
 	
 	return true
 	
