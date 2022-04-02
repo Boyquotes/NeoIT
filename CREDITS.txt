@@ -1,11 +1,24 @@
 Programmers
 ===========
-DylanCheetah
-Lamina
+DylanCheetah (client-side code)
+Lamina (server-side code)
+
+Meshes
+======
+DylanCheetah (new sky sphere and various mesh improvements)
+
+Textures
+========
+DylanCheetah (specular maps)
+
+Audio
+=====
+gumbydragon (new ambient music)
 
 Localization
 ============
-Lamina
+Elote (Spanish)
+Lamina (German)
 
 Original Game
 =============
