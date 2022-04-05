@@ -1,0 +1,22 @@
+[gd_resource type="MaterialShader" format=1]
+
+[resource]
+
+_code = {
+"fragment": "uniform texture base;
+
+vec4 col = tex(base, UV);
+
+if(col.a < .5)
+{
+    DISCARD = true;
+}
+
+DIFFUSE = col.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
