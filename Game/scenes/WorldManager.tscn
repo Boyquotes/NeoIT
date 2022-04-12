@@ -39,9 +39,9 @@
 [ext_resource path="res://addons/TerrainSystem/icon.png" type="Texture" id=37]
 [ext_resource path="res://addons/ThreadPool/ThreadPool.gd" type="Script" id=38]
 [ext_resource path="res://addons/ThreadPool/icon.png" type="Texture" id=39]
-[ext_resource path="res://addons/QueuedStreamPlayer/QueuedStreamPlayer.gd" type="Script" id=40]
-[ext_resource path="res://addons/QueuedStreamPlayer/icon.png" type="Texture" id=41]
-[ext_resource path="res://scenes/SkyManager.tscn" type="PackedScene" id=42]
+[ext_resource path="res://scenes/SkyManager.tscn" type="PackedScene" id=40]
+[ext_resource path="res://addons/QueuedStreamPlayer/QueuedStreamPlayer.gd" type="Script" id=41]
+[ext_resource path="res://addons/QueuedStreamPlayer/icon.png" type="Texture" id=42]
 
 [sub_resource type="MaterialShader" id=1]
 
@@ -246,15 +246,15 @@ __meta__ = {
 }
 max_threads = 2
 
+[node name="SkyManager" parent="." instance=ExtResource( 40 )]
+
 [node name="QueuedStreamPlayer" type="Node" parent="."]
 
-script/script = ExtResource( 40 )
+script/script = ExtResource( 41 )
 __meta__ = {
-"_editor_icon": ExtResource( 41 )
+"_editor_icon": ExtResource( 42 )
 }
 loop = true
 volume = 1.0
-
-[node name="SkyManager" parent="." instance=ExtResource( 42 )]
 
 

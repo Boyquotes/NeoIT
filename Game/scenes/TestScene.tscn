@@ -4,7 +4,7 @@
 [ext_resource path="res://addons/FlyCam/FlyCam.gd" type="Script" id=2]
 [ext_resource path="res://addons/FlyCam/icon.png" type="Texture" id=3]
 [ext_resource path="res://scenes/WorldManager.tscn" type="PackedScene" id=4]
-[ext_resource path="res://meshes/scenery/grass.msh" type="Mesh" id=5]
+[ext_resource path="res://scenes/characters/Critter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://themes/Default.tres" type="Theme" id=6]
 
 [sub_resource type="Environment" id=1]
@@ -62,7 +62,7 @@ transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0 )
 projection = 0
 fov = 45.0
 near = 0.1
-far = 100.0
+far = 200.0
 keep_aspect = 1
 current = true
 visible_layers = 1048575
@@ -78,7 +78,10 @@ rot = Vector3( 0, -135, 0 )
 
 [node name="WorldManager" parent="." instance=ExtResource( 4 )]
 
-grass = ExtResource( 5 )
+[node name="Critter" parent="." instance=ExtResource( 5 )]
+
+transform/local = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 20, 1500, 20 )
+jump_strength = 64
 
 [node name="UI" type="CanvasLayer" parent="."]
 
