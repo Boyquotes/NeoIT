@@ -7,11 +7,28 @@ func _ready():
 	
 
 func _fixed_process(delta):
+	stop()
+	var direction = Vector3()
+	
 	if Input.is_action_pressed("move_forward"):
-		velocity.z = 8
+		direction.z = 1
 		
-	else:
-		velocity.z = 0
+	elif Input.is_action_pressed("move_backward"):
+		direction.z = -1
+		
+	if Input.is_action_pressed("move_left"):
+		direction.x = 1
+		
+	elif Input.is_action_pressed("move_right"):
+		direction.x = -1
+		
+	walk(direction)
+		
+	if Input.is_action_pressed("turn_left"):
+		turn(false)
+		
+	elif Input.is_action_pressed("turn_right"):
+		turn(true)
 		
 	if Input.is_action_pressed("move_up"):
 		jump()

@@ -5,7 +5,7 @@
 
 [sub_resource type="BoxShape" id=1]
 
-extents = Vector3( 2.76525, 15.4697, 10.5166 )
+extents = Vector3( 0.782779, 3.94054, 2.59126 )
 
 [node name="Critter" type="KinematicBody"]
 
@@ -14,7 +14,7 @@ input/ray_pickable = true
 input/capture_on_drag = false
 shape_count = 1
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.5231, 0 )
+shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.00132, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -26,14 +26,21 @@ collision/margin = 0.001
 script/script = ExtResource( 1 )
 gravity = 8
 mass = 128
+walk_speed = 8
+run_speed = 16
+turn_speed = 2
 jump_strength = 64
+max_hp = 500
+is_invincible = false
 
 [node name="giraffe" parent="." instance=ExtResource( 2 )]
+
+transform/local = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.5231, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.00132, 0 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0

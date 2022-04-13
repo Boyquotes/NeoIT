@@ -24,7 +24,7 @@ func _fixed_process(delta):
 	#Handle collision
 	if is_colliding():
 		#Slide along collision vector
-		move(remainder.slide(get_collision_normal()) * delta)
+		set_translation(get_translation() + remainder.slide(get_collision_normal()) * delta)
 		
 		#Nullify next gravity update and emit 
 		#collision signal
