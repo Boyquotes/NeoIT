@@ -1119,13 +1119,5 @@
                 
             }
         ]
-    },
-	"yellowGrass":{
-	    "texture_units":[
-		    {
-			    "texture":"grassYellow.png",
-				"type":"base"
-			}
-		]
-	}
+    }
 }

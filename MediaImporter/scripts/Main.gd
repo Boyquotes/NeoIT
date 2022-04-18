@@ -1,38 +1,72 @@
 extends Node
 
-signal start_step(message)
+signal begin_step(msg)
 signal end_step
 signal import_complete
 
+enum ImportState {
+    IMPORT_MAPS,
+    IMPORT_WEATHER,
+    IMPORT_CONFIG
+}
+
 var dir = Directory.new()
+var worker_thread
 
 
 func _ready():
 	pass
 
 
-func _on_TerrainFolderSelectScreen_next(old_folder, new_folder):
-	#Verify that both folders exist
-	if old_folder == "" or new_folder == "":
+func _on_MediaFolderSelectScreen_next(old_dir, new_dir):
+	#Validate params
+	if old_dir == "" or not dir.dir_exists(old_dir):
+		get_node("ErrorDialog").set_text(tr("OLD_MEDIA_DIRECTORY_MUST_EXIST"))
+		get_node("ErrorDialog").popup()
 		return
 		
-	if not dir.dir_exists(old_folder):
-		show_error(tr("THE_DIRECTORY") + " '" + old_folder + 
-		    "' " + tr("DOES_NOT_EXIST") + ".")
+	if new_dir == "" or not dir.dir_exists(new_dir):
+		get_node("ErrorDialog").set_text(tr("NEW_MEDIA_DIRECTORY_MUST_EXIST"))
+		get_node("ErrorDialog").popup()
 		return
 		
-	if not dir.dir_exists(new_folder):
-		show_error(tr("THE_DIRECTORY") + " '" + new_folder + 
-		    "' " + tr("DOES_NOT_EXIST") + ".")
-		return
+	#Import maps
+	#import_maps(old_dir, new_dir)
+	#import_weather(old_dir, new_dir)
+	import_config_files(old_dir, new_dir)
 		
-	#print("Old Folder: " + old_folder)
-	#print("New Folder: " + new_folder)
+		
+func _on_Main_begin_step(msg):
+	get_node("ImportProgressScreen").begin_step(msg)
+
+
+func _on_Main_end_step():
+	get_node("ImportProgressScreen").end_step()
 	
+	
+func _on_Main_import_complete(old_dir, new_dir):
+	#Get current state and decide what to do next
+	var state = worker_thread.wait_to_finish()
+	
+	if state == IMPORT_MAPS:
+		#Import weather data next
+		import_weather_data(old_dir, new_dir)
+		
+	elif state == IMPORT_WEATHER:
+		#Import config files
+		import_config_files(old_dir, new_dir)
+		
+	elif state == IMPORT_CONFIG:
+		#Switch back to media folder select screen
+		get_node("ImportProgressScreen").hide()
+		get_node("MediaFolderSelectScreen").show()
+		
+		
+func import_maps(old_dir, new_dir):
 	#Enumerate maps
 	var folders = []
 	var maps = []
-	dir.open(old_folder)
+	dir.open(old_dir + "/terrains")
 	dir.list_dir_begin()
 	var file = dir.get_next()
 	
@@ -57,90 +91,74 @@ func _on_TerrainFolderSelectScreen_next(old_folder, new_folder):
 	#print(str(maps.size()) + " maps enumerated")
 	
 	#Switch to import progress screen
-	get_node("TerrainFolderSelectScreen").hide()
+	get_node("MediaFolderSelectScreen").hide()
 	get_node("ImportProgressScreen").show()
 	get_node("ImportProgressScreen").initialize(
 	    maps.size() + 2)
 	
 	#Start map import thread
-	var thread = Thread.new()
-	thread.start(self, "import_maps_thread", 
-	    [old_folder, new_folder, folders, maps])
-	#import_maps_thread([old_folder, new_folder, folders, maps])
-	
-	
-func _on_Main_start_step(message):
-	get_node("ImportProgressScreen").start_step(message)
-
-
-func _on_Main_end_step():
-	get_node("ImportProgressScreen").end_step()
-	
-	
-func _on_Main_import_complete():
-	#Switch back to terrain folder selection
-	get_node("ImportProgressScreen").hide()
-	get_node("TerrainFolderSelectScreen").show()
-	
-	
-func show_error(message):
-	#Set error message and display error dialog
-	get_node("ErrorDialog").set_text(message)
-	get_node("ErrorDialog").popup()
+	worker_thread = Thread.new()
+	worker_thread.start(self, "import_maps_thread", 
+	    [old_dir, new_dir, folders, maps])
+	#import_maps_thread([old_dir, new_dir, folders, maps])
 	
 	
 func import_maps_thread(data):
-	#Create images folder
-	var old_folder = data[0]
-	var new_folder = data[1]
+	#Create map and image folders
+	var old_dir = data[0]
+	var new_dir = data[1]
 	var folders = data[2]
 	var maps = data[3]
-	dir.make_dir(new_folder + "/images")
+	dir.make_dir_recursive(new_dir + "/maps/images")
 	
 	#Copy images
-	emit_signal("start_step", tr("COPYING_IMAGES"))
+	call_deferred("emit_signal", "begin_step", 
+	    tr("COPYING_IMAGES"))
 	
 	for folder in folders:
 		copy_images(
-		    old_folder + "/" + folder,
-		    new_folder + "/images"
+		    old_dir + "/terrains/" + folder,
+		    new_dir + "/maps/images"
 		)
 		
-	emit_signal("end_step")
+	call_deferred("emit_signal", "end_step")
 	
 	#Convert materials
-	emit_signal("start_step", tr("IMPORTING_MATERIALS"))
+	call_deferred("emit_signal", "begin_step", 
+	    tr("IMPORTING_MATERIALS"))
 	var material_lib = {}
 	
 	for folder in folders:
-		import_materials(old_folder + "/" + folder, 
+		import_materials(old_dir + "/terrains/" + folder, 
 		    material_lib)
 	
 	var matlib_file = File.new()
 	
-	if matlib_file.open(new_folder + "/materials.json",
+	if matlib_file.open(new_dir + "/maps/materials.json",
 	    File.WRITE):
-		print(tr("FAILED_TO_SAVE") + " '" + new_folder + 
-		    "/materials.json'.")
+		print(tr("FAILED_TO_SAVE") + " '" + new_dir + 
+		    "/maps/materials.json'.")
 		return
 		
 	matlib_file.store_string(
 	    pretty_json(material_lib.to_json()))
 	matlib_file.close()
-	emit_signal("end_step")
+	call_deferred("emit_signal", "end_step")
 	
 	#Import each map
 	for map in maps:
-		emit_signal("start_step", 
+		call_deferred("emit_signal", "begin_step", 
 		    tr("IMPORTING_MAP") + " '" + map + "'...")
 		import_map(
-		    old_folder + "/" + map, 
-		    new_folder
+		    old_dir + "/terrains/" + map, 
+		    new_dir + "/maps"
 		)
-		emit_signal("end_step")
+		call_deferred("emit_signal", "end_step")
 		
 	#Send import complete signal
-	emit_signal("import_complete")
+	call_deferred("emit_signal", "import_complete", old_dir,
+	    new_dir)
+	return IMPORT_MAPS
 		
 		
 func copy_images(src, dest):
@@ -306,17 +324,17 @@ func parse_texture_unit(file, texture_unit):
 			return
 	
 	
-func import_map(old_folder, new_folder):
+func import_map(old_dir, new_dir):
 	#Import world file
-	var world_file = old_folder.get_file() + ".world"
+	var world_file = old_dir.get_file() + ".world"
 	print(tr("IMPORTING_WORLD") + " '" + world_file + "'...")
-	import_world(old_folder, new_folder, world_file)
+	import_world(old_dir, new_dir, world_file)
 	
 	
-func import_world(old_folder, new_folder, name):
+func import_world(old_dir, new_dir, name):
 	#Try to open the world file
 	var world_file = File.new()
-	var filename = old_folder + "/" + name
+	var filename = old_dir + "/" + name
 	
 	if world_file.open(filename, File.READ):
 		print(tr("FAILED_TO_OPEN") + " '" + filename + "'.")
@@ -359,7 +377,7 @@ func import_world(old_folder, new_folder, name):
 		if section[0] == "Initialize":
 			var cfg_file = section[1]
 			var spawn_pos = parse_vec(section[4])
-			import_terrain(old_folder + "/" + cfg_file, 
+			import_terrain(old_dir + "/" + cfg_file, 
 			    new_world)
 			new_world["spawn_pos"] = spawn_pos
 			
@@ -566,7 +584,7 @@ func import_world(old_folder, new_folder, name):
 		    section[0] == "FloatingBushes" or
 		    section[0] == "NewFloatingBushes"):
 			var name = section[1]
-			import_foliage(old_folder + "/" + name, new_world)
+			import_foliage(old_dir + "/" + name, new_world)
 			
 		#Collision box section
 		elif section[0] == "CollBox":
@@ -591,7 +609,7 @@ func import_world(old_folder, new_folder, name):
 		#Spawn critters section
 		elif section[0] == "SpawnCritters":
 			var name = section[1]
-			import_critters(old_folder + "/" + name, new_world)
+			import_critters(old_dir + "/" + name, new_world)
 			
 		#Freeze time section
 		elif section[0] == "FreezeTime":
@@ -614,7 +632,7 @@ func import_world(old_folder, new_folder, name):
 		
 	#Save new map file
 	var map_file = File.new()
-	filename = (new_folder + "/" + 
+	filename = (new_dir + "/" + 
 	    name.replace(".world", ".json"))
 	
 	if map_file.open(filename, File.WRITE):
@@ -789,6 +807,395 @@ func import_critters(name, world):
 	world["critters"] = critters
 	
 	
+func import_weather_data(old_dir, new_dir):
+	#Enumerate weather cycles
+	var file = File.new()
+	
+	if file.open(old_dir + "/weather/WeatherCycles.cfg", 
+	    File.READ):
+		show_error(tr("WEATHER_CYCLE_FILE_NOT_FOUND"))
+		return
+		
+	var cycles = file.get_as_text().split("[")
+	file.close()
+	
+	#Enumerate custom weather cycles
+	if not file.open(old_dir + "/weather/CustomWeatherCycles.cfg", 
+	    File.READ):
+		cycles.append_array(file.get_as_text().split("["))
+		
+	else:
+		print("Failed to load custom weather cycles.")
+		
+	file.close()
+		
+	#Remove trash from weather cycles array
+	var i = 0
+	
+	while i < cycles.size():
+		if cycles[i] == "":
+			cycles.remove(i)
+			continue
+			
+		i += 1
+		
+	#Initialize and switch to progress screen
+	get_node("ImportProgressScreen").initialize(cycles.size() + 1)
+	get_node("MediaFolderSelectScreen").hide()
+	get_node("ImportProgressScreen").show()
+	
+	#Start weather import thread
+	worker_thread = Thread.new()
+	worker_thread.start(self, "import_weather_thread", 
+	    [old_dir, new_dir, cycles])
+	#import_weather_thread([old_dir, new_dir, cycles])
+	
+	
+func import_weather_thread(data):
+	var old_dir = data[0]
+	var new_dir = data[1]
+	var cycles = data[2]
+	
+	#Import weather config file
+	call_deferred("emit_signal", "begin_step", 
+	    tr("IMPORTING_WEATHER"))
+	var weather = {
+	    "weather": {},
+	    "cycles": {}
+	}
+	import_weather(old_dir + "/weather/Weathers.cfg", 
+	    weather)
+	call_deferred("emit_signal", "end_step")
+	
+	#Import custom weather config file
+	call_deferred("emit_signal", "begin_step", 
+	    tr("IMPORTING_CUSTOM_WEATHER"))
+	import_weather(old_dir + "/weather/CustomWeathers.cfg", 
+	    weather)
+	call_deferred("emit_signal", "end_step")
+	
+	#Import weather cycles here
+	for cycle in cycles:
+		cycle = cycle.split("\n")
+		cycle[0] = cycle[0].replace("]", "")
+		call_deferred("emit_signal", "begin_step", 
+		    tr("IMPORTING_WEATHER_CYCLE") + " '" + cycle[0] +
+		    "'...")
+		import_weather_cycle(cycle[0], 
+		    old_dir + "/weather/" + cycle[1], weather)
+		emit_signal("end_step")
+		
+	#Save weather file
+	var file = File.new()
+	
+	if file.open(new_dir + "/maps/weather.json", File.WRITE):
+		print(tr("FAILED_TO_SAVE") + " '" + new_dir + 
+		    "/weather.json'.")
+		return
+		
+	file.store_string(pretty_json(weather.to_json()))
+	file.close()
+	
+	#Emit import complete signal
+	call_deferred("emit_signal", "import_complete", old_dir,
+	    new_dir)
+	return IMPORT_WEATHER
+	
+	
+func import_weather(filename, weather):
+	#Load weather data
+	var file = File.new()
+	
+	if file.open(filename, File.READ):
+		print(tr("FAILED_TO_IMPORT_WEATHER") + " '" + 
+		    filename + "'.")
+		return
+		
+	var sections = file.get_as_text().split("[")
+	file.close()
+	
+	#Parse weather data
+	for section in sections:
+		#Skip empty sections
+		if section == "":
+			continue
+		
+		#Split section into lines
+		section = section.replace("\r\n", "\n").split("\n")
+		section[0] = section[0].replace("]", "")
+		
+		#Import weather data
+		var name = section[0]
+		var particle = section[1].split("/")[1]
+		var offset = parse_weather_vec(section[2])
+		var sound = section[3] if section.size() >= 4 else ""
+		weather["weather"][name] = {
+		    "particle": particle,
+		    "offset": offset,
+		    "sound": sound.split(".")[0]
+		}
+	
+	
+func import_weather_cycle(name, filename, weather):
+	#Load weather cycle data
+	var file = File.new()
+	
+	if file.open(filename, File.READ):
+		print(tr("FAILED_TO_IMPORT_WEATHER_CYCLE") + " '" +
+		    filename + "'.")
+		return
+		
+	var sections = file.get_as_text().split("[")
+	file.close()
+	
+	#Parse weather cycle data
+	var cycle = []
+	
+	for section in sections:
+		#Skip empty sections
+		if section == "":
+			continue
+			
+		#Split section into lines
+		section = section.replace("\r\n", "\n").split("\n")
+		section[0] = section[0].replace("]", "")
+		
+		#Import weather cycle data
+		var phase = {
+		    "sky": {}
+		}
+		
+		for item in section:
+			#Separate key and value
+			item = item.split("=")
+			
+			#Start time?
+			if item[0] == "Start":
+				phase["start"] = int(item[1])
+				
+			#End time?
+			elif item[0] == "End":
+				phase["end"] = int(item[1])
+				
+			#Sky shader?
+			elif item[0] == "SkyShader":
+				phase["sky"]["shader"] = item[1].split_floats(" ")
+				
+			#Sky adder?
+			elif item[0] == "SkyAdder":
+				phase["sky"]["adder"] = item[1].split_floats(" ")
+				
+			#Weather?
+			elif item[0] == "Weather":
+				phase["weather"] = item[1]
+				
+			#Rate?
+			elif item[0] == "Rate":
+				phase["rate"] = int(item[1])
+				
+		cycle.append(phase)
+		
+	weather["cycles"][name] = cycle
+	
+	
+func import_config_files(old_dir, new_dir):
+	#Initialze progress screen
+	get_node("MediaFolderSelectScreen").hide()
+	get_node("ImportProgressScreen").show()
+	get_node("ImportProgressScreen").initialize(7)
+	
+	#Start config file import thread
+	#worker_thread = Thread.new()
+	#worker_thread.start(self, "import_config_files_thread",
+	#    [old_dir, new_dir])
+	import_config_files_thread([old_dir, new_dir])
+	
+	
+func import_config_files_thread(data):
+	#Create config folder
+	var old_dir = data[0]
+	var new_dir = data[1]
+	dir.make_dir(new_dir + "/config")
+	
+	#Locate config files
+	var ad1 = old_dir + "/../static/client/ad1-unencrypted.dat"
+	var cd1 = old_dir + "/../static/client/cd1-unencrypted.dat"
+	var cd2 = old_dir + "/../static/client/cd2-unencrypted.dat"
+	var cfg_dir = old_dir + "/../static/client/config/windows"
+	
+	if not dir.dir_exists(cfg_dir):
+		cfg_dir = old_dir + "/../static/client"
+		
+	var hotkeys = cfg_dir + "/Hotkeys.cfg"
+	var items = cfg_dir + "/Items.cfg"
+	var settings = cfg_dir + "/Settings.cfg"
+	var unit_emotes = cfg_dir + "/UnitEmotes.cfg"
+	
+	#Repair ad1, cd1, and cd2 to comply with cfg file standards
+	call_deferred("emit_signal", "begin_step", tr("IMPORTING_AD1"))
+	repair_cfg(ad1, new_dir + "/config/abilities.cfg")
+	call_deferred("emit_signal", "end_step")
+	
+	call_deferred("emit_signal", "begin_step", tr("IMPORTING_CD1"))
+	repair_cfg(cd1, new_dir + "/config/critter-defs.cfg")
+	call_deferred("emit_signal", "end_step")
+	
+	call_deferred("emit_signal", "begin_step", tr("IMPORTING_CD2"))
+	repair_cfg(cd2, new_dir + "/config/critter-spawns.cfg")
+	call_deferred("emit_signal", "end_step")
+	
+	#Emit import complete signal
+	call_deferred("emit_signal", "import_complete", old_dir,
+	    new_dir)
+	return IMPORT_CONFIG
+	
+	
+func repair_cfg(old_cfg, new_cfg):
+	#Open malformed cfg file
+	var file = File.new()
+	
+	if file.open(old_cfg, File.READ):
+		print("Failed to open config file '" + old_cfg + "'.")
+		return
+		
+	#Load sections
+	var sections = file.get_as_text().split("[")
+	file.close()
+	
+	#Repair malformed data
+	var cfg_file = ConfigFile.new()
+	
+	for section in sections:
+		#Skip empty sections
+		if section == "":
+			continue
+			
+		#Separate section into lines and repair it
+		var lines = section.replace("\r\n", "\n").split("\n")
+		var name = "Default"
+		
+		for line in lines:
+			#Section header?
+			if line.ends_with("]"):
+				name = line.replace("]", "")
+				continue
+				
+			#Separate key and value
+			var item = line.split("=")
+			var key = item[0].to_lower()
+			var value = item[1] if item.size() > 1 else "true"
+			
+			#Ignore empty keys
+			if key == "":
+				continue
+				
+			#Is this a duplicate key?
+			var data = null
+			
+			if cfg_file.has_section_key(name, key):
+				data = cfg_file.get_value(name, key)
+				
+				#Convert the data to a list if needed
+				if typeof(data) != TYPE_ARRAY:
+					data = [data]
+				
+			
+			#List value?
+			if "," in value:
+				var list = parse_list(value)
+				
+				if data != null:
+					#Nested list?
+					if typeof(data[0]) != TYPE_ARRAY:
+						data = [data]
+					
+					data.push_back(list)
+					cfg_file.set_value(name, key, data)
+					
+				else:
+					cfg_file.set_value(name, key, list)
+				
+			#Vector value?
+			elif " " in value and is_digit(value[0]):
+				var vec = value.split_floats(" ")
+				
+				if data != null:
+					data.push_back(
+					    Vector3(vec[0], vec[1], vec[2]))
+					cfg_file.set_value(name, key, data)
+					
+				else:
+					cfg_file.set_value(name, key, 
+					    Vector3(vec[0], vec[1], vec[2]))
+				
+			#Boolean value?
+			elif value == "true" or value == "false":
+				if data != null:
+					data.push_back(name, key, value == "true")
+					cfg_file.set_value(name, key, data)
+					
+				else:
+					cfg_file.set_value(name, key, value == "true")
+				
+			#Integer value?
+			elif value.is_valid_integer():
+				if data != null:
+					data.push_back(name, key, int(value))
+					cfg_file.set_value(name, key, data)
+					
+				else:
+					cfg_file.set_value(name, key, int(value))
+				
+			#Float value?
+			elif value.is_valid_float():
+				if data != null:
+					data.push_back(name, key, float(value))
+					cfg_file.set_value(name, key, data)
+					
+				else:
+					cfg_file.set_value(name, key, float(value))
+				
+			#String value?
+			else:
+				if data != null:
+					data.push_back(name, key, value)
+					cfg_file.set_value(name, key, data)
+					
+				else:
+					cfg_file.set_value(name, key, value)
+				
+	cfg_file.save(new_cfg)
+	
+	
+func parse_list(s):
+	#Split at each comma
+	var list = Array(s.split(","))
+	
+	#Process each item
+	for i in range(list.size()):
+		#Get next item
+		var item = list[i]
+		
+		#Vector?
+		if " " in item and is_digit(item[0]):
+			var vec = item.split_floats(" ")
+			list[i] = Vector3(vec[0], vec[1], vec[2])
+			
+		#Boolean?
+		elif item == "true" or item == "false":
+			list[i] = (item == "true")
+			
+		#Integer?
+		elif item.is_valid_integer():
+			list[i] = int(item)
+			
+		#Float?
+		elif item.is_valid_float():
+			list[i] = float(item)
+			
+	return list
+	
+	
 func parse_vec(text, apply_factor=true):
 	var parts = text.split(" ")
 	var vec = []
@@ -797,6 +1204,18 @@ func parse_vec(text, apply_factor=true):
 		vec.append(float(part) * (.1 if apply_factor else 1))
 		
 	return vec
+	
+	
+func parse_weather_vec(s):
+	var vec = s.split_floats(" ")
+	vec[0] *= .01
+	vec[1] *= .01
+	vec[2] *= .01
+	return vec
+	
+	
+func is_digit(s):
+	return s in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 	
 	
 func pretty_json(json):
