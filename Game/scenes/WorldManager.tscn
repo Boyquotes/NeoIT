@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=1]
+[gd_scene load_steps=47 format=1]
 
 [ext_resource path="res://scripts/WorldManager.gd" type="Script" id=1]
 [ext_resource path="res://scenes/objects/Portal.tscn" type="PackedScene" id=2]
@@ -40,8 +40,9 @@
 [ext_resource path="res://addons/ThreadPool/ThreadPool.gd" type="Script" id=38]
 [ext_resource path="res://addons/ThreadPool/icon.png" type="Texture" id=39]
 [ext_resource path="res://scenes/SkyManager.tscn" type="PackedScene" id=40]
-[ext_resource path="res://addons/QueuedStreamPlayer/QueuedStreamPlayer.gd" type="Script" id=41]
-[ext_resource path="res://addons/QueuedStreamPlayer/icon.png" type="Texture" id=42]
+[ext_resource path="res://scenes/characters/CritterManager.tscn" type="PackedScene" id=41]
+[ext_resource path="res://addons/QueuedStreamPlayer/QueuedStreamPlayer.gd" type="Script" id=42]
+[ext_resource path="res://addons/QueuedStreamPlayer/icon.png" type="Texture" id=43]
 
 [sub_resource type="MaterialShader" id=1]
 
@@ -248,11 +249,13 @@ max_threads = 2
 
 [node name="SkyManager" parent="." instance=ExtResource( 40 )]
 
+[node name="CritterManager" parent="." instance=ExtResource( 41 )]
+
 [node name="QueuedStreamPlayer" type="Node" parent="."]
 
-script/script = ExtResource( 41 )
+script/script = ExtResource( 42 )
 __meta__ = {
-"_editor_icon": ExtResource( 42 )
+"_editor_icon": ExtResource( 43 )
 }
 loop = true
 volume = 1.0

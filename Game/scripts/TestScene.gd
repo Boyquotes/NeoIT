@@ -28,6 +28,13 @@ func _on_UnloadButton_pressed():
 	get_node("WorldManager").unload_world()
 	
 	
+func _on_SpawnButton_pressed():
+	#Spawn a critter
+	get_node("UI/UI/Panel/SpawnButton").release_focus()
+	var name = get_node("UI/UI/Panel/Critter").get_text()
+	get_node("WorldManager/CritterManager").spawn_critter(name, 20, 20)
+	
+	
 func show_error(msg):
 	#Display error dialog
 	get_node("UI/UI/ErrorDialog").set_text(msg)

@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scripts/TestScene.gd" type="Script" id=1]
 [ext_resource path="res://addons/FlyCam/FlyCam.gd" type="Script" id=2]
 [ext_resource path="res://addons/FlyCam/icon.png" type="Texture" id=3]
 [ext_resource path="res://scenes/WorldManager.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/characters/Critter.tscn" type="PackedScene" id=5]
-[ext_resource path="res://themes/Default.tres" type="Theme" id=6]
+[ext_resource path="res://themes/Default.tres" type="Theme" id=5]
 
 [sub_resource type="Environment" id=1]
 
@@ -64,7 +63,7 @@ fov = 45.0
 near = 0.1
 far = 200.0
 keep_aspect = 1
-current = false
+current = true
 visible_layers = 1048575
 environment = SubResource( 1 )
 h_offset = 0.0
@@ -77,27 +76,6 @@ speed = 8
 rot = Vector3( 0, -135, 0 )
 
 [node name="WorldManager" parent="." instance=ExtResource( 4 )]
-
-[node name="Critter" parent="." instance=ExtResource( 5 )]
-
-transform/local = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 20, 1500, 20 )
-max_hp = 500
-is_invincible = false
-
-[node name="Camera" type="Camera" parent="Critter"]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( -1, -4.08288e-08, -3.3104e-07, -1.22486e-07, 0.96809, 0.250605, 3.10245e-07, 0.250605, -0.96809, 1.33514e-05, 7.30164, -7.13049 )
-projection = 0
-fov = 45.0
-near = 0.1
-far = 100.0
-keep_aspect = 1
-current = true
-visible_layers = 1048575
-environment = SubResource( 1 )
-h_offset = 0.0
-v_offset = 0.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -112,7 +90,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = ExtResource( 6 )
+theme/theme = ExtResource( 5 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
@@ -127,7 +105,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 280.0
-margin/bottom = 110.0
+margin/bottom = 160.0
 
 [node name="World" type="LineEdit" parent="UI/UI/Panel"]
 
@@ -138,7 +116,7 @@ size_flags/vertical = 2
 margin/left = 10.0
 margin/top = 10.0
 margin/right = 190.0
-margin/bottom = 48.0
+margin/bottom = 50.0
 placeholder/text = "World"
 placeholder/alpha = 0.6
 focus_mode = 2
@@ -177,6 +155,38 @@ shortcut = null
 text = "Unload"
 flat = false
 
+[node name="Critter" type="LineEdit" parent="UI/UI/Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 110.0
+margin/right = 190.0
+margin/bottom = 150.0
+placeholder/text = "Critter"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="SpawnButton" type="Button" parent="UI/UI/Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 200.0
+margin/top = 110.0
+margin/right = 260.0
+margin/bottom = 150.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Spawn"
+flat = false
+
 [node name="ErrorDialog" type="AcceptDialog" parent="UI/UI"]
 
 visibility/visible = false
@@ -195,5 +205,7 @@ dialog/hide_on_ok = true
 [connection signal="pressed" from="UI/UI/Panel/LoadButton" to="." method="_on_LoadButton_pressed"]
 
 [connection signal="pressed" from="UI/UI/Panel/UnloadButton" to="." method="_on_UnloadButton_pressed"]
+
+[connection signal="pressed" from="UI/UI/Panel/SpawnButton" to="." method="_on_SpawnButton_pressed"]
 
 

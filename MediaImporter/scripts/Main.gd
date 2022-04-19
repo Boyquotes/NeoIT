@@ -1117,7 +1117,7 @@ func repair_cfg(old_cfg, new_cfg):
 				
 			#Vector value?
 			elif " " in value and is_digit(value[0]):
-				var vec = value.split_floats(" ")
+				var vec = parse_vec(value)
 				
 				if data != null:
 					data.push_back(
@@ -1139,21 +1139,25 @@ func repair_cfg(old_cfg, new_cfg):
 				
 			#Integer value?
 			elif value.is_valid_integer():
+				var factor = .5 if key == "maxspeed" else 1
+				
 				if data != null:
-					data.push_back(name, key, int(value))
+					data.push_back(name, key, int(value) * factor)
 					cfg_file.set_value(name, key, data)
 					
 				else:
-					cfg_file.set_value(name, key, int(value))
+					cfg_file.set_value(name, key, int(value) * factor)
 				
 			#Float value?
 			elif value.is_valid_float():
+				var factor = .5 if key == "scale" or key == "maxspeed" else 1
+				
 				if data != null:
-					data.push_back(name, key, float(value))
+					data.push_back(name, key, float(value) * factor)
 					cfg_file.set_value(name, key, data)
 					
 				else:
-					cfg_file.set_value(name, key, float(value))
+					cfg_file.set_value(name, key, float(value) * factor)
 				
 			#String value?
 			else:
@@ -1178,7 +1182,7 @@ func parse_list(s):
 		
 		#Vector?
 		if " " in item and is_digit(item[0]):
-			var vec = item.split_floats(" ")
+			var vec = parse_vec(item)
 			list[i] = Vector3(vec[0], vec[1], vec[2])
 			
 		#Boolean?
@@ -1208,10 +1212,12 @@ func parse_vec(text, apply_factor=true):
 	
 func parse_weather_vec(s):
 	var vec = s.split_floats(" ")
-	vec[0] *= .01
-	vec[1] *= .01
-	vec[2] *= .01
-	return vec
+	return vec * .01
+	
+	
+func parse_config_vec(s):
+	var vec = s.sqlit_floats(" ")
+	return vec * .5
 	
 	
 func is_digit(s):

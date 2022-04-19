@@ -11,10 +11,10 @@ export (float) var walk_speed = 8
 export (float) var run_speed = 16
 export (float) var turn_speed = 2
 export (float) var jump_strength = 64
-export (int) var max_hp = 500
+export (int) var max_hp = 500 setget set_max_hp
 export (bool) var is_invincible = false
 
-onready var hp = max_hp setget add_hp
+onready var hp = max_hp
 var alliance = ALLIANCE_NONE
 
 
@@ -54,6 +54,15 @@ func turn(right):
 func jump():
 	#Jump
 	velocity.y = jump_strength
+	
+	
+func set_max_hp(value):
+	max_hp = value
+	
+	#Ensure that the current HP is less than the
+	#max HP.
+	if hp and hp > max_hp:
+		hp = max_hp
 	
 	
 func add_hp(inc):

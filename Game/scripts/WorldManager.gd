@@ -196,8 +196,11 @@ func _ready():
 	else:
 		logger.log_warning("No user particle system folder detected.")
 		
-	#Pass particle lib reference to sky manager
+	#Pass particle lib reference to sky manager 
+	#and pass terrain system reference to critter 
+	#manager
 	get_node("SkyManager").particles = particles
+	get_node("CritterManager").terrain_system = get_node("TerrainSystem")
 	return true
 	
 	
