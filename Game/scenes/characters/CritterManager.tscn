@@ -18,4 +18,13 @@ __meta__ = {
 "_editor_icon": ExtResource( 4 )
 }
 
+[node name="SpawnTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+
 

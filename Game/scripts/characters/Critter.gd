@@ -12,7 +12,16 @@ var skill_drops = []
 
 
 func _ready():
-	pass
+	#Enable event handling
+	set_process(true)
+	
+	
+func _process(delta):
+	#Dispose of critters that have fallen off the map
+	if get_translation().y < 0:
+		print("A critter has fallen off the map!")
+		queue_free()
+		emit_signal("died")
 	
 	
 func set_mesh(mesh):

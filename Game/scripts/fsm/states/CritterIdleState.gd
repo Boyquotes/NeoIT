@@ -20,4 +20,5 @@ func enter(obj):
 
 
 func _on_DecisionTimer_timeout():
-	print("Making a decision...")
+	#Enter run state
+	get_node("..").change_state("CritterRunState")

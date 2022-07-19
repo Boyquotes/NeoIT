@@ -216,10 +216,13 @@ func load_world(name):
 		path += "/user/maps/" + name + ".json"
 		return load_map(path)
 		
+	#Initialize critter spawns
+	get_node("CritterManager").start_random_spawns(name, map_size)
 	return true
 	
 	
 func unload_world():
+	get_node("CritterManager").stop_random_spawns()
 	unload_map()
 	
 	

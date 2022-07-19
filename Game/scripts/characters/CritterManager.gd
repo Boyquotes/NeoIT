@@ -7,6 +7,9 @@ var critter_defs = ConfigFile.new()
 var critter_spawns = ConfigFile.new()
 var critters = {}
 var terrain_system = null
+var spawn_list = []
+var _map_size = Vector3()
+var critter_count = 0
 
 
 func _ready():
@@ -104,5 +107,40 @@ func spawn_critter(name, x, z):
 	var scale = critter_defs.get_value(name, "scale", .5)
 	critter.set_scale(Vector3(scale, scale, scale))
 	
+	#Connect signals
+	critter.connect("died", self, "critter_died")
+	
 	#Add critter to scene
 	add_child(critter)
+	critter_count += 1
+	print("Critter Count: " + str(critter_count))
+	
+	
+func start_random_spawns(map_name, map_size):
+	spawn_list = critter_spawns.get_value(map_name, "critterlist", [])
+	_map_size = map_size
+	get_node("SpawnTimer").start()
+	
+	
+func stop_random_spawns():
+	get_node("SpawnTimer").stop()
+	get_tree().call_group(get_tree().GROUP_CALL_DEFAULT, "Critters",
+	    "queue_free")
+	critter_count = 0
+	
+	
+func critter_died():
+	critter_count -= 1
+	print("Critter Count: " + str(critter_count))
+
+
+func _on_SpawnTimer_timeout():
+	#Randomly choose a critter
+	var critter = spawn_list[rand_range(0, spawn_list.size())]
+	
+	#Shall we spawn this critter?
+	if critter[1] > rand_range(0, 100) / 100:
+		var x = rand_range(0, _map_size.x)
+		var z = rand_range(0, _map_size.z)
+		spawn_critter(critter[0], x, z)
+		get_node("Logger").log_info("Spawned a '" + critter[0] + "' at " + str(Vector2(x, z)))
