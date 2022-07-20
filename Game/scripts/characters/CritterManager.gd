@@ -135,6 +135,10 @@ func critter_died():
 
 
 func _on_SpawnTimer_timeout():
+	#Return if the spawn list is empty
+	if spawn_list.size() == 0:
+		return
+	
 	#Randomly choose a critter
 	var critter = spawn_list[rand_range(0, spawn_list.size())]
 	
