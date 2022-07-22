@@ -1,0 +1,207 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/characters/Unit.gd" type="Script" id=1]
+[ext_resource path="res://meshes/player/feline.scn" type="PackedScene" id=2]
+
+[sub_resource type="BoxShape" id=1]
+
+extents = Vector3( 2.46733, 4.56656, 7.14732 )
+
+[node name="Unit" type="KinematicBody"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = true
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.59833, -1.03991 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collide_with/static = true
+collide_with/kinematic = true
+collide_with/rigid = true
+collide_with/character = true
+collision/margin = 0.001
+script/script = ExtResource( 1 )
+gravity = 8
+mass = 128
+walk_speed = 8
+run_speed = 16
+turn_speed = 2
+jump_strength = 64
+max_hp = 500
+is_invincible = false
+
+[node name="feline" parent="." instance=ExtResource( 2 )]
+
+[node name="head05" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane02" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane03" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane04" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane05" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane06" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane07" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane08" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane09" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane10" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane11" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane12" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane13" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane14" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane15" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane16" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane17" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="mane18" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tail02" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tail06" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tuft02" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tuft03" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tuft04" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tuft05" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tuft06" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tuft07" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tuft08" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tuft09" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="tuft10" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="wings02" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="wings03" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="wings04" parent="feline/skeleton01/Skeleton"]
+
+visibility/visible = false
+
+[node name="head02" parent="feline/skeleton02/Skeleton"]
+
+visibility/visible = false
+
+[node name="head03" parent="feline/skeleton02/Skeleton"]
+
+visibility/visible = false
+
+[node name="head04" parent="feline/skeleton02/Skeleton"]
+
+visibility/visible = false
+
+[node name="head06" parent="feline/skeleton02/Skeleton"]
+
+visibility/visible = false
+
+[node name="tail03" parent="feline/skeleton02/Skeleton"]
+
+visibility/visible = false
+
+[node name="tail04" parent="feline/skeleton02/Skeleton"]
+
+visibility/visible = false
+
+[node name="tail05" parent="feline/skeleton02/Skeleton"]
+
+visibility/visible = false
+
+[node name="tail07" parent="feline/skeleton02/Skeleton"]
+
+visibility/visible = false
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.59833, -1.03991 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+
+[editable path="feline"]

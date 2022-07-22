@@ -1,5 +1,7 @@
 extends Node
 
+export (PackedScene) var Unit
+
 
 func _ready():
 	#Turn on event processing
@@ -33,6 +35,18 @@ func _on_SpawnButton_pressed():
 	get_node("UI/UI/Panel/SpawnButton").release_focus()
 	var name = get_node("UI/UI/Panel/Critter").get_text()
 	get_node("WorldManager/CritterManager").spawn_critter(name, 20, 20)
+	
+	
+func _on_SpawnUnitButton_pressed():
+	#Spawn a unit
+	var unit = Unit.instance()
+	unit.set_scale(Vector3(.5, .5, .5))
+	unit.set_translation(Vector3(10, 50, 10))
+	unit.set_head("head02")
+	unit.set_tail("tail02")
+	unit.set_mane("mane02")
+	unit.set_tuft("tuft02")
+	add_child(unit)
 	
 	
 func show_error(msg):
