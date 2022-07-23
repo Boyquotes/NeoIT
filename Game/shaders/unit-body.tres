@@ -1,0 +1,33 @@
+[gd_resource type="MaterialShader" format=1]
+
+[resource]
+
+_code = {
+"fragment": "uniform texture body_mask_1;
+uniform texture body_mask_2;
+uniform texture body_marking;
+
+uniform color pelt;
+uniform color underfur;
+uniform color marking;
+
+vec3 col = pelt.rgb;
+
+if(tex(body_mask_1, UV).a > 0.0)
+{
+    col = underfur.rgb;
+}
+
+if(tex(body_marking, UV).a > 0.0)
+{
+    col = marking.rgb;
+}
+
+DIFFUSE = col;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+

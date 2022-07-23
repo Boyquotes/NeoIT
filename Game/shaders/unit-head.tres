@@ -1,0 +1,68 @@
+[gd_resource type="MaterialShader" format=1]
+
+[resource]
+
+_code = {
+"fragment": "uniform texture base;
+uniform texture head_mask_1;
+uniform texture head_mask_2;
+uniform texture head_mask_3;
+uniform texture head_mask_4;
+uniform texture head_mask_5;
+uniform texture head_mask_6;
+uniform texture head_mask_7;
+uniform texture head_marking;
+
+uniform color pelt;
+uniform color underfur;
+uniform color above_eyes;
+uniform color below_eyes;
+uniform color nose;
+uniform color ears;
+uniform color marking;
+
+vec3 col = pelt.rgb;
+
+if(tex(head_mask_1, UV).a > 0.0)
+{
+    col = underfur.rgb;
+}
+
+if(tex(head_mask_2, UV).a > 0.0)
+{
+    col = above_eyes.rgb;
+}
+
+if(tex(head_mask_3, UV).a > 0.0)
+{
+    col = below_eyes.rgb;
+}
+
+if(tex(head_mask_4, UV).a > 0.0)
+{
+    col = nose.rgb;
+}
+
+if(tex(head_mask_5, UV).a > 0.0)
+{
+    col = ears.rgb;
+}
+
+if(tex(head_marking, UV).a > 0.0)
+{
+    col = marking.rgb;
+}
+
+if(tex(head_mask_7, UV).a > 0.0)
+{
+    col = tex(base, UV).rgb;
+}
+
+DIFFUSE = col;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+

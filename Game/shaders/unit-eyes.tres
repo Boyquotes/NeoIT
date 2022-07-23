@@ -1,0 +1,32 @@
+[gd_resource type="MaterialShader" format=1]
+
+[resource]
+
+_code = {
+"fragment": "uniform texture base;
+uniform texture eye_mask_1;
+uniform texture eye_mask_2;
+
+uniform color pelt;
+uniform color iris;
+
+vec3 col = tex(base, UV).rgb;
+
+if(tex(eye_mask_1, UV).a > 0.0)
+{
+    col = pelt.rgb;
+}
+
+if(tex(eye_mask_2, UV).a > 0.0)
+{
+    col = iris.rgb;
+}
+
+DIFFUSE = col;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
