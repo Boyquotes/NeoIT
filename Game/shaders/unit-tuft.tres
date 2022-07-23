@@ -1,0 +1,15 @@
+[gd_resource type="MaterialShader" format=1]
+
+[resource]
+
+_code = {
+"fragment": "uniform color tuft;
+
+DIFFUSE = tuft.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
