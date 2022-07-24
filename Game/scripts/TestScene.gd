@@ -58,6 +58,10 @@ func _on_SpawnUnitButton_pressed():
 	unit.set_tailtip_color(Color(1.0, 1.0, 1.0))
 	unit.set_mane_color(Color(0.0, 0.0, 1.0))
 	unit.set_tuft_color(Color(1.0, .5, 0.0))
+	unit.set_marking_color(Color(1.0, 1.0, 0.0))
+	unit.set_body_marking("bodyMark20")
+	unit.set_head_marking("headMark15")
+	unit.set_tail_marking("tailMark03")
 	
 	#Spawn a second unit
 	unit = Unit.instance()

@@ -195,3 +195,24 @@ func set_mane_color(color):
 	
 func set_tuft_color(color):
 	get_node("feline/skeleton01/Skeleton/tuft02").get("material/0").set_shader_param("tuft", color)
+	
+	
+func set_marking_color(color):
+	get_node("feline/skeleton01/Skeleton/body").get("material/0").set_shader_param("marking", color)
+	get_node("feline/skeleton01/Skeleton/head01").get("material/0").set_shader_param("marking", color)
+	get_node("feline/skeleton01/Skeleton/tail02").get("material/0").set_shader_param("marking", color)
+	
+	
+func set_body_marking(marking):
+	var tex = load("res://meshes/player/images/markings/body/" + marking + ".png")
+	get_node("feline/skeleton01/Skeleton/body").get("material/0").set_shader_param("body_marking", tex)
+	
+	
+func set_head_marking(marking):
+	var tex = load("res://meshes/player/images/markings/head/" + marking + ".png")
+	get_node("feline/skeleton01/Skeleton/head01").get("material/0").set_shader_param("head_marking", tex)
+	
+	
+func set_tail_marking(marking):
+	var tex = load("res://meshes/player/images/markings/tail/" + marking + ".png")
+	get_node("feline/skeleton01/Skeleton/tail02").get("material/0").set_shader_param("tail_marking", tex)
