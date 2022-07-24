@@ -38,15 +38,45 @@ func _on_SpawnButton_pressed():
 	
 	
 func _on_SpawnUnitButton_pressed():
+	get_node("UI/UI/Panel/SpawnUnitButton").release_focus()
+	
 	#Spawn a unit
 	var unit = Unit.instance()
+	add_child(unit)
 	unit.set_scale(Vector3(.5, .5, .5))
 	unit.set_translation(Vector3(10, 50, 10))
 	unit.set_head("head02")
 	unit.set_tail("tail02")
 	unit.set_mane("mane02")
 	unit.set_tuft("tuft02")
+	unit.set_pelt_color(Color(1.0, 0.0, 0.0))
+	unit.set_above_eye_color(Color(.8, 0.0, 0.0))
+	unit.set_below_eye_color(Color(.5, 0.0, 0.0))
+	unit.set_nose_color(Color(0.0, 0.0, 0.0))
+	unit.set_ear_color(Color(1.0, 1.0, 1.0))
+	unit.set_eye_color(Color(1.0, 0.0, 0.0))
+	unit.set_tailtip_color(Color(1.0, 1.0, 1.0))
+	unit.set_mane_color(Color(0.0, 0.0, 1.0))
+	unit.set_tuft_color(Color(1.0, .5, 0.0))
+	
+	#Spawn a second unit
+	unit = Unit.instance()
 	add_child(unit)
+	unit.set_scale(Vector3(.5, .5, .5))
+	unit.set_translation(Vector3(20, 50, 20))
+	unit.set_head("head01")
+	unit.set_tail("tail03")
+	unit.set_mane("mane04")
+	unit.set_tuft("tuft05")
+	unit.set_pelt_color(Color(0.0, 1.0, 0.0))
+	unit.set_above_eye_color(Color(0.0, .8, 0.0))
+	unit.set_below_eye_color(Color(0.0, .5, 0.0))
+	unit.set_nose_color(Color(.5, 0.0, 1.0))
+	unit.set_ear_color(Color(0.0, 0.0, 0.0))
+	unit.set_eye_color(Color(0.0, 1.0, 0.0))
+	unit.set_tailtip_color(Color(0.0, 0.0, 0.0))
+	unit.set_mane_color(Color(.5, 0.0, 1.0))
+	unit.set_tuft_color(Color(1.0, 0.0, .5))
 	
 	
 func show_error(msg):

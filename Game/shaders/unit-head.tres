@@ -23,37 +23,37 @@ uniform color marking;
 
 vec3 col = pelt.rgb;
 
-if(tex(head_mask_1, UV).a > 0.0)
+if(tex(head_mask_1, UV).a > 0.5)
 {
     col = underfur.rgb;
 }
 
-if(tex(head_mask_2, UV).a > 0.0)
+if(tex(head_mask_4, UV).a > 0.5)
 {
     col = above_eyes.rgb;
 }
 
-if(tex(head_mask_3, UV).a > 0.0)
+if(tex(head_mask_5, UV).a > 0.5)
 {
     col = below_eyes.rgb;
 }
 
-if(tex(head_mask_4, UV).a > 0.0)
+if(tex(head_mask_3, UV).a > 0.5)
 {
     col = nose.rgb;
 }
 
-if(tex(head_mask_5, UV).a > 0.0)
+if(tex(head_mask_7, UV).a > 0.5)
 {
     col = ears.rgb;
 }
 
-if(tex(head_marking, UV).a > 0.0)
+if(tex(head_marking, UV).a > 0.5)
 {
     col = marking.rgb;
 }
 
-if(tex(head_mask_7, UV).a > 0.0)
+if(tex(head_mask_2, UV).a > 0.5)
 {
     col = tex(base, UV).rgb;
 }

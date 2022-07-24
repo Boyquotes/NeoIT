@@ -12,12 +12,12 @@ uniform color marking;
 
 vec3 col = pelt.rgb;
 
-if(tex(tail_mask_1, UV).a > 0.0)
+if(tex(tail_mask_1, UV).a > 0.5)
 {
     col = tailtip.rgb;
 }
 
-if(tex(tail_marking, UV).a > 0.0)
+if(tex(tail_marking, UV).a > 0.5)
 {
     col = marking.rgb;
 }

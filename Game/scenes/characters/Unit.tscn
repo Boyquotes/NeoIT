@@ -1,11 +1,152 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=33 format=1]
 
 [ext_resource path="res://scripts/characters/Unit.gd" type="Script" id=1]
-[ext_resource path="res://meshes/player/feline.scn" type="PackedScene" id=2]
+[ext_resource path="res://shaders/unit-body.tres" type="Shader" id=2]
+[ext_resource path="res://meshes/player/images/markings/body/bodyMark01.png" type="Texture" id=3]
+[ext_resource path="res://meshes/player/images/masks/body/bodyMask1.png" type="Texture" id=4]
+[ext_resource path="res://meshes/player/images/masks/body/bodyMask2.png" type="Texture" id=5]
+[ext_resource path="res://shaders/unit-head.tres" type="Shader" id=6]
+[ext_resource path="res://meshes/player/CatHeadTex.tex" type="Texture" id=7]
+[ext_resource path="res://meshes/player/images/markings/head/headMark01.png" type="Texture" id=8]
+[ext_resource path="res://meshes/player/images/masks/head/headMask1.png" type="Texture" id=9]
+[ext_resource path="res://meshes/player/images/masks/head/headMask2.png" type="Texture" id=10]
+[ext_resource path="res://meshes/player/images/masks/head/headMask3.png" type="Texture" id=11]
+[ext_resource path="res://meshes/player/images/masks/head/headMask4.png" type="Texture" id=12]
+[ext_resource path="res://meshes/player/images/masks/head/headMask5.png" type="Texture" id=13]
+[ext_resource path="res://meshes/player/images/masks/head/headMask6.png" type="Texture" id=14]
+[ext_resource path="res://meshes/player/images/masks/head/headMask7.png" type="Texture" id=15]
+[ext_resource path="res://shaders/unit-eyes.tres" type="Shader" id=16]
+[ext_resource path="res://meshes/player/EyeTex.tex" type="Texture" id=17]
+[ext_resource path="res://meshes/player/images/masks/eye/eyeMask1.png" type="Texture" id=18]
+[ext_resource path="res://meshes/player/images/masks/eye/eyeMask2.png" type="Texture" id=19]
+[ext_resource path="res://shaders/unit-tail.tres" type="Shader" id=20]
+[ext_resource path="res://meshes/player/images/markings/tail/tailMark01.png" type="Texture" id=21]
+[ext_resource path="res://meshes/player/images/masks/tail/tailMask1.png" type="Texture" id=22]
+[ext_resource path="res://shaders/unit-mane.tres" type="Shader" id=23]
+[ext_resource path="res://shaders/unit-tuft.tres" type="Shader" id=24]
+[ext_resource path="res://meshes/player/feline.scn" type="PackedScene" id=25]
 
 [sub_resource type="BoxShape" id=1]
 
 extents = Vector3( 2.46733, 4.56656, 7.14732 )
+
+[sub_resource type="ShaderMaterial" id=2]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = false
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 0.0
+shader/shader = ExtResource( 2 )
+shader_param/body_mask_1 = ExtResource( 4 )
+shader_param/body_mask_2 = ExtResource( 5 )
+shader_param/body_marking = ExtResource( 3 )
+shader_param/pelt = Color( 1, 0.773438, 0, 1 )
+shader_param/underfur = Color( 1, 1, 1, 1 )
+shader_param/marking = null
+
+[sub_resource type="ShaderMaterial" id=3]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = false
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 0.0
+shader/shader = ExtResource( 6 )
+shader_param/base = ExtResource( 7 )
+shader_param/head_mask_1 = ExtResource( 9 )
+shader_param/head_mask_2 = ExtResource( 10 )
+shader_param/head_mask_3 = ExtResource( 11 )
+shader_param/head_mask_4 = ExtResource( 12 )
+shader_param/head_mask_5 = ExtResource( 13 )
+shader_param/head_mask_6 = ExtResource( 14 )
+shader_param/head_mask_7 = ExtResource( 15 )
+shader_param/head_marking = ExtResource( 8 )
+shader_param/pelt = Color( 1, 0.772549, 0, 1 )
+shader_param/underfur = Color( 1, 1, 1, 1 )
+shader_param/above_eyes = Color( 1, 0.772549, 0, 1 )
+shader_param/below_eyes = Color( 1, 0.772549, 0, 1 )
+shader_param/nose = Color( 0.996582, 0.5625, 1, 1 )
+shader_param/ears = Color( 1, 0.539063, 0.960388, 1 )
+shader_param/marking = null
+
+[sub_resource type="ShaderMaterial" id=4]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = false
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 0.0
+shader/shader = ExtResource( 16 )
+shader_param/base = ExtResource( 17 )
+shader_param/eye_mask_1 = ExtResource( 18 )
+shader_param/eye_mask_2 = ExtResource( 19 )
+shader_param/pelt = Color( 1, 0.772549, 0, 1 )
+shader_param/iris = Color( 0, 0.554688, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=5]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = false
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 9.3673e-39
+shader/shader = ExtResource( 20 )
+shader_param/tail_mask_1 = ExtResource( 22 )
+shader_param/tail_marking = ExtResource( 21 )
+shader_param/pelt = Color( 1, 0.772549, 0, 1 )
+shader_param/tailtip = Color( 1, 0.328125, 0, 1 )
+shader_param/marking = null
+
+[sub_resource type="ShaderMaterial" id=6]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = false
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 7.97339e-43
+shader/shader = ExtResource( 23 )
+shader_param/mane = Color( 1, 0.398438, 0, 1 )
+
+[sub_resource type="ShaderMaterial" id=7]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = false
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 1.01021e-38
+shader/shader = ExtResource( 24 )
+shader_param/tuft = Color( 0.589844, 0.344136, 0.105988, 1 )
 
 [node name="Unit" type="KinematicBody"]
 
@@ -32,8 +173,14 @@ turn_speed = 2
 jump_strength = 64
 max_hp = 500
 is_invincible = false
+body_mat = SubResource( 2 )
+head_mat = SubResource( 3 )
+eye_mat = SubResource( 4 )
+tail_mat = SubResource( 5 )
+mane_mat = SubResource( 6 )
+tuft_mat = SubResource( 7 )
 
-[node name="feline" parent="." instance=ExtResource( 2 )]
+[node name="feline" parent="." instance=ExtResource( 25 )]
 
 [node name="head05" parent="feline/skeleton01/Skeleton"]
 
