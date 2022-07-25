@@ -350,5 +350,65 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="."]
+
+playback/process_mode = 1
+base_path = NodePath("../feline")
+master_player = NodePath("../feline/AnimationPlayer")
+data = {
+"active": false,
+"connections": [ "viseme-pos", "out", 0, "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1, "primary-action", "primary-speed", 0 ],
+"master": NodePath("../feline/AnimationPlayer"),
+"nodes": [ {
+"id": "out",
+"pos": Vector2( 1278, 369 ),
+"type": "output"
+}, {
+"filter": [  ],
+"from": "face-open-jaw",
+"id": "facial-expression",
+"pos": Vector2( 9, 287 ),
+"type": "animation"
+}, {
+"id": "head-pos",
+"mix": 0.0,
+"pos": Vector2( 538, 73 ),
+"type": "mix"
+}, {
+"id": "viseme-pos",
+"mix": 0.0,
+"pos": Vector2( 942, 357 ),
+"type": "mix"
+}, {
+"filter": [  ],
+"from": "mouth-A",
+"id": "viseme",
+"pos": Vector2( 9, 405 ),
+"type": "animation"
+}, {
+"id": "face-pos",
+"mix": 0.0,
+"pos": Vector2( 750, 194 ),
+"type": "mix"
+}, {
+"id": "primary-speed",
+"pos": Vector2( 235, 40 ),
+"scale": 0.25,
+"type": "timescale"
+}, {
+"filter": [  ],
+"from": "turn-right",
+"id": "head-movement",
+"pos": Vector2( 9, 167 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "idle-loop",
+"id": "primary-action",
+"pos": Vector2( 9, 48 ),
+"type": "animation"
+} ]
+}
+
 
 [editable path="feline"]
