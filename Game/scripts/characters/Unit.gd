@@ -216,3 +216,27 @@ func set_head_marking(marking):
 func set_tail_marking(marking):
 	var tex = load("res://meshes/player/images/markings/tail/" + marking + ".png")
 	get_node("feline/skeleton01/Skeleton/tail02").get("material/0").set_shader_param("tail_marking", tex)
+
+
+func set_primary_action(name, speed):
+	var action = get_node("feline/AnimationPlayer").get_animation(name)
+	get_node("AnimationTreePlayer").animation_node_set_animation("primary-action", action)
+	get_node("AnimationTreePlayer").timescale_node_set_scale("primary-speed", speed)
+	get_node("AnimationTreePlayer").set_active(true)
+	
+	
+func set_head_movement(name, pos):
+	pass
+	
+	
+func set_facial_expression(name):
+	var action = get_node("feline/AnimationPlayer").get_animation(name)
+	get_node("AnimationTreePlayer").animation_node_set_animation("facial-expression", action)
+	get_node("AnimationTreePlayer").set_active(true)
+	
+	
+func set_viseme(name):
+	var action = get_node("feline/AnimationPlayer").get_animation(name)
+	get_node("AnimationTreePlayer").animation_node_set_animation("viseme", action)
+	get_node("AnimationTreePlayer").set_active(true)
+	

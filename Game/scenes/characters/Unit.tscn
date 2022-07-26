@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=1]
+[gd_scene load_steps=35 format=1]
 
 [ext_resource path="res://scripts/characters/Unit.gd" type="Script" id=1]
 [ext_resource path="res://shaders/unit-body.tres" type="Shader" id=2]
@@ -25,6 +25,8 @@
 [ext_resource path="res://shaders/unit-mane.tres" type="Shader" id=23]
 [ext_resource path="res://shaders/unit-tuft.tres" type="Shader" id=24]
 [ext_resource path="res://meshes/player/feline.scn" type="PackedScene" id=25]
+[ext_resource path="res://scenes/fsm/UnitFSM.tscn" type="PackedScene" id=26]
+[ext_resource path="res://audio/sfx/SampleLibrary.tres" type="SampleLibrary" id=27]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -148,7 +150,9 @@ params/line_width = 1.01021e-38
 shader/shader = ExtResource( 24 )
 shader_param/tuft = Color( 0.589844, 0.344136, 0.105988, 1 )
 
-[node name="Unit" type="KinematicBody"]
+[node name="Unit" type="KinematicBody" groups=[
+"Units",
+]]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 input/ray_pickable = true
@@ -357,23 +361,23 @@ base_path = NodePath("../feline")
 master_player = NodePath("../feline/AnimationPlayer")
 data = {
 "active": false,
-"connections": [ "viseme-pos", "out", 0, "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1, "primary-action", "primary-speed", 0 ],
+"connections": [ "viseme-pos", "out", 0, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "primary-action", "primary-speed", 0 ],
 "master": NodePath("../feline/AnimationPlayer"),
 "nodes": [ {
 "id": "out",
 "pos": Vector2( 1278, 369 ),
 "type": "output"
 }, {
+"id": "face-pos",
+"mix": 0.0,
+"pos": Vector2( 750, 194 ),
+"type": "mix"
+}, {
 "filter": [  ],
 "from": "face-open-jaw",
 "id": "facial-expression",
 "pos": Vector2( 9, 287 ),
 "type": "animation"
-}, {
-"id": "head-pos",
-"mix": 0.0,
-"pos": Vector2( 538, 73 ),
-"type": "mix"
 }, {
 "id": "viseme-pos",
 "mix": 0.0,
@@ -386,21 +390,21 @@ data = {
 "pos": Vector2( 9, 405 ),
 "type": "animation"
 }, {
-"id": "face-pos",
+"id": "head-pos",
 "mix": 0.0,
-"pos": Vector2( 750, 194 ),
+"pos": Vector2( 538, 73 ),
 "type": "mix"
-}, {
-"id": "primary-speed",
-"pos": Vector2( 235, 40 ),
-"scale": 0.25,
-"type": "timescale"
 }, {
 "filter": [  ],
 "from": "turn-right",
 "id": "head-movement",
 "pos": Vector2( 9, 167 ),
 "type": "animation"
+}, {
+"id": "primary-speed",
+"pos": Vector2( 235, 40 ),
+"scale": 0.25,
+"type": "timescale"
 }, {
 "filter": [  ],
 "from": "idle-loop",
@@ -409,6 +413,21 @@ data = {
 "type": "animation"
 } ]
 }
+
+[node name="UnitFSM" parent="." instance=ExtResource( 26 )]
+
+[node name="SpatialSamplePlayer" type="SpatialSamplePlayer" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 100.0
+params/attenuation/distance_exp = 1.0
+params/emission_cone/degrees = 180.0
+params/emission_cone/attenuation_db = -6.0
+config/polyphony = 1
+config/samples = ExtResource( 27 )
 
 
 [editable path="feline"]
