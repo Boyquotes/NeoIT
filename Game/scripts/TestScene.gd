@@ -5,12 +5,7 @@ export (PackedScene) var Unit
 
 func _ready():
 	#Turn on event processing
-	set_process(true)
 	set_process_unhandled_input(true)
-	
-	
-func _process(delta):
-	pass
 	
 	
 func _unhandled_input(event):
@@ -46,7 +41,7 @@ func _on_SpawnUnitButton_pressed():
 	get_node("UI/UI/Panel/SpawnUnitButton").release_focus()
 	
 	#Spawn a unit
-	var unit = get_node("WorldManager/UnitManager").spawn_unit("Test")
+	var unit = get_node("WorldManager/UnitManager").spawn_player()
 	unit.set_translation(Vector3(10, 50, 10))
 	unit.set_head("head02")
 	unit.set_tail("tail02")
@@ -67,7 +62,7 @@ func _on_SpawnUnitButton_pressed():
 	unit.set_tail_marking("tailMark03")
 	
 	#Spawn a second unit
-	unit = get_node("WorldManager/UnitManager").spawn_unit("Test2")
+	unit = get_node("WorldManager/UnitManager").spawn_unit("Test")
 	unit.set_translation(Vector3(20, 50, 20))
 	unit.set_head("head01")
 	unit.set_tail("tail03")

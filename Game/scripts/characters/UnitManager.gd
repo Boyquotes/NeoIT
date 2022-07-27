@@ -11,13 +11,14 @@ func _ready():
 func spawn_unit(id):
 	var unit = Unit.instance()
 	add_child(unit)
-	unit.set_scale(Vector3(.5, .5, .5))
+	unit.set_scale(Vector3(.25, .25, .25))
 	unit.set_name(id)
 	return unit
 	
 	
 func spawn_player():
 	var player = spawn_unit("Player")
+	player.set_pause_mode(PAUSE_MODE_INHERIT)
 	return player
 	
 	
