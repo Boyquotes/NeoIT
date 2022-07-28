@@ -15,6 +15,11 @@ func enter(obj):
 	
 	
 func exit():
-	#Stop movement and run sound effect
+	#Stop sound effect and movement
 	_obj.get_node("SpatialSamplePlayer").stop_all()
 	_obj.stop()
+	
+	
+func update(delta):
+	#Update movement direction
+	_obj.run()

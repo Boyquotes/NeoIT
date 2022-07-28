@@ -18,7 +18,7 @@ func spawn_unit(id):
 	
 func spawn_player():
 	var player = spawn_unit("Player")
-	player.set_pause_mode(PAUSE_MODE_INHERIT)
+	player.get_node("UnitPlayerController").enable(true)
 	return player
 	
 	

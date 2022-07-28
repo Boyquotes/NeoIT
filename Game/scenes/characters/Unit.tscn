@@ -173,8 +173,8 @@ collision/margin = 0.001
 script/script = ExtResource( 1 )
 gravity = 8
 mass = 128
-walk_speed = 16.0
-run_speed = 32.0
+walk_speed = 32.0
+run_speed = 64.0
 turn_speed = 2
 jump_strength = 64
 max_hp = 500
@@ -363,22 +363,13 @@ base_path = NodePath("../feline")
 master_player = NodePath("../feline/AnimationPlayer")
 data = {
 "active": false,
-"connections": [ "viseme-pos", "out", 0, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1, "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "primary-action", "primary-speed", 0, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1 ],
+"connections": [ "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "primary-action", "primary-speed", 0, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "viseme-pos", "out", 0 ],
 "master": NodePath("../feline/AnimationPlayer"),
 "nodes": [ {
-"id": "out",
-"pos": Vector2( 1278, 369 ),
-"type": "output"
-}, {
-"id": "face-pos",
-"mix": 0.0,
-"pos": Vector2( 750, 194 ),
-"type": "mix"
-}, {
 "filter": [  ],
-"from": "mouth-A",
-"id": "viseme",
-"pos": Vector2( 9, 405 ),
+"from": "turn-right",
+"id": "head-movement",
+"pos": Vector2( 9, 167 ),
 "type": "animation"
 }, {
 "id": "head-pos",
@@ -387,15 +378,9 @@ data = {
 "type": "mix"
 }, {
 "filter": [  ],
-"from": "face-open-jaw",
-"id": "facial-expression",
-"pos": Vector2( 9, 287 ),
-"type": "animation"
-}, {
-"filter": [  ],
-"from": "turn-right",
-"id": "head-movement",
-"pos": Vector2( 9, 167 ),
+"from": "idle-loop",
+"id": "primary-action",
+"pos": Vector2( 9, 48 ),
 "type": "animation"
 }, {
 "id": "primary-speed",
@@ -404,15 +389,30 @@ data = {
 "type": "timescale"
 }, {
 "filter": [  ],
-"from": "idle-loop",
-"id": "primary-action",
-"pos": Vector2( 9, 48 ),
+"from": "mouth-A",
+"id": "viseme",
+"pos": Vector2( 9, 405 ),
+"type": "animation"
+}, {
+"id": "face-pos",
+"mix": 0.0,
+"pos": Vector2( 750, 194 ),
+"type": "mix"
+}, {
+"filter": [  ],
+"from": "face-open-jaw",
+"id": "facial-expression",
+"pos": Vector2( 9, 287 ),
 "type": "animation"
 }, {
 "id": "viseme-pos",
 "mix": 0.0,
 "pos": Vector2( 942, 357 ),
 "type": "mix"
+}, {
+"id": "out",
+"pos": Vector2( 1278, 369 ),
+"type": "output"
 } ]
 }
 
@@ -420,67 +420,12 @@ data = {
 
 [node name="UnitPlayerController" parent="." instance=ExtResource( 27 )]
 
-[node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="."]
+[node name="CameraPivot" type="Spatial" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.76572, 0 )
-nodes/node_a = NodePath("")
-nodes/node_b = NodePath("")
-solver/priority = 1
-collision/exclude_nodes = true
-linear_limit_x/enabled = true
-linear_limit_x/upper_distance = 0.0
-linear_limit_x/lower_distance = 0.0
-linear_limit_x/softness = 0.7
-linear_limit_x/restitution = 0.5
-linear_limit_x/damping = 1.0
-angular_limit_x/enabled = true
-angular_limit_x/upper_angle = 0.0
-angular_limit_x/lower_angle = 0.0
-angular_limit_x/softness = 0.5
-angular_limit_x/restitution = 0.0
-angular_limit_x/damping = 1.0
-angular_limit_x/force_limit = 0.0
-angular_limit_x/erp = 0.5
-angular_motor_x/enabled = false
-angular_motor_x/target_velocity = 0.0
-angular_motor_x/force_limit = 300.0
-linear_limit_y/enabled = true
-linear_limit_y/upper_distance = 0.0
-linear_limit_y/lower_distance = 0.0
-linear_limit_y/softness = 0.7
-linear_limit_y/restitution = 0.5
-linear_limit_y/damping = 1.0
-angular_limit_y/enabled = true
-angular_limit_y/upper_angle = 0.0
-angular_limit_y/lower_angle = 0.0
-angular_limit_y/softness = 0.5
-angular_limit_y/restitution = 0.0
-angular_limit_y/damping = 1.0
-angular_limit_y/force_limit = 0.0
-angular_limit_y/erp = 0.5
-angular_motor_y/enabled = false
-angular_motor_y/target_velocity = 0.0
-angular_motor_y/force_limit = 300.0
-linear_limit_z/enabled = true
-linear_limit_z/upper_distance = 0.0
-linear_limit_z/lower_distance = 0.0
-linear_limit_z/softness = 0.7
-linear_limit_z/restitution = 0.5
-linear_limit_z/damping = 1.0
-angular_limit_z/enabled = true
-angular_limit_z/upper_angle = 0.0
-angular_limit_z/lower_angle = 0.0
-angular_limit_z/softness = 0.5
-angular_limit_z/restitution = 0.0
-angular_limit_z/damping = 1.0
-angular_limit_z/force_limit = 0.0
-angular_limit_z/erp = 0.5
-angular_motor_z/enabled = false
-angular_motor_z/target_velocity = 0.0
-angular_motor_z/force_limit = 300.0
 
-[node name="Camera" type="Camera" parent="Generic6DOFJoint"]
+[node name="Camera" type="Camera" parent="CameraPivot"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -32 )
