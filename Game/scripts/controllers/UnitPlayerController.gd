@@ -24,30 +24,28 @@ func _input(event):
 	elif event.type == InputEvent.KEY and event.is_action_pressed("camera_3"):
 		change_cam_mode(CAM_MODE_FREE)
 		
-	#Skip other input handling in free cam mode
-	if cam_mode == CAM_MODE_FREE:
-		return
-		
-	#Handle movement
-	if event.type == InputEvent.KEY and event.is_action_pressed("move_forward"):
-		get_node("../UnitFSM").change_state("UnitRunState")
-		
-	elif event.type == InputEvent.KEY and event.is_action_released("move_forward"):
-		get_node("../UnitFSM").change_state("UnitIdleState")
-		
-	if event.type == InputEvent.KEY and event.is_action_pressed("move_forward_slow"):
-		get_node("../UnitFSM").change_state("UnitWalkState")
-		
-	elif event.type == InputEvent.KEY and event.is_action_released("move_forward_slow"):
-		get_node("../UnitFSM").change_state("UnitIdleState")
-		
 		
 func _process(delta):
 	#Skip other input handling in free cam mode
 	if cam_mode == CAM_MODE_FREE:
 		return
 		
-	#Handle movement
+	#Handle unit movement
+	var move_vec = Vector3()
+	
+	if Input.is_action_pressed("move_forward"):
+		move_vec.z = 1
+		
+	elif Input.is_action_pressed("move_backward"):
+		move_vec.z = -1
+		
+	if Input.is_action_pressed("move_left"):
+		move_vec.x = 1
+		
+	elif Input.is_action_pressed("move_right"):
+		move_vec.x = -1
+		
+	#Handle unit and camera rotation
 	if Input.is_action_pressed("turn_left"):
 		get_node("..").turn(false)
 		
@@ -59,6 +57,25 @@ func _process(delta):
 		
 	elif Input.is_action_pressed("look_down"):
 		get_node("../CameraPivot").rotate_x(-deg2rad(2))
+		
+	#Update movement
+	if move_vec == Vector3():
+		get_node("../UnitFSM").change_state("UnitIdleState")
+		get_node("..").stop()
+		return
+	
+	if Input.is_key_pressed(KEY_SHIFT):
+		get_node("../UnitFSM").change_state("UnitWalkState")
+		get_node("..").walk(move_vec)
+		
+	else:
+		get_node("../UnitFSM").change_state("UnitRunState")
+		get_node("..").run(move_vec)
+		
+	#Update relative orientation
+	get_node("../feline").set_rotation(
+	    Vector3(0, atan2(move_vec.x, move_vec.z), 0)
+	)
 		
 		
 func enable(state):

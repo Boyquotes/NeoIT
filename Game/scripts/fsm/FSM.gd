@@ -17,6 +17,10 @@ func change_state(name):
 	#Validate new state
 	if not has_node(name):
 		return
+		
+	#Don't change to the same state
+	if state and name == state.get_name():
+		return
 	
 	#Exit current state (if applicable)
 	if state:
