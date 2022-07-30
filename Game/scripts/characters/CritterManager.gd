@@ -104,7 +104,7 @@ func spawn_critter(name, x, z):
 	#<======== not implemented yet!
 	
 	#Set scale
-	var scale = critter_defs.get_value(name, "scale", .5)
+	var scale = critter_defs.get_value(name, "scale", 1) * .25
 	critter.set_scale(Vector3(scale, scale, scale))
 	
 	#Connect signals

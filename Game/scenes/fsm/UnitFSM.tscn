@@ -1,18 +1,24 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scripts/fsm/UnitFSM.gd" type="Script" id=1]
-[ext_resource path="res://scenes/fsm/states/UnitIdleState.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/fsm/states/UnitRunState.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/fsm/states/UnitWalkState.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/fsm/states/PlayerIdleState.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/fsm/states/PlayerRunState.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/fsm/states/PlayerWalkState.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/fsm/states/PlayerJumpState.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/fsm/states/PlayerFallState.tscn" type="PackedScene" id=6]
 
 [node name="UnitFSM" type="Node"]
 
 script/script = ExtResource( 1 )
 
-[node name="UnitIdleState" parent="." instance=ExtResource( 2 )]
+[node name="PlayerIdleState" parent="." instance=ExtResource( 2 )]
 
-[node name="UnitRunState" parent="." instance=ExtResource( 3 )]
+[node name="PlayerRunState" parent="." instance=ExtResource( 3 )]
 
-[node name="UnitWalkState" parent="." instance=ExtResource( 4 )]
+[node name="PlayerWalkState" parent="." instance=ExtResource( 4 )]
+
+[node name="PlayerJumpState" parent="." instance=ExtResource( 5 )]
+
+[node name="PlayerFallState" parent="." instance=ExtResource( 6 )]
 
 

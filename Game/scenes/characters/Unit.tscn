@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=1]
+[gd_scene load_steps=36 format=1]
 
 [ext_resource path="res://scripts/characters/Unit.gd" type="Script" id=1]
 [ext_resource path="res://shaders/unit-body.tres" type="Shader" id=2]
@@ -26,9 +26,8 @@
 [ext_resource path="res://shaders/unit-tuft.tres" type="Shader" id=24]
 [ext_resource path="res://meshes/player/feline.scn" type="PackedScene" id=25]
 [ext_resource path="res://scenes/fsm/UnitFSM.tscn" type="PackedScene" id=26]
-[ext_resource path="res://scenes/controllers/UnitPlayerController.tscn" type="PackedScene" id=27]
-[ext_resource path="res://environments/Default.tres" type="Environment" id=28]
-[ext_resource path="res://audio/sfx/SampleLibrary.tres" type="SampleLibrary" id=29]
+[ext_resource path="res://environments/Default.tres" type="Environment" id=27]
+[ext_resource path="res://audio/sfx/SampleLibrary.tres" type="SampleLibrary" id=28]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -173,8 +172,8 @@ collision/margin = 0.001
 script/script = ExtResource( 1 )
 gravity = 8
 mass = 128
-walk_speed = 32.0
-run_speed = 64.0
+walk_speed = 32
+run_speed = 64
 turn_speed = 2
 jump_strength = 64
 max_hp = 500
@@ -185,6 +184,7 @@ eye_mat = SubResource( 4 )
 tail_mat = SubResource( 5 )
 mane_mat = SubResource( 6 )
 tuft_mat = SubResource( 7 )
+turn_angle = 0
 
 [node name="feline" parent="." instance=ExtResource( 25 )]
 
@@ -363,9 +363,13 @@ base_path = NodePath("../feline")
 master_player = NodePath("../feline/AnimationPlayer")
 data = {
 "active": false,
-"connections": [ "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "primary-action", "primary-speed", 0, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1, "viseme-pos", "out", 0 ],
+"connections": [ "viseme-pos", "out", 0, "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "primary-action", "primary-speed", 0, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1 ],
 "master": NodePath("../feline/AnimationPlayer"),
 "nodes": [ {
+"id": "out",
+"pos": Vector2( 1278, 369 ),
+"type": "output"
+}, {
 "filter": [  ],
 "from": "turn-right",
 "id": "head-movement",
@@ -409,16 +413,10 @@ data = {
 "mix": 0.0,
 "pos": Vector2( 750, 194 ),
 "type": "mix"
-}, {
-"id": "out",
-"pos": Vector2( 1278, 369 ),
-"type": "output"
 } ]
 }
 
 [node name="UnitFSM" parent="." instance=ExtResource( 26 )]
-
-[node name="UnitPlayerController" parent="." instance=ExtResource( 27 )]
 
 [node name="CameraPivot" type="Spatial" parent="."]
 
@@ -436,9 +434,23 @@ far = 200.0
 keep_aspect = 1
 current = false
 visible_layers = 1048575
-environment = ExtResource( 28 )
+environment = ExtResource( 27 )
 h_offset = 0.0
 v_offset = 0.0
+
+[node name="TurnTween" type="Tween" parent="."]
+
+playback/process_mode = 1
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[node name="JumpTween" type="Tween" parent="."]
+
+playback/process_mode = 1
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 [node name="SpatialSamplePlayer" type="SpatialSamplePlayer" parent="."]
 
@@ -451,7 +463,7 @@ params/attenuation/distance_exp = 1.0
 params/emission_cone/degrees = 180.0
 params/emission_cone/attenuation_db = -6.0
 config/polyphony = 1
-config/samples = ExtResource( 29 )
+config/samples = ExtResource( 28 )
 
 
 [editable path="feline"]

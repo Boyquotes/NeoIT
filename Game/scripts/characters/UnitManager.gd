@@ -18,7 +18,7 @@ func spawn_unit(id):
 	
 func spawn_player():
 	var player = spawn_unit("Player")
-	player.get_node("UnitPlayerController").enable(true)
+	player.get_node("UnitFSM").change_state("PlayerIdleState")
 	return player
 	
 	

@@ -7,6 +7,8 @@ export (ShaderMaterial) var tail_mat
 export (ShaderMaterial) var mane_mat
 export (ShaderMaterial) var tuft_mat
 
+export (float) var turn_angle = 0 setget set_turn_angle
+
 
 func _ready():
 	#We need to use a duplicate material each unit so that each unit can
@@ -239,4 +241,11 @@ func set_viseme(name):
 	var action = get_node("feline/AnimationPlayer").get_animation(name)
 	get_node("AnimationTreePlayer").animation_node_set_animation("viseme", action)
 	get_node("AnimationTreePlayer").set_active(true)
+	
+	
+func set_turn_angle(value):
+	if has_node("feline"):
+		get_node("feline").set_rotation(Vector3(0, value, 0))
+		
+	turn_angle = value
 	
