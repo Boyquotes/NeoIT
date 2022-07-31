@@ -6,8 +6,11 @@ export (ShaderMaterial) var eye_mat
 export (ShaderMaterial) var tail_mat
 export (ShaderMaterial) var mane_mat
 export (ShaderMaterial) var tuft_mat
+export (ShaderMaterial) var wing_mat
 
 export (float) var turn_angle = 0 setget set_turn_angle
+
+var can_fly = false
 
 
 func _ready():
@@ -19,6 +22,7 @@ func _ready():
 	set_tail_mat(tail_mat.duplicate())
 	set_mane_mat(mane_mat.duplicate())
 	set_tuft_mat(tuft_mat.duplicate())
+	set_wing_mat(wing_mat.duplicate())
 	
 	
 func set_head(head):
@@ -97,13 +101,35 @@ func set_tuft(tuft):
 		get_node("feline/skeleton02/Skeleton/" + tuft).show()
 		
 		
+func set_wings(wings):
+	#Hide all wings
+	for i in range(Globals.get("NeoIT/max_wings")):
+		var name = "wings" + ("0" if i + 1 < 10 else "") + str(i + 1)
+		
+		if has_node("feline/skeleton01/Skeleton/" + name):
+			get_node("feline/skeleton01/Skeleton/" + name).hide()
+			
+		elif has_node("feline/skeleton02/Skeleton/" + name):
+			get_node("feline/Skeleton02/Skeleton/" + name).hide()
+			
+	#Show the given wings
+	if has_node("feline/skeleton01/Skeleton/" + wings):
+		get_node("feline/skeleton01/Skeleton/" + wings).show()
+		
+	elif has_node("feline/skeleton02/Skeleton/" + wings):
+		get_node("feline/skeleton02/Skeleton/" + wings).show()
+		
+	#Set flying state
+	can_fly = (wings != "wings01")
+		
+		
 func set_body_mat(mat):
 	get_node("feline/skeleton01/Skeleton/body").set("material/0", mat)
 	
 	
 func set_head_mat(mat):
 	for i in range(Globals.get("NeoIT/max_heads")):
-		var name = "head" + ("0" if i + 1 < 10 else "") + str(i)
+		var name = "head" + ("0" if i + 1 < 10 else "") + str(i + 1)
 		
 		if has_node("feline/skeleton01/Skeleton/" + name):
 			get_node("feline/skeleton01/Skeleton/" + name).set("material/0", mat)
@@ -114,7 +140,7 @@ func set_head_mat(mat):
 			
 func set_eye_mat(mat):
 	for i in range(Globals.get("NeoIT/max_heads")):
-		var name = "head" + ("0" if i + 1 < 10 else "") + str(i)
+		var name = "head" + ("0" if i + 1 < 10 else "") + str(i + 1)
 		
 		if has_node("feline/skeleton01/Skeleton/" + name):
 			get_node("feline/skeleton01/Skeleton/" + name).set("material/2", mat)
@@ -125,7 +151,7 @@ func set_eye_mat(mat):
 			
 func set_tail_mat(mat):
 	for i in range(Globals.get("NeoIT/max_tails")):
-		var name = "tail" + ("0" if i + 1 < 10 else "") + str(i)
+		var name = "tail" + ("0" if i + 1 < 10 else "") + str(i + 1)
 		
 		if has_node("feline/skeleton01/Skeleton/" + name):
 			get_node("feline/skeleton01/Skeleton/" + name).set("material/0", mat)
@@ -136,7 +162,7 @@ func set_tail_mat(mat):
 			
 func set_mane_mat(mat):
 	for i in range(Globals.get("NeoIT/max_manes")):
-		var name = "mane" + ("0" if i + 1 < 10 else "") + str(i)
+		var name = "mane" + ("0" if i + 1 < 10 else "") + str(i + 1)
 		
 		if has_node("feline/skeleton01/Skeleton/" + name):
 			get_node("feline/skeleton01/Skeleton/" + name).set("material/0", mat)
@@ -147,12 +173,23 @@ func set_mane_mat(mat):
 			
 func set_tuft_mat(mat):
 	for i in range(Globals.get("NeoIT/max_tufts")):
-		var name = "tuft" + ("0" if i + 1 < 10 else "") + str(i)
+		var name = "tuft" + ("0" if i + 1 < 10 else "") + str(i + 1)
 		
 		if has_node("feline/skeleton01/Skeleton/" + name):
 			get_node("feline/skeleton01/Skeleton/" + name).set("material/0", mat)
 			
 		elif has_node("feline/skeleton02/Skeleton/" + name):
+			get_node("feline/skeleton02/Skeleton/" + name).set("material/0", mat)
+			
+			
+func set_wing_mat(mat):
+	for i in range(Globals.get("NeoIT/max_wings")):
+		var name = "wings" + ("0" if i + 1 < 10 else "") + str(i + 1)
+		
+		if has_node("feline/skeleton01/Skeleton/" + name):
+			get_node("feline/skeleton01/Skeleton/" + name).set("material/0", mat)
+			
+		elif has_node("feline/skelton02/Skeleton/" + name):
 			get_node("feline/skeleton02/Skeleton/" + name).set("material/0", mat)
 		
 		
@@ -197,6 +234,10 @@ func set_mane_color(color):
 	
 func set_tuft_color(color):
 	get_node("feline/skeleton01/Skeleton/tuft02").get("material/0").set_shader_param("tuft", color)
+	
+	
+func set_wing_color(color):
+	get_node("feline/skeleton01/Skeleton/wings02").get("material/0").set_shader_param("wings", color)
 	
 	
 func set_marking_color(color):

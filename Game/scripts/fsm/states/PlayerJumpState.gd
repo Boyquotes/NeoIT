@@ -32,6 +32,10 @@ func update(delta):
 	#Handle input
 	var move_vec = Vector3()
 	
+	if _obj.can_fly and Input.is_action_pressed("fly"):
+		get_node("..").change_state("PlayerFlyState")
+		return
+	
 	if not Input.is_action_pressed("jump"):
 		get_node("..").change_state("PlayerFallState")
 		return

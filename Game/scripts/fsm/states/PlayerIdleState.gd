@@ -19,7 +19,10 @@ func update(delta):
 		return
 	
 	#Handle input
-	if Input.is_action_pressed("jump"):
+	if _obj.can_fly and Input.is_action_pressed("fly"):
+		get_node("..").change_state("PlayerFlyState")
+		
+	elif Input.is_action_pressed("jump"):
 		get_node("..").change_state("PlayerJumpState")
 		
 	elif (Input.is_action_pressed("move_forward") or

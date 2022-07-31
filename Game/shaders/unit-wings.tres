@@ -1,0 +1,17 @@
+[gd_resource type="MaterialShader" format=1]
+
+[resource]
+
+_code = {
+"fragment": "uniform texture base;
+
+uniform color wings;
+
+DIFFUSE = tex(base, UV).rgb * wings.rgb;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+

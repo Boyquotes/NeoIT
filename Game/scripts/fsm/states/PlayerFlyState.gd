@@ -8,14 +8,8 @@ func _ready():
 func enter(obj):
 	.enter(obj)
 	
-	#Start run animation and sound effect
-	_obj.set_primary_action("run-loop", 1.0)
-	_obj.get_node("SpatialSamplePlayer").play("run_grass")
-	
-	
-func exit():
-	#Stop run sound effect
-	_obj.get_node("SpatialSamplePlayer").stop_all()
+	#Start fly animation
+	_obj.set_primary_action("hover-loop", 1.0)
 	
 	
 func update(delta):
@@ -25,17 +19,10 @@ func update(delta):
 		
 	#Handle input
 	var move_vec = Vector3()
-	
-	if _obj.can_fly and Input.is_action_pressed("fly"):
-		get_node("..").change_state("PlayerFlyState")
-		return
+	_obj.velocity.y = 8
 	
 	if Input.is_action_pressed("jump"):
-		get_node("..").change_state("PlayerJumpState")
-		return
-	
-	if Input.is_action_pressed("walk"):
-		get_node("..").change_state("PlayerWalkState")
+		get_node("..").change_state("PlayerFallState")
 		return
 	
 	if Input.is_action_pressed("move_forward"):
@@ -50,6 +37,12 @@ func update(delta):
 	elif Input.is_action_pressed("move_right"):
 		move_vec.x = -1
 		
+	if Input.is_action_pressed("move_up"):
+		_obj.velocity.y += 4
+		
+	elif Input.is_action_pressed("move_down"):
+		_obj.velocity.y += -4
+		
 	if Input.is_action_pressed("turn_left"):
 		_obj.turn(false)
 		
@@ -61,11 +54,6 @@ func update(delta):
 		
 	elif Input.is_action_pressed("look_down"):
 		_obj.get_node("CameraPivot").rotate_x(-deg2rad(_obj.turn_speed))
-		
-	#Is there no movement?
-	if move_vec == Vector3():
-		get_node("..").change_state("PlayerIdleState")
-		return
 		
 	#Update movement
 	_obj.run(move_vec)
