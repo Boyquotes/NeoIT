@@ -43,10 +43,10 @@ func update(delta):
 	elif Input.is_action_pressed("move_down"):
 		_obj.velocity.y += -4
 		
-	if Input.is_action_pressed("turn_left"):
+	if Input.is_action_pressed("look_left"):
 		_obj.turn(false)
 		
-	elif Input.is_action_pressed("turn_right"):
+	elif Input.is_action_pressed("look_right"):
 		_obj.turn(true)
 		
 	if Input.is_action_pressed("look_up"):

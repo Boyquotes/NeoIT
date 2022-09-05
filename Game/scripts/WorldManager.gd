@@ -200,7 +200,7 @@ func _ready():
 	#and pass terrain system reference to critter 
 	#manager
 	get_node("SkyManager").particles = particles
-	get_node("CritterManager").terrain_system = get_node("TerrainSystem")
+	get_node("CritterManager").terrain_system = get_node("HeightmapTerrain")
 	return true
 	
 	
@@ -252,19 +252,22 @@ func load_map(path):
 	
 	#Load terrain
 	var path = "res://maps/images/" + map["heightmap"]
+	var heightmap = load(path)
 	
-	if not get_node("TerrainSystem").load_terrain(path):
+	if not heightmap:
 		logger.log_error("Failed to load terrain.")
 		return false
+		
+	get_node("HeightmapTerrain").heightmap = heightmap
 		
 	var material = compile_material(map["material"])
 	
 	if not material:
 		return false
 		
-	get_node("TerrainSystem").set_material(material)
+	get_node("HeightmapTerrain").set_material(material)
 	var scale = map["size"]
-	get_node("TerrainSystem").set_scale(Vector3(scale[0] / 512, scale[1], scale[2] / 512))
+	get_node("HeightmapTerrain").set_scale(Vector3(scale[0] / 512, scale[1], scale[2] / 512))
 	map_size = Vector3(scale[0], scale[1], scale[2])
 	var spawn = map["spawn_pos"]
 	spawn_pos = Vector3(spawn[0], spawn[1], spawn[2])
@@ -418,7 +421,7 @@ func load_map(path):
 					transform.origin = Vector3(pos[0], pos[1], pos[2])
 					
 				elif pos.size() == 2:
-					transform.origin = Vector3(pos[0], get_node("TerrainSystem").get_height(pos[0], pos[1]), pos[1])
+					transform.origin = Vector3(pos[0], get_node("HeightmapTerrain").get_height(pos[0], pos[1]), pos[1])
 					
 				object.set_transform(transform)
 				
@@ -559,7 +562,7 @@ func load_map(path):
 			
 			#Set random position
 			var pos = Vector3(rand_range(0, map_size.x), 0, rand_range(0, map_size.z))
-			pos.y = get_node("TerrainSystem").get_height(pos.x, pos.z)
+			pos.y = get_node("HeightmapTerrain").get_height(pos.x, pos.z)
 			var transform = object.get_transform()
 			transform.origin = pos
 			object.set_transform(transform)
@@ -674,7 +677,7 @@ func load_map(path):
 	
 func unload_map():
 	#Unload terrain and all world objects
-	get_node("TerrainSystem").unload_terrain()
+	get_node("HeightmapTerrain").heightmap = null
 	get_node("SkyManager").set_weather_cycle("")
 	get_tree().call_group(get_tree().GROUP_CALL_DEFAULT, 
 	    "WorldObjects", "queue_free")
@@ -750,7 +753,7 @@ func load_grass_chunk(pos, factor, grass_map, material):
 			    inst_cnt)
 			transform.origin = Vector3(x * factor.x, 0,
 			    z * factor.y)
-			transform.origin.y = get_node("TerrainSystem").get_height(
+			transform.origin.y = get_node("HeightmapTerrain").get_height(
 			    pos.x + transform.origin.x, 
 			    pos.z + transform.origin.z
 			)

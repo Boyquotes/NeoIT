@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=1]
+[gd_scene load_steps=46 format=1]
 
 [ext_resource path="res://scripts/WorldManager.gd" type="Script" id=1]
 [ext_resource path="res://scenes/objects/Portal.tscn" type="PackedScene" id=2]
@@ -35,15 +35,13 @@
 [ext_resource path="res://audio/sfx/wind1.smp" type="Sample" id=33]
 [ext_resource path="res://addons/Logger/Logger.gd" type="Script" id=34]
 [ext_resource path="res://addons/Logger/icon.png" type="Texture" id=35]
-[ext_resource path="res://addons/TerrainSystem/TerrainSystem.gd" type="Script" id=36]
-[ext_resource path="res://addons/TerrainSystem/icon.png" type="Texture" id=37]
-[ext_resource path="res://addons/ThreadPool/ThreadPool.gd" type="Script" id=38]
-[ext_resource path="res://addons/ThreadPool/icon.png" type="Texture" id=39]
-[ext_resource path="res://scenes/SkyManager.tscn" type="PackedScene" id=40]
-[ext_resource path="res://scenes/characters/CritterManager.tscn" type="PackedScene" id=41]
-[ext_resource path="res://scenes/characters/UnitManager.tscn" type="PackedScene" id=42]
-[ext_resource path="res://addons/QueuedStreamPlayer/QueuedStreamPlayer.gd" type="Script" id=43]
-[ext_resource path="res://addons/QueuedStreamPlayer/icon.png" type="Texture" id=44]
+[ext_resource path="res://addons/Cybermals-Vista/HeightmapTerrain/HeightmapTerrain.gd" type="Script" id=36]
+[ext_resource path="res://addons/Cybermals-Vista/HeightmapTerrain/HeightmapTerrain.png" type="Texture" id=37]
+[ext_resource path="res://scenes/SkyManager.tscn" type="PackedScene" id=38]
+[ext_resource path="res://scenes/characters/CritterManager.tscn" type="PackedScene" id=39]
+[ext_resource path="res://scenes/characters/UnitManager.tscn" type="PackedScene" id=40]
+[ext_resource path="res://addons/QueuedStreamPlayer/QueuedStreamPlayer.gd" type="Script" id=41]
+[ext_resource path="res://addons/QueuedStreamPlayer/icon.png" type="Texture" id=42]
 
 [sub_resource type="MaterialShader" id=1]
 
@@ -231,34 +229,27 @@ __meta__ = {
 "_editor_icon": ExtResource( 35 )
 }
 
-[node name="TerrainSystem" type="Spatial" parent="."]
+[node name="HeightmapTerrain" type="Spatial" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 36 )
 __meta__ = {
 "_editor_icon": ExtResource( 37 )
 }
-chunk_size = 64
+material = null
+heightmap = null
 
-[node name="ThreadPool" type="Node" parent="TerrainSystem"]
+[node name="SkyManager" parent="." instance=ExtResource( 38 )]
 
-script/script = ExtResource( 38 )
-__meta__ = {
-"_editor_icon": ExtResource( 39 )
-}
-max_threads = 2
+[node name="CritterManager" parent="." instance=ExtResource( 39 )]
 
-[node name="SkyManager" parent="." instance=ExtResource( 40 )]
-
-[node name="CritterManager" parent="." instance=ExtResource( 41 )]
-
-[node name="UnitManager" parent="." instance=ExtResource( 42 )]
+[node name="UnitManager" parent="." instance=ExtResource( 40 )]
 
 [node name="QueuedStreamPlayer" type="Node" parent="."]
 
-script/script = ExtResource( 43 )
+script/script = ExtResource( 41 )
 __meta__ = {
-"_editor_icon": ExtResource( 44 )
+"_editor_icon": ExtResource( 42 )
 }
 loop = true
 volume = 1.0
