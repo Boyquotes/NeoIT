@@ -1,0 +1,212 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://addons/RetroIT-Asset-Importer/MaterialImporter/MaterialImportDialog.gd" type="Script" id=1]
+
+[node name="MaterialImportDialog" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="MaterialImportDialog" type="ConfirmationDialog" parent="."]
+
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 262.0
+margin/top = 180.0
+margin/right = -288.0
+margin/bottom = -190.0
+popup/exclusive = false
+window/title = "Import RetroIT Material"
+dialog/hide_on_ok = true
+
+[node name="SourceFileLabel" type="Label" parent="MaterialImportDialog"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 84.0
+margin/bottom = 24.0
+text = "Source File:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="SourceFile" type="LineEdit" parent="MaterialImportDialog"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 30.0
+margin/right = 510.0
+margin/bottom = 54.0
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="SourceFileButton" type="Button" parent="MaterialImportDialog"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 520.0
+margin/top = 30.0
+margin/right = 540.0
+margin/bottom = 50.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = ".."
+flat = false
+
+[node name="TargetPathLabel" type="Label" parent="MaterialImportDialog"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 60.0
+margin/right = 84.0
+margin/bottom = 74.0
+text = "Target Path:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="TargetPath" type="LineEdit" parent="MaterialImportDialog"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 80.0
+margin/right = 510.0
+margin/bottom = 104.0
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="TargetPathButton" type="Button" parent="MaterialImportDialog"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 520.0
+margin/top = 80.0
+margin/right = 540.0
+margin/bottom = 100.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = ".."
+flat = false
+
+[node name="MaterialNameLabel" type="Label" parent="MaterialImportDialog"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 110.0
+margin/right = 50.0
+margin/bottom = 124.0
+text = "Material Name:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="MaterialName" type="OptionButton" parent="MaterialImportDialog"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 130.0
+margin/right = 540.0
+margin/bottom = 150.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+align = 0
+selected = -1
+items = [  ]
+
+[node name="OpenDialog" type="FileDialog" parent="."]
+
+visibility/visible = false
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 452.0
+margin/top = 230.0
+margin/right = -468.0
+margin/bottom = -240.0
+popup/exclusive = false
+window/title = "Open a File"
+dialog/hide_on_ok = false
+mode = 0
+access = 0
+filters = StringArray( "*.material;RetroIT Material" )
+show_hidden_files = false
+
+[node name="DirDialog" type="FileDialog" parent="."]
+
+visibility/visible = false
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 452.0
+margin/top = 230.0
+margin/right = -468.0
+margin/bottom = -240.0
+popup/exclusive = false
+window/title = "Open a Directory"
+dialog/hide_on_ok = false
+mode = 2
+access = 0
+filters = StringArray(  )
+show_hidden_files = false
+
+[connection signal="confirmed" from="MaterialImportDialog" to="." method="_on_MaterialImportDialog_confirmed"]
+
+[connection signal="text_changed" from="MaterialImportDialog/SourceFile" to="." method="_on_SourceFile_text_changed"]
+
+[connection signal="pressed" from="MaterialImportDialog/SourceFileButton" to="." method="_on_SourceFileButton_pressed"]
+
+[connection signal="pressed" from="MaterialImportDialog/TargetPathButton" to="." method="_on_TargetPathButton_pressed"]
+
+[connection signal="item_selected" from="MaterialImportDialog/MaterialName" to="." method="_on_MaterialName_item_selected"]
+
+[connection signal="file_selected" from="OpenDialog" to="." method="_on_OpenDialog_file_selected"]
+
+[connection signal="dir_selected" from="DirDialog" to="." method="_on_DirDialog_dir_selected"]
+
+
