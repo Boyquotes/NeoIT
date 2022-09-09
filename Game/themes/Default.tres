@@ -1,14 +1,16 @@
 [gd_resource type="Theme" load_steps=28 format=1]
 
-[ext_resource path="res://scenes/ui/images/buttonOver.png" type="Texture" id=1]
-[ext_resource path="res://scenes/ui/images/buttonUp.png" type="Texture" id=2]
-[ext_resource path="res://scenes/ui/images/buttonDown.png" type="Texture" id=3]
-[ext_resource path="res://scenes/ui/images/grabberUp.png" type="Texture" id=4]
-[ext_resource path="res://scenes/ui/images/grabberOver.png" type="Texture" id=5]
-[ext_resource path="res://scenes/ui/images/slider.png" type="Texture" id=6]
-[ext_resource path="res://scenes/ui/images/borderCenter.png" type="Texture" id=7]
-[ext_resource path="res://scenes/ui/images/listSelectHighlight.png" type="Texture" id=8]
+[ext_resource path="res://themes/images/default/buttonOver.png" type="Texture" id=1]
+[ext_resource path="res://themes/images/default/buttonUp.png" type="Texture" id=2]
+[ext_resource path="res://themes/images/default/buttonDown.png" type="Texture" id=3]
+[ext_resource path="res://themes/images/default/grabberUp.png" type="Texture" id=4]
+[ext_resource path="res://themes/images/default/grabberOver.png" type="Texture" id=5]
+[ext_resource path="res://themes/images/default/slider.png" type="Texture" id=6]
+[ext_resource path="res://themes/images/default/borderCenter.png" type="Texture" id=7]
+[ext_resource path="res://themes/images/default/listSelectHighlight.png" type="Texture" id=8]
 [ext_resource path="res://fonts/ConsolaMono.ttf" type="DynamicFontData" id=9]
+
+
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

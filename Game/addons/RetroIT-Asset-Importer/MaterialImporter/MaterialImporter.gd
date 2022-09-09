@@ -15,7 +15,8 @@ func init(root_control):
 	
 func fini():
 	#Destroy import dialog
-	mtl_import_dlg.queue_free()
+	if mtl_import_dlg:
+		mtl_import_dlg.queue_free()
 
 
 static func get_name():
@@ -27,7 +28,7 @@ func get_visible_name():
 
 
 func can_reimport_multiple_files():
-	return true
+	return false
 	
 	
 func import_dialog(from):
@@ -94,45 +95,65 @@ func import(path, from):
 				pass #todo
 			
 			#Mask?
-			if "color_op" in texture_unit and texture_unit["color_op"] == "alpha_blend":
-				uniform_block += "uniform texture mask" + str(mask_cnt) + ";\n"
-				mtl.set_shader_param("mask" + str(mask_cnt), find_texture(texture_unit["texture"]))
+			if (("color_op" in texture_unit and 
+			    texture_unit["color_op"] == "alpha_blend") or
+			    ("alpha_op_ex" in texture_unit and
+			    texture_unit["alpha_op_ex"] == "source1 src_texture src_texture")):
+				uniform_block += "uniform texture MASK" + str(mask_cnt) + ";\n"
+				mtl.set_shader_param("MASK" + str(mask_cnt), find_texture(texture_unit["texture"]))
 				mask_cnt += 1
+				
+			#Modulate layer?
+			elif "color_op" in texture_unit and texture_unit["color_op"] == "modulate":
+				uniform_block += "uniform texture TEXTURE" + str(layer_cnt) + ";\n"
+				layer_block += "vec3 layer" + str(layer_cnt) + " = tex(TEXTURE" + str(layer_cnt) + ", UV" + scale + ").rgb;\n"
+				blend_block += "DIFFUSE = DIFFUSE * layer" + str(layer_cnt) + ";\n"
 				
 			#Layer?
 			else:
-				uniform_block += "uniform texture tex" + str(layer_cnt) + ";\n"
-				layer_block += "vec3 layer" + str(layer_cnt) + " = tex(tex" + str(layer_cnt) + ", UV" + scale + ").rgb;\n"
+				uniform_block += "uniform texture TEXTURE" + str(layer_cnt) + ";\n"
+				layer_block += "vec3 layer" + str(layer_cnt) + " = tex(TEXTURE" + str(layer_cnt) + ", UV" + scale + ").rgb;\n"
 				
 				if layer_cnt == 0:
 					blend_block += "DIFFUSE = layer0;\n"
 					
 				else:
-					blend_block += "DIFFUSE = mix(DIFFUSE, layer" + str(layer_cnt) + ", tex(mask" + str(mask_cnt - 1) + ", UV).a);\n"
+					blend_block += "DIFFUSE = mix(DIFFUSE, layer" + str(layer_cnt) + ", tex(MASK" + str(mask_cnt - 1) + ", UV).a);\n"
 				
-				mtl.set_shader_param("tex" + str(layer_cnt), find_texture(texture_unit["texture"]))
+				mtl.set_shader_param("TEXTURE" + str(layer_cnt), find_texture(texture_unit["texture"]))
 				layer_cnt += 1
 				
 	#Combine code blocks into shader program
 	var fshader = uniform_block + "\n" + layer_block + "\n" + blend_block
 	shader.set_code("", fshader, "")
-	print(fshader)
 	
 	#Set material shader
 	mtl.set_shader(shader)
 	
+	#Update MD5 sum
+	var file = File.new()
+	from.set_source_md5(0, file.get_md5(source))
+	mtl.set_import_metadata(from)
+	
+	#Save the material
+	var err = ResourceSaver.save(path, mtl)
+	
+	if err:
+		print("Failed to save '" + path + "'.")
+		
+	return err
+	
 	
 func _on_MaterialImportDialog_import_material(source, dest, mtl_name):
 	#Build output path
-	var filename = mtl_name.replace("/", "-") + ".tres"
+	var filename = mtl_name.replace("/", "-") + ".mtl"
 	var path = dest.plus_file(filename)
 	
 	#Build resource import metadata
-	var file = File.new()
 	var res_meta = ResourceImportMetadata.new()
 	res_meta.add_source(source)
+	res_meta.set_editor("material")
 	res_meta.set_option("mtl_name", mtl_name)
-	res_meta.set_source_md5(0, file.get_md5(source))
 	
 	#Import the material
 	import(path, res_meta)
@@ -316,6 +337,11 @@ func parse_texture_unit(file, line_no):
 		elif line.begins_with("colour_op_ex "):
 			texture_unit["color_op_ex"] = line.right(13)
 			
+		#Extended alpha operation?
+		elif line.begins_with("alpha_op_ex "):
+			texture_unit["alpha_op_ex"] = line.right(12)
+			print(line)
+			
 		#Scroll animation?
 		elif line.begins_with("scroll_anim "):
 			texture_unit["scroll_anim"] = line.right(12)
@@ -323,8 +349,6 @@ func parse_texture_unit(file, line_no):
 		#End of block?
 		elif line.begins_with("}"):
 			return [texture_unit, line_no]
-			
-		print("Line " + str(line_no) + ": " + line)
 		
 	#End of block missing
 	print("Parser Error: Line " + str(line_no) + ": Expected '}'.")
@@ -332,5 +356,45 @@ func parse_texture_unit(file, line_no):
 	
 	
 func find_texture(filename):
-	#<================ stopped here
+	#Recursively search the project directory for the given file
+	var dir = Directory.new()
+	var queue = ["res://"]
+	
+	while not queue.empty():
+		#Get next directory to search
+		var dirname = queue.front()
+		queue.pop_front()
+		
+		#Check directory contents
+		dir.open(dirname)
+		dir.list_dir_begin()
+		var file = dir.get_next()
+		
+		while file != "":
+			#Skip current and parent directories
+			if file == "." or file == "..":
+				pass
+				
+			#Is the file a directory?
+			elif dir.dir_exists(dirname.plus_file(file)):
+				#Queue the sub-directory
+				queue.push_back(dirname.plus_file(file))
+				
+			#Is the file the one we are searching for?
+			elif file == filename:
+				#End our search, load the texture, and return it
+				dir.list_dir_end()
+				var texture = load(dirname.plus_file(file))
+				
+				if not texture:
+					print("ERROR: Failed to load '" + filename + "'.")
+					
+				return texture
+			
+			#Get next file
+			file = dir.get_next()
+		
+		dir.list_dir_end()
+		
+	print("WARNING: Failed to find texture '" + filename + "'.")
 	return null
