@@ -117,8 +117,11 @@ func import(path, from):
 				if layer_cnt == 0:
 					blend_block += "DIFFUSE = layer0;\n"
 					
-				else:
+				elif mask_cnt:
 					blend_block += "DIFFUSE = mix(DIFFUSE, layer" + str(layer_cnt) + ", tex(MASK" + str(mask_cnt - 1) + ", UV).a);\n"
+					
+				else:
+					blend_block += "DIFFUSE = DIFFUSE * layer" + str(layer_cnt) + ";\n"
 				
 				mtl.set_shader_param("TEXTURE" + str(layer_cnt), find_texture(texture_unit["texture"]))
 				layer_cnt += 1
