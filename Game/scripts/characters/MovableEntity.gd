@@ -2,7 +2,7 @@ extends KinematicBody
 
 signal collided(collider)
 
-export (float) var gravity = 8
+export (float) var gravity = 4
 export (float) var mass = 128
 
 var velocity = Vector3()

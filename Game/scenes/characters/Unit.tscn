@@ -188,10 +188,10 @@ collide_with/rigid = true
 collide_with/character = true
 collision/margin = 0.001
 script/script = ExtResource( 1 )
-gravity = 8
+gravity = 4
 mass = 128
-walk_speed = 32
-run_speed = 64
+walk_speed = 64
+run_speed = 128
 turn_speed = 2
 jump_strength = 64
 max_hp = 500
@@ -382,7 +382,7 @@ base_path = NodePath("../feline")
 master_player = NodePath("../feline/AnimationPlayer")
 data = {
 "active": false,
-"connections": [ "viseme-pos", "out", 0, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "primary-action", "primary-speed", 0, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1 ],
+"connections": [ "viseme-pos", "out", 0, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "primary-action", "primary-speed", 0, "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1 ],
 "master": NodePath("../feline/AnimationPlayer"),
 "nodes": [ {
 "id": "out",
@@ -394,27 +394,10 @@ data = {
 "pos": Vector2( 942, 357 ),
 "type": "mix"
 }, {
-"id": "head-pos",
-"mix": 0.0,
-"pos": Vector2( 538, 73 ),
-"type": "mix"
-}, {
 "filter": [  ],
 "from": "idle-loop",
 "id": "primary-action",
 "pos": Vector2( 9, 48 ),
-"type": "animation"
-}, {
-"filter": [  ],
-"from": "face-open-jaw",
-"id": "facial-expression",
-"pos": Vector2( 9, 287 ),
-"type": "animation"
-}, {
-"filter": [  ],
-"from": "mouth-A",
-"id": "viseme",
-"pos": Vector2( 9, 405 ),
 "type": "animation"
 }, {
 "id": "primary-speed",
@@ -422,15 +405,32 @@ data = {
 "scale": 0.25,
 "type": "timescale"
 }, {
+"filter": [  ],
+"from": "mouth-A",
+"id": "viseme",
+"pos": Vector2( 9, 405 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "turn-right",
+"id": "head-movement",
+"pos": Vector2( 9, 167 ),
+"type": "animation"
+}, {
+"id": "head-pos",
+"mix": 0.0,
+"pos": Vector2( 538, 73 ),
+"type": "mix"
+}, {
 "id": "face-pos",
 "mix": 0.0,
 "pos": Vector2( 750, 194 ),
 "type": "mix"
 }, {
 "filter": [  ],
-"from": "turn-right",
-"id": "head-movement",
-"pos": Vector2( 9, 167 ),
+"from": "face-open-jaw",
+"id": "facial-expression",
+"pos": Vector2( 9, 287 ),
 "type": "animation"
 } ]
 }

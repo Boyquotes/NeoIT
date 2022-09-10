@@ -17,17 +17,17 @@ func _unhandled_input(event):
 
 
 func _on_LoadButton_pressed():
-	#Load a world
+	#Load a map
 	get_node("UI/UI/Panel/LoadButton").release_focus()
 	var name = get_node("UI/UI/Panel/World").get_text()
 	
-	if not get_node("WorldManager").load_world(name):
+	if not get_node("WorldManager").load_map(name):
 		show_error("Failed to load world '" + name + "'.")
 
 
 func _on_UnloadButton_pressed():
-	#Unload current world
-	get_node("WorldManager").unload_world()
+	#Unload current map
+	get_node("WorldManager").unload_map()
 	
 	
 func _on_SpawnButton_pressed():
