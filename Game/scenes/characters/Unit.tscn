@@ -190,10 +190,10 @@ collision/margin = 0.001
 script/script = ExtResource( 1 )
 gravity = 4
 mass = 128
-walk_speed = 64
-run_speed = 128
+walk_speed = 32
+run_speed = 64
 turn_speed = 2
-jump_strength = 64
+jump_strength = 32
 max_hp = 500
 is_invincible = false
 body_mat = SubResource( 2 )
@@ -382,17 +382,12 @@ base_path = NodePath("../feline")
 master_player = NodePath("../feline/AnimationPlayer")
 data = {
 "active": false,
-"connections": [ "viseme-pos", "out", 0, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "primary-action", "primary-speed", 0, "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1 ],
+"connections": [ "viseme-pos", "out", 0, "face-pos", "viseme-pos", 0, "viseme", "viseme-pos", 1, "primary-speed", "head-pos", 0, "head-movement", "head-pos", 1, "head-pos", "face-pos", 0, "facial-expression", "face-pos", 1, "primary-action", "primary-speed", 0 ],
 "master": NodePath("../feline/AnimationPlayer"),
 "nodes": [ {
 "id": "out",
 "pos": Vector2( 1278, 369 ),
 "type": "output"
-}, {
-"id": "viseme-pos",
-"mix": 0.0,
-"pos": Vector2( 942, 357 ),
-"type": "mix"
 }, {
 "filter": [  ],
 "from": "idle-loop",
@@ -400,16 +395,16 @@ data = {
 "pos": Vector2( 9, 48 ),
 "type": "animation"
 }, {
-"id": "primary-speed",
-"pos": Vector2( 235, 40 ),
-"scale": 0.25,
-"type": "timescale"
-}, {
 "filter": [  ],
 "from": "mouth-A",
 "id": "viseme",
 "pos": Vector2( 9, 405 ),
 "type": "animation"
+}, {
+"id": "viseme-pos",
+"mix": 0.0,
+"pos": Vector2( 942, 357 ),
+"type": "mix"
 }, {
 "filter": [  ],
 "from": "turn-right",
@@ -427,6 +422,11 @@ data = {
 "pos": Vector2( 750, 194 ),
 "type": "mix"
 }, {
+"id": "primary-speed",
+"pos": Vector2( 235, 40 ),
+"scale": 0.25,
+"type": "timescale"
+}, {
 "filter": [  ],
 "from": "face-open-jaw",
 "id": "facial-expression",
@@ -442,7 +442,7 @@ data = {
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.76572, 0 )
 
-[node name="Camera" type="Camera" parent="CameraPivot"]
+[node name="UnitCam" type="Camera" parent="CameraPivot"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -32 )

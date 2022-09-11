@@ -15,7 +15,7 @@ func enter(obj):
 	
 func update(delta):
 	#Are we in free cam mode?
-	if not _obj.get_node("CameraPivot/Camera").is_current():
+	if not _obj.get_node("CameraPivot/UnitCam").is_current():
 		return
 	
 	#Handle input

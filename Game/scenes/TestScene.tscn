@@ -74,7 +74,7 @@ script/script = ExtResource( 3 )
 __meta__ = {
 "_editor_icon": ExtResource( 4 )
 }
-move_speed = 8
+move_speed = 8.0
 look_speed = 128
 slowdown_factor = 0.5
 rotation = Vector3( 0, 0, 0 )

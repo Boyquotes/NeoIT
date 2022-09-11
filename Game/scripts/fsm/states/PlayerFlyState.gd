@@ -14,12 +14,12 @@ func enter(obj):
 	
 func update(delta):
 	#Are we in free cam mode?
-	if not _obj.get_node("CameraPivot/Camera").is_current():
+	if not _obj.get_node("CameraPivot/UnitCam").is_current():
 		return
 		
 	#Handle input
 	var move_vec = Vector3()
-	_obj.velocity.y = 8
+	_obj.velocity.y = _obj.gravity
 	
 	if Input.is_action_pressed("jump"):
 		get_node("..").change_state("PlayerFallState")
@@ -38,10 +38,10 @@ func update(delta):
 		move_vec.x = -1
 		
 	if Input.is_action_pressed("move_up"):
-		_obj.velocity.y += 4
+		_obj.velocity.y += 8
 		
 	elif Input.is_action_pressed("move_down"):
-		_obj.velocity.y += -4
+		_obj.velocity.y += -8
 		
 	if Input.is_action_pressed("look_left"):
 		_obj.turn(false)

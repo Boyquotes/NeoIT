@@ -10,7 +10,6 @@ func init(root_control):
 	mtl_import_dlg = MaterialImportDialog.instance()
 	mtl_import_dlg.connect("import_material", self, "_on_MaterialImportDialog_import_material")
 	root_control.add_child(mtl_import_dlg)
-	mtl_import_dlg.get_node("MaterialImportDialog").hide()
 	
 	
 func fini():
@@ -32,9 +31,27 @@ func can_reimport_multiple_files():
 	
 	
 func import_dialog(from):
+	#Reimport?
+	if from != "":
+		#Get import metadata
+		var mtl = load(from)
+		var metadata = mtl.get_import_metadata()
+		var source = metadata.get_source_path(0)
+		var dest = from.get_base_dir()
+		var mtl_name = metadata.get_option("mtl_name")
+		
+		#Set previous data
+		mtl_import_dlg.get_node("OpenDialog").set_current_path(source)
+		mtl_import_dlg.get_node("OpenDialog").emit_signal("file_selected", source)
+		mtl_import_dlg.get_node("DirDialog").set_current_path(dest)
+		mtl_import_dlg.get_node("DirDialog").emit_signal("dir_selected", dest)
+		
+		for i in range(mtl_import_dlg.get_node("MaterialImportDialog/MaterialName").get_item_count()):
+			if mtl_import_dlg.get_node("MaterialImportDialog/MaterialName").get_item_text(i) == mtl_name:
+				mtl_import_dlg.get_node("MaterialImportDialog/MaterialName").select(i)
+				break
+		
 	#Display material import dialog
-	mtl_import_dlg.get_node("OpenDialog").set_current_path(from)
-	mtl_import_dlg.get_node("OpenDialog").invalidate()
 	mtl_import_dlg.get_node("MaterialImportDialog").show()
 	
 	
@@ -155,7 +172,7 @@ func _on_MaterialImportDialog_import_material(source, dest, mtl_name):
 	#Build resource import metadata
 	var res_meta = ResourceImportMetadata.new()
 	res_meta.add_source(source)
-	res_meta.set_editor("material")
+	res_meta.set_editor("retro_it_material")
 	res_meta.set_option("mtl_name", mtl_name)
 	
 	#Import the material

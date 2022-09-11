@@ -4,6 +4,10 @@ export (PackedScene) var Unit
 
 
 func _ready():
+	#Add fly cam to camera manager and activate it
+	CameraManager.add_camera(get_node("FlyCam"))
+	CameraManager.switch_camera("FlyCam")
+	
 	#Turn on event processing
 	set_process_unhandled_input(true)
 	
@@ -42,7 +46,7 @@ func _on_SpawnUnitButton_pressed():
 	
 	#Spawn a unit
 	var unit = get_node("WorldManager/UnitManager").spawn_player()
-	unit.set_translation(Vector3(10, 50, 10))
+	unit.set_translation(Vector3(0, 50, 0))
 	unit.set_head("head02")
 	unit.set_tail("tail02")
 	unit.set_mane("mane02")
@@ -62,7 +66,10 @@ func _on_SpawnUnitButton_pressed():
 	unit.set_body_marking("bodyMark20")
 	unit.set_head_marking("headMark15")
 	unit.set_tail_marking("tailMark03")
-	unit.get_node("CameraPivot/Camera").make_current()
+	
+	#Add the unit's camera to the camera manager and activate it
+	CameraManager.add_camera(unit.get_node("CameraPivot/UnitCam"))
+	CameraManager.switch_camera("UnitCam")
 	
 	#Spawn a second unit
 	unit = get_node("WorldManager/UnitManager").spawn_unit("Test")

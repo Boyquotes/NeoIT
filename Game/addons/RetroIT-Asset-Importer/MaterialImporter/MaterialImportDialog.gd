@@ -15,17 +15,18 @@ func _ready():
 	
 	#Set initial target path
 	get_node("DirDialog").set_current_path("res://")
-	get_node("DirDialog").invalidate()
 
 
 func _on_SourceFileButton_pressed():
 	#Show open dialog
 	get_node("OpenDialog").show()
+	get_node("OpenDialog").invalidate()
 
 
 func _on_TargetPathButton_pressed():
 	#Show directory dialog
 	get_node("DirDialog").show()
+	get_node("DirDialog").invalidate()
 
 
 func _on_OpenDialog_file_selected(path):

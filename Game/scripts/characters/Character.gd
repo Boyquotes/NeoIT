@@ -7,10 +7,10 @@ enum Alliance {
     ALLIANCE_PLAYER
 }
 
-export (float) var walk_speed = 64
-export (float) var run_speed = 128
+export (float) var walk_speed = 32
+export (float) var run_speed = 64
 export (float) var turn_speed = 2
-export (float) var jump_strength = 64
+export (float) var jump_strength = 32
 export (int) var max_hp = 500 setget set_max_hp
 export (bool) var is_invincible = false
 

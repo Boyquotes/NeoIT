@@ -1,0 +1,171 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://addons/RetroIT-Asset-Importer/MapImporter/MapImportDialog.gd" type="Script" id=1]
+
+[node name="MapImporterDialog" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="MapImportDialog" type="ConfirmationDialog" parent="."]
+
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 242.0
+margin/top = 70.0
+margin/right = -298.0
+margin/bottom = -80.0
+popup/exclusive = false
+window/title = "Import RetroIT Map"
+dialog/hide_on_ok = true
+
+[node name="SourceFileLabel" type="Label" parent="MapImportDialog"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 57.0
+margin/bottom = 24.0
+text = "Source File:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="SourceFile" type="LineEdit" parent="MapImportDialog"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 30.0
+margin/right = 500.0
+margin/bottom = 54.0
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="SourceFileButton" type="Button" parent="MapImportDialog"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 510.0
+margin/top = 30.0
+margin/right = 530.0
+margin/bottom = 50.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = ".."
+flat = false
+
+[node name="TargetPathLabel" type="Label" parent="MapImportDialog"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 60.0
+margin/right = 84.0
+margin/bottom = 74.0
+text = "Target Path:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="TargetPath" type="LineEdit" parent="MapImportDialog"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 80.0
+margin/right = 500.0
+margin/bottom = 104.0
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="TargetPathButton" type="Button" parent="MapImportDialog"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 510.0
+margin/top = 80.0
+margin/right = 530.0
+margin/bottom = 100.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = ".."
+flat = false
+
+[node name="OpenDialog" type="FileDialog" parent="."]
+
+visibility/visible = false
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 392.0
+margin/top = 190.0
+margin/right = -408.0
+margin/bottom = -210.0
+popup/exclusive = false
+window/title = "Open a File"
+dialog/hide_on_ok = false
+mode = 0
+access = 0
+filters = StringArray( "*.world;RetroIT World File" )
+show_hidden_files = false
+
+[node name="DirDialog" type="FileDialog" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 120.0
+margin/top = 110.0
+margin/right = 920.0
+margin/bottom = 510.0
+popup/exclusive = false
+window/title = "Open a Directory"
+dialog/hide_on_ok = false
+mode = 2
+access = 0
+filters = StringArray(  )
+show_hidden_files = false
+
+[connection signal="confirmed" from="MapImportDialog" to="." method="_on_MapImportDialog_confirmed"]
+
+[connection signal="pressed" from="MapImportDialog/SourceFileButton" to="." method="_on_SourceFileButton_pressed"]
+
+[connection signal="pressed" from="MapImportDialog/TargetPathButton" to="." method="_on_TargetPathButton_pressed"]
+
+[connection signal="file_selected" from="OpenDialog" to="." method="_on_OpenDialog_file_selected"]
+
+[connection signal="dir_selected" from="DirDialog" to="." method="_on_DirDialog_dir_selected"]
+
+
