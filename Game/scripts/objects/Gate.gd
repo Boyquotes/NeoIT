@@ -1,28 +1,18 @@
+tool
 extends Area
 
-var destination = ""
-var destination_vec = Vector3()
+export (String) var destination = ""
+export (Vector3) var destination_vec = Vector3()
+export (Material) var material setget set_material, get_material
 
 
 func _ready():
 	pass
 	
 	
-func set_destination(map):
-	destination = map
+func set_material(value):
+	get_node("portal/portal").set_material_override(value)
 	
 	
-func get_destination():
-	return destination
-	
-	
-func set_destination_vec(vec):
-	destination_vec = vec
-	
-	
-func get_destination_vec():
-	return destination_vec
-	
-	
-func set_material(material):
-	get_node("portal/portal").set_material_override(material)
+func get_material():
+	return get_node("portal/portal").get_material_override()
