@@ -81,8 +81,12 @@ func import(path, from):
 		#Parse section
 		section = section.split("\n")
 		
+		#Skip empty section
+		if section[0] == "":
+			continue
+		
 		#Initialize section?
-		if section[0].begins_with("Initialize"):
+		elif section[0].begins_with("Initialize"):
 			#Add spawn point
 			var spawn_point = Spatial.new()
 			spawn_point.set_name("SpawnPoint")
@@ -97,7 +101,7 @@ func import(path, from):
 			var portal = load("res://scenes/objects/Portal.tscn").instance()
 			var pos = section[1].split_floats(" ")
 			portal.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
-			var radius = int(section[2])
+			var radius = float(section[2])
 			portal.set_scale(Vector3(radius, radius, radius) * .1)
 			portal.destination = section[3]
 			portal.material = FixedMaterial.new()
@@ -112,6 +116,7 @@ func import(path, from):
 			var gate = load("res://scenes/objects/Gate.tscn").instance()
 			var pos = section[2].split_floats(" ")
 			gate.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
+			gate.set_scale(Vector3(40, 40, 40) * .1)
 			gate.destination = section[3]
 			var destination_vec = section[4].split_floats(" ")
 			gate.destination_vec = Vector3(destination_vec[0], 0, destination_vec[1]) * .1
@@ -131,7 +136,171 @@ func import(path, from):
 			
 		#Water plane section?
 		elif section[0].begins_with("WaterPlane"):
-			pass #<=================== next
+			#Add water plane
+			var water_plane
+			
+			if section.size() == 7 and section[6] == "true":
+				water_plane = load("res://scenes/objects/IcePlane.tscn").instance()
+				
+			else:
+				water_plane = load("res://scenes/objects/WaterPlane.tscn").instance()
+				
+			var pos = section[1].split_floats(" ")
+			water_plane.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
+			water_plane.set_scale(Vector3(float(section[2]), 1, float(section[3])) * .1)
+			#TODO: Sound and material
+			root.add_child(water_plane)
+			water_plane.set_owner(root)
+			
+		#Object section?
+		elif section[0].begins_with("Object"):
+			#Add map object
+			var MapObject = load("res://meshes/scenery".plus_file(section[1].replace(".mesh", ".scn")))
+			
+			if not MapObject:
+				print("ERROR: Failed to load map object '" + section[1].replace(".mesh", ".scn") + "'.")
+				
+			else:
+				var obj = MapObject.instance()
+				var pos = section[2].split_floats(" ")
+				obj.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
+				var scale = section[3].split_floats(" ")
+				obj.set_scale(Vector3(scale[0], scale[1], scale[2]) * .1)
+				var rot = section[4].split_floats(" ")
+				obj.set_rotation(Vector3(deg2rad(rot[0]), deg2rad(rot[1]), deg2rad(rot[2])))
+				#TODO: Sound and material
+				root.add_child(obj)
+				obj.set_owner(root)
+				
+		#Particle section?
+		elif section[0].begins_with("Particle"):
+			#Add particle system
+			var ParticleSystem = load("res://particles".plus_file(section[1] + ".tscn"))
+			
+			if not ParticleSystem:
+				print("ERROR: Failed to load particle system '" + section[1] + ".tscn'.")
+				
+			else:
+				var particle = ParticleSystem.instance()
+				var pos = section[2].split_floats(" ")
+				particle.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
+				#TODO: Sound
+				root.add_child(particle)
+				particle.set_owner(root)
+				
+		#Weather cycle section?
+		elif section[0].begins_with("WeatherCycle"):
+			#TODO: Need to decide how to do this.
+			pass
+			
+		#Interior section?
+		elif section[0].begins_with("Interior"):
+			#TODO: Do this in Blender?
+			pass
+			
+		#Light section?
+		elif section[0].begins_with("Light"):
+			#Add light
+			var light = OmniLight.new()
+			var pos = section[1].split_floats(" ")
+			light.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
+			var color = section[2].split_floats(" ")
+			light.set_color(Light.COLOR_DIFFUSE, Color(color[0], color[1], color[2]))
+			root.add_child(light)
+			light.set_owner(root)
+			
+		#Billboard section?
+		elif section[0].begins_with("Billboard"):
+			#Add billboard
+			var billboard = Sprite3D.new()
+			billboard.set_draw_flag(Sprite3D.FLAG_BILLBOARD, true)
+			billboard.set_draw_flag(Sprite3D.FLAG_DOUBLE_SIDED, true)
+			var pos = section[1].split_floats(" ")
+			billboard.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
+			var scale = section[2].split_floats(" ")
+			billboard.set_scale(Vector3(scale[0], scale[1], 1))
+			#TODO: Material
+			root.add_child(billboard)
+			billboard.set_owner(root)
+			
+		#Sphere wall section?
+		elif section[0].begins_with("SphereWall"):
+			#TODO: Figure out how to do inverted sphere
+			pass
+			
+		#Box wall section?
+		elif section[0].begins_with("BoxWall"):
+			#Add box wall
+			var box_wall = load("res://scenes/objects/BoxWall.tscn").instance()
+			var pos = section[1].split_floats(" ")
+			box_wall.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
+			var extents = section[2].split_floats(" ")
+			box_wall.set_scale(Vector3(extents[0], 5000, extents[1]) * .1)
+			root.add_child(box_wall)
+			box_wall.set_owner(root)
+			
+		#Map effect section?
+		elif section[0].begins_with("MapEffect"):
+			#TODO: Figure out how to implement this.
+			pass
+			
+		#Grass section?
+		elif section[0].begins_with("Grass"):
+			#TODO: Need to create Cybermals-Terra first and use Grass node.
+			pass
+			
+		#Random trees or random bushes section?
+		elif (section[0].begins_with("RandomTrees") or 
+			section[0].begins_with("RandomBushes")):
+			#TODO: Need to create Cybermals-Terra first and use RandomObjects node.
+			pass
+			
+		#Trees or bushes section?
+		elif (section[0].begins_with("Trees") or 
+			section[0].begins_with("NewTrees") or 
+			section[0].begins_with("Bushes") or 
+			section[0].begins_with("NewBushes") or 
+			section[0].begins_with("FloatingBushes") or 
+			section[0].begins_with("NewFloatingBushes")):
+			#TODO: Need to create Cybermals-Terra first and use Foliage node
+			pass
+			
+		#Collision box section?
+		elif section[0].begins_with("CollBox"):
+			#Add collision box
+			var col_box = load("res://scenes/objects/CollisionBox.tscn").instance()
+			var pos = section[1].split_floats(" ")
+			col_box.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
+			var size = section[2].split_floats(" ")
+			col_box.set_scale(Vector3(size[0], size[1], size[2]) * .1)
+			root.add_child(col_box)
+			col_box.set_owner(root)
+			
+		#Collision sphere section?
+		elif section[0].begins_with("CollSphere"):
+			#Add collision sphere
+			var col_sphere = load("res://scenes/objects/CollisionSphere.tscn").instance()
+			var pos = section[1].split_floats(" ")
+			col_sphere.set_translation(Vector3(pos[0], pos[1], pos[2]) * .1)
+			var radius = float(section[2])
+			col_sphere.set_scale(Vector3(radius, radius, radius) * .1)
+			root.add_child(col_sphere)
+			col_sphere.set_owner(root)
+			
+		#Spawn critters section?
+		elif section[0].begins_with("SpawnCritters"):
+			#TODO: Need a way to implement this.
+			pass
+			
+		#Freeze time section?
+		elif section[0].begins_with("FreezeTime"):
+			#TODO: Need a way to implement this.
+			pass
+			
+		#Music section?
+		elif section[0].begins_with("Music"):
+			#TODO: Need to create Cybermals-Tranquility first
+			pass
 			
 		#Unknown?
 		else:

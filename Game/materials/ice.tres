@@ -1,17 +1,17 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=1]
 
-[ext_resource path="res://meshes/terrain/textures/Water02.png" type="Texture" id=1]
-[ext_resource path="res://meshes/terrain/textures/Water01.png" type="Texture" id=2]
+[ext_resource path="res://meshes/terrain/textures/Water01.png" type="Texture" id=1]
+[ext_resource path="res://meshes/terrain/textures/Water02.png" type="Texture" id=2]
 
 [sub_resource type="MaterialShader" id=1]
 
 _code = {
-"fragment": "uniform texture undercurrent;
-uniform texture overcurrent;
+"fragment": "uniform texture overcurrent;
+uniform texture undercurrent;
 
-//Sample layers
-vec4 layer0 = tex(undercurrent, UV + vec2(TIME, TIME) * .1);
-vec4 layer1 = tex(overcurrent, UV + vec2(TIME, -TIME) * .1);
+//Sample layer textures
+vec4 layer0 = tex(overcurrent, UV);
+vec4 layer1 = tex(undercurrent, UV);
 
 //Blend layers
 DIFFUSE_ALPHA = mix(layer0, layer1, layer1.a);",
@@ -25,16 +25,16 @@ DIFFUSE_ALPHA = mix(layer0, layer1, layer1.a);",
 [resource]
 
 flags/visible = true
-flags/double_sided = true
+flags/double_sided = false
 flags/invert_faces = false
-flags/unshaded = true
+flags/unshaded = false
 flags/on_top = false
 flags/lightmap_on_uv2 = true
 flags/colarray_is_srgb = false
 params/blend_mode = 0
 params/depth_draw = 1
-params/line_width = 9.27553e-39
+params/line_width = 0.0
 shader/shader = SubResource( 1 )
-shader_param/undercurrent = ExtResource( 2 )
 shader_param/overcurrent = ExtResource( 1 )
+shader_param/undercurrent = ExtResource( 2 )
 
