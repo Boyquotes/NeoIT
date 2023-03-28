@@ -5,26 +5,18 @@ signal import_map(source, dest)
 
 
 func _ready():
-	#Copy theme from root control
-	var theme = get_node("../..").get_theme()
-	get_node("MapImportDialog").set_theme(theme)
-	get_node("OpenDialog").set_theme(theme)
-	get_node("DirDialog").set_theme(theme)
-	
 	#Set initial target path
 	get_node("DirDialog").set_current_path("res://")
 
 
 func _on_SourceFileButton_pressed():
 	#Show open dialog
-	get_node("OpenDialog").show()
-	get_node("OpenDialog").invalidate()
+	get_node("OpenDialog").popup_centered()
 
 
 func _on_TargetPathButton_pressed():
 	#Show dir dialog
-	get_node("DirDialog").show()
-	get_node("DirDialog").invalidate()
+	get_node("DirDialog").popup_centered()
 
 
 func _on_OpenDialog_file_selected(path):

@@ -52,7 +52,7 @@ func import_dialog(from):
 				break
 		
 	#Display material import dialog
-	mtl_import_dlg.get_node("MaterialImportDialog").show()
+	mtl_import_dlg.get_node("MaterialImportDialog").popup_centered()
 	
 	
 func import(path, from):

@@ -46,7 +46,7 @@ func import_dialog(from):
 		map_import_dlg.get_node("DirDialog").emit_signal("dir_selected", dest)
 	
 	#Show import dialog
-	map_import_dlg.get_node("MapImportDialog").show()
+	map_import_dlg.get_node("MapImportDialog").popup_centered()
 	
 	
 func import(path, from):
